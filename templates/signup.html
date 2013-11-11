@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Events @ IIT Bombay">
+    <meta name="author" content="">
+
+    <title>Events | IIT Bombay</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/static/bootstrap/css/bootstrap.css" rel="stylesheet">
+  <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Open+Sans:300italic,400,300,700' rel='stylesheet' type='text/css'>
+    <link href="/static/boostrap/css/stylesheet.css" rel="stylesheet">
+    <script src="/static/jquery.js"></script>
+    <script src="/static/boostrap/js/bootstrap.js"></script>
+
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-fixed-top navbar-inverse" id="nav" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="./">Events</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="#about">About</a></li>
+            <li><a href="#events">Competitions</a></li>
+            <li><a href="./faqs.html">Faqs</a></li>
+            <li><a href="./contact.html">Contact</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container -->
+    </nav>
+    <hr>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 col-lg-offset-2">
+          <div class="page-header">
+            <h4> Signup !!</h4>
+          </div>
+            <form class="form-horizontal">
+
+            <!-- Text input-->
+            <div class="form-group">
+              <label class="control-label" for="username">Username</label>
+                <input id="username" name="username" placeholder="" class="form-control" required="" type="text">
+              </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+              <label class="control-label" for="ldapUsername">LDAP username</label>
+                <input id="ldapUsername" name="ldapUsername" placeholder="" class="form-control" required="" type="text" placeholder="{{ ldap_id }}" disabled>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+              <label class="control-label" for="rollnumber">Roll Number</label>
+              <div class="controls">
+                <input id="rollnumber" name="rollnumber" placeholder="{{ rollnumber }}" class="form-control" required="" type="text" disabled>
+                
+              </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+              <label class="control-label" for="department">Department</label>
+              <div class="controls">
+                <input id="department" name="department" placeholder="{{ dept }}" class="form-control" required="" type="text" disabled>
+                
+              </div>
+            </div>
+
+            <!-- Select Basic -->
+            <div class="form-group">
+              <label class="control-label" for="hostel">Hostel</label>
+              <div class="controls">
+                <select id="hostel" name="hostel" class="form-control">
+                  <option>Hostel 1</option>
+                  <option>Hostel 2</option>
+                  <option>Hostel 3</option>
+                  <option>Hostel 4</option>
+                  <option>Hostel 5</option>
+                  <option>Hostel 6</option>
+                  <option>Hostel 7</option>
+                  <option>Hostel 8</option>
+                  <option>Hostel 9</option>
+                  <option>Hostel 10</option>
+                  <option>Hostel 11</option>
+                  <option>Hostel 12</option>
+                  <option>Hostel 13</option>
+                  <option>Hostel 14</option>
+                  <option>Hostel 15</option>
+                  <option>Hostel  16</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+              <label class="control-label" for="room">room</label>
+              <div class="controls">
+                <input id="room" name="room" placeholder="" class="form-control" type="text">
+                
+              </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+              <label class="control-label" for="phone">Phone</label>
+              <div class="controls">
+                <input id="phone" name="phone" placeholder="" class="form-control" type="text">
+                
+              </div>
+            </div>
+              <button type="submit" class="btn btn-success btn-lg btn-block">Sign up</button>
+
+            </form>
+          </div>
+        </div>
+      <footer>
+        <div class="row">
+          <div class="col-lg-12">
+            <hr>
+            <p style="text-align:center">Copyright &copy; Company 2013</p>
+            <p style="text-align:center"> Contact us </p>
+          </div>
+        </div>
+      </footer>
+    </div>
+
