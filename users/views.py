@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.template.loader import get_template
 from django.template import Context
+from django.http import HttpResponse,HttpResponseRedirect
+
 # Create your views here.
 import json
 import urllib
@@ -33,13 +35,14 @@ def signup_stage1(request):
        			'Accept-Encoding': 'none',
        			'Accept-Language': 'en-US,en;q=0.8',
 		       'Connection': 'keep-alive'}
-		url = "http://www.cse.iitb.ac.in/~prithvirajbilla/ldap-api/?user="+ldap_id
+		url = "http://localhost/ldap-api/?user="+ldap_id
 		req = urllib2.Request(url,headers=hdr)
 		response = urllib2.urlopen(req,)
 		the_page = response.read()
 		array = json.loads(the_page)
-		if 'ldap_id' in array:
-			return render(request,'signup.html',{'ldap_id':array['ldap_id']})
+		print array
+		if 'ldapid' in array:
+			return render(request,'signup.html',{'ldapid':array['ldapid'],'roll':array['rollno']})
 		else:
 			return HttpResponseRedirect("/")
 	else:
