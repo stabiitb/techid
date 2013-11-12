@@ -86,7 +86,11 @@
           </div>
           <br>
           <br>
-          <form role="form" method="post" action="/signup/1/">{% csrf_token %}
+          {% if error1 %}
+                <div class="alert alert-danger"><Strong>Warning!</strong> Wrong Ldap Id or Ldap username doesn't exists.</div>
+          {% endif %}
+
+          <form role="form" method="get" action="/signup/1/">
             <div class="form-group">
               <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Enter GPO Email">
             </div>

@@ -22,8 +22,8 @@ def login(request):
 		return HttpResponseRedirect('/')
 
 def signup_stage1(request):
-	if 'email' in request.POST:
-		email = request.POST['email']
+	if 'email' in request.GET:
+		email = request.GET['email']
 		ldap_id = (email.split("@"))[0]
 		proxy_support = urllib2.ProxyHandler({'http':'http://rajeev_kumar:+eragonxxx*@netmon.iitb.ac.in:80',
                                                'https':'https://rajeev_kumar:eragonxxx*@netmon.iitb.ac.in:80'})
@@ -42,8 +42,24 @@ def signup_stage1(request):
 		array = json.loads(the_page)
 		print array
 		if 'ldapid' in array:
-			return render(request,'signup.html',{'ldapid':array['ldapid'],'roll':array['rollno']})
+			return render(request,'signup.html',{'ldapid':array['ldapid'],'roll':array['rollno'],'dept':array['dept'],'name':array['fname']+" "+array['lname']})
 		else:
-			return HttpResponseRedirect("/")
+			return HttpResponseRedirect("/?p=signup")
+	elif 'p' in request.GET:
+		p = request.GET['p']
+		if p=='error':
+			return render(request,'signup.html',{'error':True})
+		elif p=='already':
+			return render(request,'signup.html',{'error2':True})
+		elif p=='usernameExists':
+			return render(request,'signup.html',{'error3':True})
+		else:
+			return render(request,'signup.html')
 	else:
-		return render(request,'signup.html')
+		return HttpResponseRedirect("/")
+
+def viewProfile(request,offset):
+	return render(request,'profile.html')
+
+def editProfile(request):
+	return render(request,'edit.html')

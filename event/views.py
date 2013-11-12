@@ -5,17 +5,20 @@ from datetime import datetime
 # Create your views here.
 from event.models import *
 from django.http import HttpResponse,HttpResponseRedirect
+
 def index(request):
 	if 'p' in request.GET:
 		p = request.GET['p']
 		if p == 'error':
 			return render(request,'index.html',{'error':True})
+		elif p== 'signup':
+			return render(request,'index.html',{'error1':True})
 		else:
 			return render(request,'index.html')
 	else:
 		return render(request, 'index.html')
 
-def viewEvent(request):
+def viewCreateEvent(request):
 	if 'p' in request.GET:
 		p = request.GET['p']
 		if p == 'error':
@@ -131,3 +134,6 @@ def viewEventPage(request,offset):
 			return render(request,'eventpage.html',{'event':event,'type':type1,'workshop':workshop})
 		else:
 			return render(request,'eventpage.html',{'event':event})
+
+def viewEvents(request,offset):
+	return render(request,'events.html')
