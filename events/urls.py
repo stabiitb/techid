@@ -5,7 +5,7 @@ from event.views import index,viewCreateEvent,createEvent,viewEventPage,viewEven
 admin.autodiscover()
 from django.conf import settings
 from django.conf.urls.static import static
-from users.views import login,signup_stage1,viewProfile,editProfile
+from users.views import *
 from messages.views import *
 from signup.views import *
 
@@ -13,6 +13,8 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'events.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
+    url(r'^verify/new/$',newPassword),
+    url(r'^verify/$',verify),
     url(r'^signup/1/$',signup_stage1),
     url(r'^event/cult/(\d+)/$',viewEvents),
     url(r'^event/(\d+)/$',viewEventPage),

@@ -32,6 +32,7 @@ class Has(models.Model):
 class Unauthenticated_users(models.Model):
 	username = models.CharField(max_length=255,unique=True)
 	email_address = models.EmailField()
+	rollno = models.CharField(max_length=14)
 	verification_code = models.CharField(max_length=255)
 
 	def save(self,*args,**kwargs):

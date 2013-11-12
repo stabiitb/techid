@@ -8,7 +8,8 @@ import json
 import urllib
 import urllib2,cookielib
 import requests
-from users.models import Users
+from users.models import *
+from signup.models import *
 def login(request):
 	if 'username' in request.POST and 'password' in request.POST:
 		username = request.POST['username']
@@ -59,7 +60,24 @@ def signup_stage1(request):
 		return HttpResponseRedirect("/")
 
 def viewProfile(request,offset):
-	return render(request,'profile.html')
+	if 'user' in request.session:
+		try:
+			offset = int(offset)
+		except ValueError:
+			raise Http404()
+		s1 = Students.objects.filter(id=offset)
+		if len(s1) == 0:
+			raise Http404
+		else:
+			return render(request,'profile.html',{'student':s1[0]})
+	else:		
+		return HttpResponseRedirect("/")
 
 def editProfile(request):
-	return render(request,'edit.html')
+	if 'user' in request.session and 'rollno' in request.session:
+		username = request.session['user']
+		rollno = request.session['rollno']
+		s1 = Students.objects.filter(rollno=rollno)[0]
+		return render(request,'edit.html',{'student':s1})
+	else:
+		raise Http404

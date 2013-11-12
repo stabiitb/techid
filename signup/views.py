@@ -29,14 +29,16 @@ def signupHandler(request):
 		hostel = request.POST['hostel']
 		room = request.POST['room']
 		phone = request.POST.get('phone',False)
-		if Users.isexists(username):
+		if Students.isexists(ldapid):
+			return HttpResponseRedirect("/signup/1/?p=already")
+		elif Users.isexists(username):
 			return HttpResponseRedirect("/signup/1/?p=error")
 		elif Unauthenticated_users.isexists(username):
 			return HttpResponseRedirect("/signup/1/?p=usernameExists")
-		elif Students.isexists(ldapid):
-			return HttpResponseRedirect("/signup/1/?p=already")
 		else:
-			un1 = Unauthenticated_users(username=username,email_address=ldapid+"@iitb.ac.in")
+			if 'rollno' not in array:
+				return HttpResponseRedirect("/")
+			un1 = Unauthenticated_users(username=username,email_address=ldapid+"@iitb.ac.in",rollno=array['rollno'])
 			un1.save()
 			s1 = Students(name=name,rollno=array['rollno'],ldapid=array['ldapid'],hostel=hostel,room=room,email=ldapid+"@iitb.ac.in",phone=phone)
 			s1.save()
@@ -50,14 +52,45 @@ def verify(request):
 	if 'p' in request.GET:
 		p = request.GET['p']
 		## got a vefication code:
-		un_object = Unauthenticated_users.objects.filter(Verification_code=p)
+		un_object = Unauthenticated_users.objects.filter(verification_code=p)
 		if len(un_object) > 0:
 			username = un_object[0].username
 			email_address = un_object[0].email_address
 			request.session['verification'] = p
 			request.session['signup_username'] = username
+			request.session['email_address'] = email_address
+			request.session['rollno'] = un_object[0].rollno
 			return render(request,'forgotpassword.html',{'forgot':False})
 		else:
-			return HttpResponseRedirect("/verify?p=error")
+			return render(request,'verify.html',{'error':True})
 	else:
-		return render(request,"veify.html")
+		return render(request,"verify.html")
+
+def newPassword(request):
+	if 'password' in request.POST and 'repassword' in request.POST:
+		password = request.POST['password']
+		repassword = request.POST['repassword']
+		if password == repassword:
+			if 'verification' in request.session:
+				p = request.session['verification']
+				username = request.session['signup_username']
+				email_address = request.session['email_address']
+				rollno = request.session['rollno']
+				u1 = Users(username=username,email_address=email_address,password=password)
+				u1.save()
+				s1 = Students.objects.filter(rollno=rollno)[0]
+				h1 = Has(username=u1,rollno=s1)
+				h1.save()
+				del request.session['verification']
+				del request.session['signup_username']
+				del request.session['email_address']
+				request.session.modified = True
+				request.session['user'] = username
+				request.session['rollno'] = rollno
+				return HttpResponseRedirect("/users/"+str(s1.id))
+			else:
+				return HttpResponseRedirect("/verify?p=error")
+		else:
+			HttpResponseRedirect("/verify?p="+verification_code)
+	else:
+		return HttpResponseRedirect("/")
