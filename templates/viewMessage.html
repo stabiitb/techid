@@ -50,57 +50,42 @@
       <div class="row">
         <div class="col-lg-8 col-lg-offset-2">
             <div class="page-header">
-              <h3> Sent Messages </h3>
+              <h3> {% if rec %} Received{% elif sent %}Sent {% endif %} Messages </h3>
             </div>
             <br/>
+              {% if not reco %}
+                <div class="alert alert-info">
+                  <a href="#" class="alert-link">No Messages are present</a>
+                  <a class="close" data-dismiss="alert" href="#" aria-hidden="true">&times;</a>
+                </div>
+                {% else %}
             <div class="panel-group" id="accordion">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-          Collapsible Group Item #1<span  class="pull-right"> Date </span>
-        </a>
-      </h4>
+                {% for o in reco %}
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#{{ o.id }}">
+                      {% if rec %} {{ o.sent_id.username }}{% elif sent %} {{ o.received_id.username }} {% endif %} <span class="pull-right"> {{ o.timestamp}}</span>
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="{{ o.id }}" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        {{ o.data }} 
+                        <br/>
+                      {% if rec %}
+                        <a href="/messages/?p={{ o.sent_id.username }}" class="btn btn-success pull-right" >Reply </a>
+                      {% elif sent %}
+                        <a href="/messages/forward/?p={{ o.id }}" class="btn btn-success pull-right" >Forward </a>  
+                      {% endif %} 
+                  </div>
+                  </div>
+                </div>
+                {% endfor %}
+                {% endif %}
+            </div>
     </div>
-    <div id="collapseOne" class="panel-collapse collapse in">
-      <div class="panel-body">
-        <button type="submit" name="eventid" value="{{ event.id }}" class="btn btn-success pull-right">Reply <span class="glyphicon glyphicon-chevron-right"></span></button>
-      </div>
-    </div>
-  </div>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-          Collapsible Group Item #2
-        </a>
-      </h4>
-    </div>
-    <div id="collapseTwo" class="panel-collapse collapse">
-      <div class="panel-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS. <br/>
-        <button type="submit" name="eventid" value="{{ event.id }}" class="btn btn-success pull-right">Reply <span class="glyphicon glyphicon-chevron-right"></span></button>
-
-      </div>
-    </div>
-  </div>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-          Collapsible Group Item #3
-        </a>
-      </h4>
-    </div>
-    <div id="collapseThree" class="panel-collapse collapse">
-      <div class="panel-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-      </div>
-    </div>
-  </div>
-</div>
         </div>
-      </div>
       <footer>
         <div class="row">
           <div class="col-lg-12">

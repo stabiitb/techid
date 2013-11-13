@@ -87,7 +87,8 @@ def newPassword(request):
 				del request.session['email_address']
 				request.session.modified = True
 				request.session['user'] = username
-				request.session['rollno'] = rollno
+				request.session['roll'] = rollno
+				request.session['id'] = s1.id
 				return HttpResponseRedirect("/users/"+str(s1.id))
 			else:
 				return HttpResponseRedirect("/verify?p=error")

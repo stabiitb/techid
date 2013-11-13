@@ -81,7 +81,7 @@
                             </a>
                           <div class="media-body">
                             <p> {{o.concert.description | truncatechars:25}} </p>
-                            <a class="btn btn-sm btn-success pull-right" href="/event/{{o.id}}"> View Details</a>
+                            <a class="btn btn-sm btn-success pull-right" href="/event/{{o.concert.id}}"> View Details</a>
                           </div>
                         </div>
                           </div>
@@ -119,7 +119,7 @@
                             </a>
                           <div class="media-body">
                             <p> {{o.workshop.description | truncatechars:25}} </p>
-                            <a class="btn btn-sm btn-success pull-right" href="/event/{{o.id}}"> View Details</a>
+                            <a class="btn btn-sm btn-success pull-right" href="/event/{{o.workshop.id}}"> View Details</a>
                           </div>
                         </div>
                           </div>
@@ -144,7 +144,7 @@
                       <div class="col-lg-4">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                              <h3 class="panel-title">{{ o.individual.name }}</h3>
+                              <h3 class="panel-title">{{ o.competition.name }}</h3>
                             </div>
                           <div class="panel-body">
                           <div class="media">
@@ -152,8 +152,8 @@
                             <img src="http://placehold.it/64X64" style="width: 64px; height: 64px;" class="media-object"  alt="64x64">
                             </a>
                           <div class="media-body">
-                            <p> {{o.individual.description | truncatechars:25}} </p>
-                            <a class="btn btn-sm btn-success pull-right" href="/event/{{o.id}}"> View Details</a>
+                            <p> {{o.competition.description | truncatechars:25}} </p>
+                            <a class="btn btn-sm btn-success pull-right" href="/event/{{o.competition.id}}"> View Details</a>
                           </div>
                         </div>
                           </div>
@@ -182,7 +182,7 @@
                       <div class="col-lg-4">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                              <h3 class="panel-title">{{ o.team.name }}</h3>
+                              <h3 class="panel-title">{{ o.teamevent.name }}</h3>
                             </div>
                           <div class="panel-body">
                           <div class="media">
@@ -190,8 +190,8 @@
                             <img src="http://placehold.it/64X64" style="width: 64px; height: 64px;" class="media-object"  alt="64x64">
                             </a>
                           <div class="media-body">
-                            <p> {{o.team.description | truncatechars:25}} </p>
-                            <a class="btn btn-sm btn-success pull-right" href="/event/{{o.id}}"> View Details</a>
+                            <p> {{o.teamevent.description | truncatechars:25}} </p>
+                            <a class="btn btn-sm btn-success pull-right" href="/event/{{o.teamevent.id}}"> View Details</a>
                           </div>
                         </div>
                           </div>
@@ -229,7 +229,7 @@
                             </a>
                           <div class="media-body">
                             <p> {{o.lecture.description | truncatechars:25}} </p>
-                            <a class="btn btn-sm btn-success pull-right" href="/event/{{o.id}}"> View Details</a>
+                            <a class="btn btn-sm btn-success pull-right" href="/event/{{o.lecture.id}}"> View Details</a>
                           </div>
                         </div>
                           </div>

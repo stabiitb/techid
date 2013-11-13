@@ -53,12 +53,15 @@
             <h3> Send Messages </h3>
           </div>
           <br/>
+          {% if error %}
+            <div class="alert alert-danger"><Strong>Warning!</strong>Wrong Login .Username Or Password</div>
+          {% endif %}
           <div class="panel panel-default">
               <div class="panel-body">                
-                  <form accept-charset="UTF-8" action="" method="POST" role="form">
-                      <input type="text" name="username" placeholder="Username" class="form-control" required/>
+                  <form accept-charset="UTF-8" action="/messages/create/" method="POST" role="form">{% csrf_token %}
+                      <input type="text" name="username" placeholder="username" value="{{ username }}"  class="form-control" required/>
                       <br/>
-                      <textarea class="form-control counted" name="message" placeholder="Type in your message" rows="3" style="margin-bottom:10px;"></textarea>
+                      <textarea class="form-control counted" name="message" placeholder="Type in your message" rows="3" style="margin-bottom:10px;">{{ m }}</textarea>
                       <h6 class="pull-right" id="counter">320 characters remaining</h6>
                       <button class="btn btn-info" type="submit">Send a Message</button>
                   </form>

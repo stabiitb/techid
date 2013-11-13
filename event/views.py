@@ -65,7 +65,7 @@ def createEvent(request):
 			else:
 				return HttpResponseRedirect("/create/event?p=error")
 		elif type1=='workshop':
-			if 'workshop-speaker' in request.POST and field in request.POST:
+			if 'workshop-speaker' in request.POST and 'field' in request.POST:
 				workshop_speaker = request.POST['workshop-speaker']
 				field = request.POST['field']
 				e1 = Event(name=eventname,description=description,venue=venue,start_time=starttime,duration=duration,year_elligible=year,dept_elligible=dept,hostel_elligible=hostel,picture=picture)

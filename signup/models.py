@@ -16,7 +16,7 @@ class Students(models.Model):
 
 	@classmethod
 	def isexists(cls,ldapid):
-		if len(Students.objects.filter(ldapid=ldapid)) > 0:
+		if len(Students.objects.filter(ldapid=ldapid)) > 0:#----- "select COUNT(*) as cnt from Students where ldapid='" + ldapid + "'";
 			return True
 		else:
 			return False

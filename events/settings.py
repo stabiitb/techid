@@ -49,6 +49,8 @@ INSTALLED_APPS = (
     'event',
     'users',
     'signup',
+    'messages',
+    'registration',
 
 )
 

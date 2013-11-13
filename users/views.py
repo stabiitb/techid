@@ -20,6 +20,8 @@ def login(request):
 			request.session['user'] = username
 			h1 = Has.objects.filter(username=Users.objects.filter(username=username)[0])[0]
 			s1 = h1.rollno.id
+			request.session['id'] = s1
+			request.session['roll'] = h1.rollno.rollno
 			return HttpResponseRedirect("/users/"+str(s1))	
 	else:
 		return HttpResponseRedirect('/')
@@ -77,9 +79,11 @@ def viewProfile(request,offset):
 
 def editProfile(request):
 	if 'user' in request.session and 'rollno' in request.session:
+		sid = request.session['id']
 		username = request.session['user']
-		rollno = request.session['rollno']
+		rollno = request.session['roll']
 		s1 = Students.objects.filter(rollno=rollno)[0]
+		
 		return render(request,'edit.html',{'student':s1})
 	else:
 		raise Http404
