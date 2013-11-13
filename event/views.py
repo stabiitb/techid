@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.template.loader import get_template
 from django.template import Context
 from datetime import datetime
+import datetime as dt
+
 # Create your views here.
 from event.models import *
 from django.http import HttpResponse,HttpResponseRedirect
@@ -135,5 +137,12 @@ def viewEventPage(request,offset):
 		else:
 			return render(request,'eventpage.html',{'event':event})
 
-def viewEvents(request,offset):
-	return render(request,'events.html')
+def viewEvents(request):
+	##first part is concerts:
+	c1 = Concert.objects.filter(concert__start_time__gte=dt.datetime.now())
+	w1 = Workshop.objects.filter(workshop__start_time__gte=dt.datetime.now())
+	l1 = Lecture.objects.filter(lecture__start_time__gte=dt.datetime.now())
+	t1 = TeamEvent.objects.filter(teamevent__start_time__gte=dt.datetime.now())
+	i1 = Competition.objects.filter(competition__start_time__gte=dt.datetime.now())
+
+	return render(request,'events.html',{'concert':c1,'workshop':w1,'team':t1,'lecture':l1,'individual':i1})

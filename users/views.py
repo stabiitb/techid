@@ -18,7 +18,9 @@ def login(request):
 			return HttpResponseRedirect('/?p=error')
 		else:
 			request.session['user'] = username
-			return render(request,'index.html')
+			h1 = Has.objects.filter(username=Users.objects.filter(username=username)[0])[0]
+			s1 = h1.rollno.id
+			return HttpResponseRedirect("/users/"+str(s1))	
 	else:
 		return HttpResponseRedirect('/')
 

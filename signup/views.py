@@ -29,6 +29,7 @@ def signupHandler(request):
 		hostel = request.POST['hostel']
 		room = request.POST['room']
 		phone = request.POST.get('phone',False)
+		year = request.POST['year']
 		if Students.isexists(ldapid):
 			return HttpResponseRedirect("/signup/1/?p=already")
 		elif Users.isexists(username):
@@ -40,7 +41,7 @@ def signupHandler(request):
 				return HttpResponseRedirect("/")
 			un1 = Unauthenticated_users(username=username,email_address=ldapid+"@iitb.ac.in",rollno=array['rollno'])
 			un1.save()
-			s1 = Students(name=name,rollno=array['rollno'],ldapid=array['ldapid'],hostel=hostel,room=room,email=ldapid+"@iitb.ac.in",phone=phone)
+			s1 = Students(name=name,rollno=array['rollno'],ldapid=array['ldapid'],hostel=hostel,room=room,dept=array['dept'],email=ldapid+"@iitb.ac.in",phone=phone,year=year)
 			s1.save()
 			send_mail('Verification Code[event manager]', 'Hello\n, Welcome to our site. To activat your account, your activation code is'+un1.getCode(), 'from@example.com',['to@example.com'], fail_silently=False)
 			return HttpResponseRedirect("/verify")
@@ -91,6 +92,6 @@ def newPassword(request):
 			else:
 				return HttpResponseRedirect("/verify?p=error")
 		else:
-			HttpResponseRedirect("/verify?p="+verification_code)
+			return HttpResponseRedirect("/verify?p="+request.session['verification'])
 	else:
 		return HttpResponseRedirect("/")

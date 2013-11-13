@@ -7,7 +7,7 @@ class Students(models.Model):
 	name = models.CharField(max_length=50)
 	ldapid = models.CharField(max_length=30,unique=True,blank=False)
 	hostel = models.IntegerField()
-	#dept   = models.IntegerField()
+	dept   = models.CharField(max_length=20)
 	room   = models.IntegerField()
 	year   = models.CharField(max_length=6)
 	email = models.EmailField()

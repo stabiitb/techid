@@ -56,3 +56,13 @@ class Unauthenticated_users(models.Model):
 
 
 
+class dept(models.Model):
+	dept_small = models.CharField(max_length=10)
+	dept_fullname= models.CharField(max_length=50)
+
+	def getFullname(self,dept_small):
+		l1 = dept.objects.filter(dept_small=dept_small)
+		if len(l1) > 0:
+			return False
+		else:
+			return l1[0].dept_fullname

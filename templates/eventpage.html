@@ -92,7 +92,9 @@
 
               <ul id="myTab" class="nav nav-tabs">
                 <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
+                {% if type == "competition" or type == "team" %}
                 <li class=""><a href="#reg" data-toggle="tab">Registered &nbsp;<span class="badge pull-right"> 42</span></a></li>
+                {% endif %}
               </ul>
 
               <div id="myTabContent" class="tab-content">
