@@ -13,7 +13,7 @@ from signup.models import *
 
 ##function to get the detials of the user:
 def getValues(ldap_id):
-	url = "http://localhost/ldap-api/?user="+ldap_id
+	url = "http://www.cse.iitb.ac.in/~prithvirajbilla/ldap-api/?user="+ldap_id
 	req = urllib2.Request(url)
 	response = urllib2.urlopen(req,)
 	the_page = response.read()
@@ -43,7 +43,7 @@ def signupHandler(request):
 			un1.save()
 			s1 = Students(name=name,rollno=array['rollno'],ldapid=array['ldapid'],hostel=hostel,room=room,dept=array['dept'],email=ldapid+"@iitb.ac.in",phone=phone,year=year)
 			s1.save()
-			send_mail('Verification Code[event manager]', 'Hello\n, Welcome to our site. To activat your account, your activation code is'+un1.getCode(), 'from@example.com',['to@example.com'], fail_silently=False)
+			send_mail('Verification Code[event manager]', 'Hello\n, Welcome to our site. To activat your account, your activation code is  '+un1.getCode(), 'interiittech@gmail.com',[ldapid+'@iitb.ac.in'], fail_silently=False)
 			return HttpResponseRedirect("/verify")
 	else:
 		return HttpResponseRedirect("/signup/1/?p=error1")

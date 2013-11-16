@@ -28,14 +28,14 @@ ALLOWED_HOSTS = []
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    "/home/madhukar/django/events/templates",
+    "/var/www/event/events/templates"
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
 )
 
 # Application definition
 STATICFILES_DIRS = (
-    '/home/madhukar/django/events/static/',
+    '/var/www/event/events/static/',
 )
 
 INSTALLED_APPS = (
@@ -100,12 +100,12 @@ STATIC_URL = '/static/'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # Host for sending e-mail.
-EMAIL_HOST = 'localhost'
+EMAIL_HOST = 'smtp.gmail.com'
 
 # Port for sending e-mail.
-EMAIL_PORT = 1025
+EMAIL_PORT = 587
 
 # Optional SMTP authentication information for EMAIL_HOST.
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
-EMAIL_USE_TLS = False
+EMAIL_HOST_USER = 'interiittech@gmail.com'
+EMAIL_HOST_PASSWORD = 'Interiittech7@'
+EMAIL_USE_TLS = True
