@@ -30,9 +30,9 @@ def signup_stage1(request):
 	if 'email' in request.GET:
 		email = request.GET['email']
 		ldap_id = (email.split("@"))[0]
-		url = "http://www.cse.iitb.ac.in/~prithvirajbilla/user="+ldap_id
+		url = "http://www.cse.iitb.ac.in/~prithvirajbilla/ldap-api/?user="+ldap_id
 		req = urllib2.Request(url)
-		response = urllib2.urlopen(req,)
+		response = urllib2.urlopen(req)
 		the_page = response.read()
 		array = json.loads(the_page)
 		print array

@@ -74,7 +74,7 @@ WSGI_APPLICATION = 'events.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME':'/var/www/event/db.sqlite3',
     }
 }
 
@@ -107,5 +107,5 @@ EMAIL_PORT = 587
 
 # Optional SMTP authentication information for EMAIL_HOST.
 EMAIL_HOST_USER = 'interiittech@gmail.com'
-EMAIL_HOST_PASSWORD = 'Interiittech7@'
+EMAIL_HOST_PASSWORD = 'InteriitTech7@'
 EMAIL_USE_TLS = True
