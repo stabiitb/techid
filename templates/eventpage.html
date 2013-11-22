@@ -36,9 +36,14 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="#about">About</a></li>
-            <li><a href="./events">Competitions</a></li>
-            <li><a href="./contact.html">Contact</a></li>
+            <li><a href="/">Me</a></li>
+            <li><a href="/events/all">Events</a></li>
+            <li><a href="/messages">create Message</a></li>
+            <li><a href="/messages/sent">Sent Messages</a></li>
+            <li><a href="/messages/received">Received Messages</a></li>
+            <li><a href="/users/edit">Edit Profile </a></li>
+            <li><a href="#">Logged in as {{ request.session.user }}</a></li>
+            <li><a href="/logout">Logout</a></li>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container -->
@@ -51,13 +56,20 @@
             <div class="col-lg-12">
                <img class="img-responsive" src="http://placehold.it/1024X300">
             </div>
+            {% if p == "success" %}
+                <div class="alert alert-info"><Strong>Success!</strong>Registration Successfull</div>
+            {% elif p == "already" %}
+                <div class="alert alert-danger"><Strong>Warning!</strong>You have already registered</div>
+            {% elif p == "error" %}
+                <div class="alert alert-danger"><Strong>Warning!</strong>Cannot register to the event</div>
+            {% endif %}
             <div class="col-lg-12">
               <div class="page-header">
-                <h3>{{ event.name }} &nbsp;<span class="badge">Event Type</span>
+                <h3>{{ event.name }} &nbsp;<span class="badge">{{ type }}</span>
                 {% if type == "team" %}
                    <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#myModal">Register<span class="glyphicon glyphicon-chevron-right"></span></button> 
                 {% elif type == "competition" %}
-                 <form method="post" action="/event/register" name="type" value="competition"><button type="submit" name="eventid" value="{{ event.id }}" class="btn btn-success pull-right">Register <span class="glyphicon glyphicon-chevron-right"></span></button> </form>
+                 <form method="post" action="/event/register/" name="type" value="competition">{% csrf_token %}<button type="submit" name="eventid" value="{{ event.id }}" class="btn btn-success pull-right">Register <span class="glyphicon glyphicon-chevron-right"></span></button> </form>
                  {% endif %}
                </h3> 
               </div>
@@ -93,7 +105,7 @@
               <ul id="myTab" class="nav nav-tabs">
                 <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
                 {% if type == "competition" or type == "team" %}
-                <li class=""><a href="#reg" data-toggle="tab">Registered &nbsp;<span class="badge pull-right"> 42</span></a></li>
+                <li class=""><a href="#reg" data-toggle="tab">Registered &nbsp;<span class="badge pull-right">{{ reg | length }}</span></a></li>
                 {% endif %}
               </ul>
 
@@ -146,7 +158,18 @@
                 </div>
                 <div class="tab-pane fade" id="reg">
                   <br/>
-                  <p></p>
+                  <table class="table-bordered">
+                    {% if not reg %}
+                    <div class="alert alert-info"> No Registrations Yet </div>
+                    {% else %}
+                    <thead><tr><td>Studentname</td><td>RollNo</td></tr></thead>
+                    <tbody>
+                    {% for o in reg %}
+                    <tr><td>{{ o.sid.name }}</td><td>{{ o.sid.rollno }}</td></tr>
+                    {% endfor %}
+                    {% endif %}
+                    </tbody>
+                  </table>
                 </div>
             </div>
 

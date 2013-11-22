@@ -12,6 +12,13 @@ class Event(models.Model):
 	hostel_elligible = models.IntegerField()
 	picture = models.CharField(max_length=25)
 
+	@classmethod
+	def isexists(cls,eventid):
+		if len(cls.objects.filter(id=eventid)) > 0:
+			return True
+		else:
+			return False
+
 class Concert(models.Model):
     concert = models.ForeignKey(Event)
     concertby = models.CharField(max_length=255)

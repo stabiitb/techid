@@ -37,9 +37,14 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="#about">About</a></li>
-            <li><a href="./events">Competitions</a></li>
-            <li><a href="./contact.html">Contact</a></li>
+            <li><a href="/">Me</a></li>
+            <li><a href="/events/all">Events</a></li>
+            <li><a href="/messages">create Message</a></li>
+            <li><a href="/messages/sent">Sent Messages</a></li>
+            <li><a href="/messages/received">Received Messages</a></li>
+            <li><a href="/users/edit">Edit Profile </a></li>
+            <li><a href="#">Logged in as {{ request.session.user }}</a></li>
+            <li><a href="/logout">Logout</a></li>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container -->
