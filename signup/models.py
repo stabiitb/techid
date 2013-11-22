@@ -20,3 +20,11 @@ class Students(models.Model):
 			return True
 		else:
 			return False
+
+	@classmethod
+	def isexistsId(cls,lid):
+		if len(Students.objects.filter(id=lid)) > 0:#----- "select COUNT(*) as cnt from Students where ldapid='" + ldapid + "'";
+			return True
+		else:
+			return False
+	

@@ -87,3 +87,6 @@ def editProfile(request):
 		return render(request,'edit.html',{'student':s1})
 	else:
 		raise Http404
+def logout(request):
+	request.session.flush()
+	return HttpResponseRedirect("/")

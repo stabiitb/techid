@@ -38,9 +38,14 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="#about">About</a></li>
-            <li><a href="./events">Competitions</a></li>
-            <li><a href="./contact.html">Contact</a></li>
+            <li><a href="/">Me</a></li>
+            <li><a href="/events/all">Events</a></li>
+            <li><a href="/messages">create Message</a></li>
+            <li><a href="/messages/sent">Sent Messages</a></li>
+            <li><a href="/messages/received">Received Messages</a></li>
+            <li><a href="/users/edit">Edit Profile </a></li>
+            <li><a href="#">Logged in as {{ request.session.user }}</a></li>
+            <li><a href="/logout">Logout</a></li>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container -->
@@ -57,7 +62,7 @@
             </div>
             <div class="col-lg-8">
               <blockquote>
-              <h4> {{ student.name }}<small>Manager,Stab</small></h4>
+              <h4> {{ student.name }}<!--<small>Manager,Stab</small>--></h4>
             </blockquote>
               <h4><span class="glyphicon glyphicon-map-marker"></span> Hostel {{ student.hostel }}, Room {{ student.room }} </h4>
               <h4><span class="glyphicon glyphicon-envelope"></span> {{ student.email }}</h4>
@@ -89,6 +94,9 @@
                   <div class="row">
                     <div class="col-lg-12">
                       <br/>
+                      {% if not reg %}
+                      {% else %}
+                      {% for o in reg %}
                     <div class="media">
                       <a class="pull-left" href="#">
                         <img src="http://placehold.it/64X64" style="width: 64px; height: 64px;" class="media-object"  alt="64x64">
@@ -98,14 +106,8 @@
                         <span class="glyphicon glyphicon-certificate"></span> Participated in the Competition and won first prize.
                       </div>
                     </div>
-                    <div class="media">
-                      <a class="pull-left" href="#">
-                        <img src="http://placehold.it/64X64" style="width: 64px; height: 64px;" class="media-object"  alt="64x64">
-                      </a>
-                      <div class="media-body">
-                        <a href=""><h4 class="media-heading">Media heading</h4></a>
-                        <span class="glyphicon glyphicon-asterisk"> Registered for the Event and Attended the event.
-                      </div>
+                    {% endfor %}
+                   {% endif %}
                     </div>
                   </div>
                 </div>

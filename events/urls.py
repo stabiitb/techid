@@ -1,12 +1,13 @@
 from django.conf.urls import patterns, include, url
 
 from django.contrib import admin
-from event.views import index,viewCreateEvent,createEvent,viewEventPage,viewEvents
+from event.views import *
 admin.autodiscover()
 from django.conf import settings
 from django.conf.urls.static import static
 from users.views import *
 from messages.views import *
+from registration.views import *
 from signup.views import *
 
 urlpatterns = patterns('',
@@ -31,6 +32,8 @@ urlpatterns = patterns('',
     url(r'^signup/2/$',signupHandler),
     url(r'^messages/received/$',viewRMessages),
     url(r'^messages/sent/$',viewSMessages),
-    url(r'^messages/forward/$',forwardMessages)
+    url(r'^messages/forward/$',forwardMessages),
+    url(r'^event/register/$',IndividualRegistration),
+    url(r'^logout/$',logout),
 
 )+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

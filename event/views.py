@@ -6,10 +6,14 @@ import datetime as dt
 
 # Create your views here.
 from event.models import *
-from django.http import HttpResponse,HttpResponseRedirect
+from django.http import HttpResponse,HttpResponseRedirect,Http404,HttpResponseNotFound
+from registration.models import *
 
 def index(request):
-	if 'p' in request.GET:
+	if 'id' in request.session:
+		sid = request.session['id']
+		return HttpResponseRedirect("/users/"+str(sid))
+	elif 'p' in request.GET:
 		p = request.GET['p']
 		if p == 'error':
 			return render(request,'index.html',{'error':True})
@@ -109,9 +113,12 @@ def viewEventPage(request,offset):
 	try:
 		offset = int(offset)
 	except ValueError:
-		raise Http404()
+		raise HttpResponseNotFound('<h1>Page not found</h1>')
+
+	p = request.GET.get('p',True)
 	if len(Event.objects.filter(id=offset)) == 0:
-		return Http404()
+		return HttpResponseNotFound('<h1>Page not found</h1>')
+
 	else:
 		event = Event.objects.filter(id=offset)[0]
 		if len(Concert.objects.filter(concert=event)) != 0:
@@ -125,7 +132,8 @@ def viewEventPage(request,offset):
 		elif len(Competition.objects.filter(competition=event)) != 0:
 			competition = Competition.objects.filter(competition=event)[0]
 			type1 = "competition"
-			return render(request,'eventpage.html',{'event':event,'type':type1,'competition':competition})
+			r1=Registered.objects.filter(eid=Event.objects.filter(id=offset))
+			return render(request,'eventpage.html',{'event':event,'type':type1,'competition':competition,'reg':r1,'p':p})
 		elif len(TeamEvent.objects.filter(teamevent=event)) != 0:
 			teamevent = TeamEvent.objects.filter(teamevent=event)[0]
 			type1 = "team"
