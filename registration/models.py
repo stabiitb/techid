@@ -6,16 +6,31 @@ from users.models import *
 class Teams(models.Model):
 	teamname = models.CharField(max_length=60)
 
-
-class Registerd(models.Model):
-	sid = models.ManyToManyField(Students)
-	eid = models.ManyToManyField(Competition)
+	@classmethod
+	def isexists(cls,tid):
+		if len(cls.objects.filter(id=tid)) == 0:
+			return False
+		else:
+			return True
+			
+class Registered(models.Model):
+	sid = models.ForeignKey(Students)
+	eid = models.ForeignKey(Event)
 
 class Formed(models.Model):
 	teamid = models.ForeignKey(Teams)
-	sid = models.ManyToManyField(Students)	
+	sid = models.ForeignKey(Students)
+	@classmethod
+	def AlreadyFormed(cls,teamname,sid):
+		if len(Teams.objects.filter(teamname=teamname)) == 0:
+			return False
+		else:
+			if len(cls.objects.filter(teamid=Teams.objects.filter(teamname=teamname)[0]),sid=Students.objects.filter(sid=sid)[0]) == 0:
+				return False
+			else:
+				return True
 
 class TeamRegistered(models.Model):
 	teamid = models.ForeignKey(Teams)
-	eventid = models.ForeignKey(TeamEvent)
+	eventid = models.ForeignKey(Event)
 
