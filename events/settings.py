@@ -45,7 +45,6 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'bootstrap3',
     'event',
     'users',
     'signup',
@@ -61,8 +60,12 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-)
 
+)
+TEMPLATE_CONTEXT_PROCESSORS = (
+'django.core.context_processors.request',
+'django.contrib.auth.context_processors.auth',
+)
 ROOT_URLCONF = 'events.urls'
 
 WSGI_APPLICATION = 'events.wsgi.application'
@@ -70,11 +73,25 @@ WSGI_APPLICATION = 'events.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
+
 
 DATABASES = {
     'default': {
+<<<<<<< HEAD
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME':'/var/www/event/db.sqlite3',
+=======
+        'ENGINE': 'django.db.backends.mysql',
+        'OPTIONS': {
+            'read_default_file': '/home/madhukar/django/events/my.conf',
+        },
+>>>>>>> e6642de269bca3a2f4aa96631cf0200abf7067a9
     }
 }
 

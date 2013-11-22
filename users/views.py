@@ -95,4 +95,8 @@ def editProfile(request):
 		raise Http404
 def logout(request):
 	request.session.flush()
+<<<<<<< HEAD
 	return HttpResponseRedirect("/")
+=======
+	return HttpResponseRedirect("/")
+>>>>>>> e6642de269bca3a2f4aa96631cf0200abf7067a9
