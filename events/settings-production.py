@@ -45,7 +45,6 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'bootstrap3',
     'event',
     'users',
     'signup',
@@ -61,8 +60,12 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-)
 
+)
+TEMPLATE_CONTEXT_PROCESSORS = (
+'django.core.context_processors.request',
+'django.contrib.auth.context_processors.auth',
+)
 ROOT_URLCONF = 'events.urls'
 
 WSGI_APPLICATION = 'events.wsgi.application'
@@ -70,7 +73,22 @@ WSGI_APPLICATION = 'events.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'OPTIONS': {
+#             'read_default_file': '/home/madhukar/django/events/my.conf',
+#         },
+#     }
+# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -107,5 +125,5 @@ EMAIL_PORT = 587
 
 # Optional SMTP authentication information for EMAIL_HOST.
 EMAIL_HOST_USER = 'interiittech@gmail.com'
-EMAIL_HOST_PASSWORD = 'Interiittech7@'
+EMAIL_HOST_PASSWORD = 'InteriitTech7@'
 EMAIL_USE_TLS = True
