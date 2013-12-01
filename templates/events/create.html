@@ -1,25 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Events @ IIT Bombay">
-    <meta name="author" content="">
-
-    <title>Events | IIT Bombay</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="/static/bootstrap/css/bootstrap.css" rel="stylesheet">
-  <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Open+Sans:300italic,400,300,700' rel='stylesheet' type='text/css'>
-    <link href="/static/bootstrap/css/stylesheet.css" rel="stylesheet">
-    <script src="/static/jquery.js"></script>
-    <script src="/static/bootstrap/js/bootstrap.js"></script>
-    <script src="/static/jquery.validate.js"></script>
-    <script type="text/javascript" src="/static/moment.js"></script>
-    <script type="text/javascript" src="/static/bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js"></script>
-
-  </head>
-
+    {% include "head.html" %}
   <body>
     {% include "navbar.html" %}
     <br/>
@@ -122,16 +103,11 @@
                   <label for="type">Event Type </label>
                   <select class="form-control" name="type" id="type">
                     <option value="">Select</option>
-                    <option value="concert">Concert</option>
                     <option value="individual">Competition | Individual</option>
                     <option value="team">Competition | Team Type</option>
                     <option value="lecture">Lecture</option>
-                    <option value="workshop">workshop</option>   
+                    <option value="workshop">Workshop</option>   
                   </select>
-                </div>
-                <div class="form-group" id="concert" style="display: none">
-                  <label for="concertby"> Concert By</label>
-                  <input type="text" name="concertby" class="form-control" placeholder="" >
                 </div>
                 <div class="form-group" id="lecture" style="display:none">
                   <label for="">Speaker </label>
@@ -155,7 +131,7 @@
                 </div>
                 <div class="form-group" id="team" style="display:none">
                   <label for="competition">Deadline to register </label>
-                    <div class='input-group date' id='datetimepicker6'>
+                    <div class='input-group date' id='datetimepicker8'>
                       <input type='text' name="deadline1" class="form-control" />
                       <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
                       </span>
@@ -164,24 +140,8 @@
                     <label for="teammembers">Max Team Members</label>
                     <input type="text" name="teammembers" class="form-control" />
                 </div>
-                <div class="form-group">
-                  <label> Event Conducted By </label>
-                  <select class="form-control" name="event-type">
-                    <option value="cult">Cultural </option>
-                    <option value="tech">Technical </option>
-                    <option value="sports">Sports </option>
-                  </select>
-                </div>
                 <script type="text/javascript">
                 $(document).ready(function(){
-                    $("#type").change(function() 
-                    {
-                      if ($(this).val() == "concert") {
-                          $("#concert").show();
-                      }else{
-                          $("#concert").hide();
-                      } 
-                    });
                     $("#type").change(function() 
                     {
                       if ($(this).val() == "individual") {
@@ -224,18 +184,10 @@
     $('#datetimepicker7').datetimepicker();
   });
   $(function () {
-    $('#datetimepicker6').datetimepicker();
+    $('#datetimepicker6').datetimepicker();$('#datetimepicker8').datetimepicker();
   });
 </script> 
-      <footer>
-        <div class="row">
-          <div class="col-lg-12">
-            <hr>
-            <p style="text-align:center">Copyright &copy; Company 2013</p>
-            <p style="text-align:center"> Contact us </p>
-          </div>
-        </div>
-      </footer>
+{% include "footer.html" %}
 </div>
 </body>
 </html>
