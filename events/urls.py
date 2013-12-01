@@ -35,5 +35,6 @@ urlpatterns = patterns('',
     url(r'^messages/forward/$',forwardMessages),
     url(r'^event/register/$',IndividualRegistration),
     url(r'^logout/$',logout),
+    url(r'^view/$',viewReq),
 
 )+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

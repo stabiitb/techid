@@ -28,14 +28,14 @@ ALLOWED_HOSTS = []
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    "/var/www/event/templates"
+    "/home/madhukar/django/events/templates"
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
 )
 
 # Application definition
 STATICFILES_DIRS = (
-    '/var/www/event/static/',
+    '/home/madhukar/django/events/static/',
 )
 
 INSTALLED_APPS = (
@@ -45,7 +45,6 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'bootstrap3',
     'event',
     'users',
     'signup',

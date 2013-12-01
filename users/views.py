@@ -30,25 +30,9 @@ def signup_stage1(request):
 	if 'email' in request.GET:
 		email = request.GET['email']
 		ldap_id = (email.split("@"))[0]
-<<<<<<< HEAD
 		url = "http://www.cse.iitb.ac.in/~prithvirajbilla/ldap-api/?user="+ldap_id
 		req = urllib2.Request(url)
 		response = urllib2.urlopen(req)
-=======
-		proxy_support = urllib2.ProxyHandler({'http':'http://rajeev_kumar:+eragonxxx*@netmon.iitb.ac.in:80',
-                                               'https':'https://rajeev_kumar:eragonxxx*@netmon.iitb.ac.in:80'})
-		opener = urllib2.build_opener(proxy_support)
-		urllib2.install_opener(opener)
-		hdr = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11',
-       			'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-       			'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.3',
-       			'Accept-Encoding': 'none',
-       			'Accept-Language': 'en-US,en;q=0.8',
-		       'Connection': 'keep-alive'}
-		url = "http://localhost/ldap-api/?user="+ldap_id
-		req = urllib2.Request(url,headers=hdr)
-		response = urllib2.urlopen(req,)
->>>>>>> ddd5577e514b853f5576762e1f47363b37284896
 		the_page = response.read()
 		array = json.loads(the_page)
 		print array
@@ -95,8 +79,7 @@ def editProfile(request):
 		raise Http404
 def logout(request):
 	request.session.flush()
-<<<<<<< HEAD
 	return HttpResponseRedirect("/")
-=======
-	return HttpResponseRedirect("/")
->>>>>>> e6642de269bca3a2f4aa96631cf0200abf7067a9
+
+def viewReq(request):
+	return render(request,'events/create.html')
