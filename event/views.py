@@ -28,9 +28,9 @@ def viewCreateEvent(request):
 	if 'p' in request.GET:
 		p = request.GET['p']
 		if p == 'error':
-			return render(request,'createEvent.html',{'error':True})
+			return render(request,'events/create.html',{'error':True})
 	if 'user' in request.session:
-		return render(request,'createEvent.html')
+		return render(request,'events/create.html')
 	else:
 		return HttpResponseRedirect("/")	
 
@@ -124,26 +124,26 @@ def viewEventPage(request,offset):
 		if len(Concert.objects.filter(concert=event)) != 0:
 			concert = Concert.objects.filter(concert=event)[0]
 			type1="concert"
-			return render(request,'eventpage.html',{'event':event,"type":type1,'concert':concert})
+			return render(request,'/event/view.html',{'event':event,"type":type1,'concert':concert})
 		elif len(Lecture.objects.filter(lecture=event)) != 0:
 			lecture = Lecture.objects.filter(lecture=event)[0]
 			type1="lecture"
-			return render(request,'eventpage.html',{'event':event,'type':type1,'lecture':lecture})
+			return render(request,'/event/view.html',{'event':event,'type':type1,'lecture':lecture})
 		elif len(Competition.objects.filter(competition=event)) != 0:
 			competition = Competition.objects.filter(competition=event)[0]
 			type1 = "competition"
 			r1=Registered.objects.filter(eid=Event.objects.filter(id=offset))
-			return render(request,'eventpage.html',{'event':event,'type':type1,'competition':competition,'reg':r1,'p':p})
+			return render(request,'/event/view.html',{'event':event,'type':type1,'competition':competition,'reg':r1,'p':p})
 		elif len(TeamEvent.objects.filter(teamevent=event)) != 0:
 			teamevent = TeamEvent.objects.filter(teamevent=event)[0]
 			type1 = "team"
-			return render(request,'eventpage.html',{'event':event,'type':type1,'team':teamevent})
+			return render(request,'/event/view.html',{'event':event,'type':type1,'team':teamevent})
 		elif len(Workshop.objects.filter(workshop=event)) != 0:
 			workshop = Workshop.objects.filter(workshop=event)[0]
 			type1 = "workshop"
-			return render(request,'eventpage.html',{'event':event,'type':type1,'workshop':workshop})
+			return render(request,'/event/view.html',{'event':event,'type':type1,'workshop':workshop})
 		else:
-			return render(request,'eventpage.html',{'event':event})
+			return render(request,'/event/view.html',{'event':event})
 
 def viewEvents(request):
 	##first part is concerts:

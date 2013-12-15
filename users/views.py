@@ -21,7 +21,7 @@ def login(request):
 			h1 = Has.objects.filter(username=Users.objects.filter(username=username)[0])[0]
 			s1 = h1.rollno.id
 			request.session['id'] = s1
-			request.session['roll'] = h1.rollno.rollno
+			request.session['roll'] = "h1.rollno.rollno"
 			return HttpResponseRedirect("/users/"+str(s1))	
 	else:
 		return HttpResponseRedirect('/')

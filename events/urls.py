@@ -14,6 +14,7 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'events.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
+    # url(r'^filebrowser/', include('filebrowser.urls')),
     url(r'^messages/create/$',createMessage),
     url(r'^verify/new/$',newPassword),
     url(r'^verify/$',verify),
@@ -36,5 +37,6 @@ urlpatterns = patterns('',
     url(r'^event/register/$',IndividualRegistration),
     url(r'^logout/$',logout),
     url(r'^view/$',viewReq),
+
 
 )+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

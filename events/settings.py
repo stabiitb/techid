@@ -25,6 +25,12 @@ DEBUG = True
 TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
+## Added for the suit settings
+from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
+
+TEMPLATE_CONTEXT_PROCESSORS = TCP + (
+    'django.core.context_processors.request',
+)
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
@@ -37,19 +43,22 @@ TEMPLATE_DIRS = (
 STATICFILES_DIRS = (
     '/home/madhukar/django/events/static/',
 )
-
+STATIC_ROOT = BASE_DIR + "/staticfiles/"
+MEDIA_ROOT = '/home/madhukar/django/events/media/'
 INSTALLED_APPS = (
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'suit',
+    'django.contrib.admin',
     'event',
     'users',
     'signup',
     'messages',
     'registration',
+    # 'filebrowser',
 
 )
 
@@ -95,7 +104,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
-
+MEDIA_URL = '/uploads/'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # Host for sending e-mail.
@@ -106,5 +115,5 @@ EMAIL_PORT = 587
 
 # Optional SMTP authentication information for EMAIL_HOST.
 EMAIL_HOST_USER = 'interiittech@gmail.com'
-EMAIL_HOST_PASSWORD = 'Interiittech7@'
+EMAIL_HOST_PASSWORD = 'InteriitTech7@'
 EMAIL_USE_TLS = True

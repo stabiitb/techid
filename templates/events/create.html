@@ -4,6 +4,7 @@
   <body>
     {% include "navbar.html" %}
     <br/>
+    <script type="text/javascript" src="/static/extend/js/jasny-bootstrap.js"></script>
       <div clas="container">
          <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
@@ -26,10 +27,20 @@
                 <div class="form-group">
                   <label for="eventname">Venue</label>
                   <input type="text" class="form-control" id="eventname" name="venue" placeholder="Venue" required/>
+                  <br/>
+                   <label for="eventname">Picture</label>
                 </div>
                 <div class="form-group">
-                  <label for="picture">Picture</label>
-                  <input type="text" id="picture" class="form-control" name="picture" required/>
+                  <div class="fileinput fileinput-new" data-provides="fileinput">
+                    <div class="fileinput-new thumbnail" style="width:960px; height: 230px;">
+                      <img src="http://placeholder.it/100%x100%" name="image" alt="...">
+                    </div>
+                    <div class="fileinput-preview fileinput-exists thumbnail" style="max-width:960px; max-height: 230px;"></div>
+                    <div>
+                      <span class="btn btn-default btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span><input type="file" name="image"></span>
+                      <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+                    </div>
+                  </div>
                 </div>
                   <div class="form-group">
                     <label for="starting"> Starting Time </label>
@@ -54,8 +65,11 @@
                       <option value="Second">Second Year</option>
                       <option value="third">Third Year </option>
                       <option value="fourth">Fourth Year </option>
-                      <option value="pg-1">PG 1 Year </option>
-                      <option value="pg-2">PG 2 Year </option>
+                      <option value="mtech1">MTech 1 </option>
+                      <option value="mtech2">MTech 2 </option>
+                      <option value="mtech3">MTech 3</option>
+                      <option value="phd">PHD </option>
+                      <option value="other">Other</option>
                     </select>
                   </div>
                   <div class="form-group">
@@ -96,89 +110,76 @@
                       <option value="12">Mathematics</option>
                       <option value="13"> Mechanical Enginerring </option>
                       <option value="14"> Metallurgical Engineering </option> 
-                      <option value="15">Phusics</option>
+                      <option value="15">Physics</option>
+                      <options value="16">Other</option>
                     </select>
                   </div>
-                <div class="form-group">
-                  <label for="type">Event Type </label>
-                  <select class="form-control" name="type" id="type">
-                    <option value="">Select</option>
-                    <option value="individual">Competition | Individual</option>
-                    <option value="team">Competition | Team Type</option>
-                    <option value="lecture">Lecture</option>
-                    <option value="workshop">Workshop</option>   
-                  </select>
+                  <div class="form-group">
+                    <div class="checkbox">
+                      <label>
+                        <input id="type" type="checkbox"> <b> Require Registration</b>
+                      </label>
+                    </div>                  
                 </div>
-                <div class="form-group" id="lecture" style="display:none">
-                  <label for="">Speaker </label>
-                  <input type="text" name="speaker" class="form-control" placeholder="speaker">
+                <div id="reg" class="form-group" style="display:none">
+                  <div class="checkbox">
+                    <label>
+                      <input id="type1" name="individual" type="checkbox"> <b> Individual Registration Required</b>
+                    </label>
+                  </div>                  
+                  <div class="checkbox">
+                    <label>
+                      <input id="type2" name="team" type="checkbox"> <b> Team Registration Required</b>
+                    </label>
+                  </div>                  
+
                 </div>
-                <div class="form-group" id="workshop" style="display:none">
-                  <label for="">Speaker </label>
-                  <input type="text" name="workshop-speaker" class="form-control" placeholder="speaker">
-                  <br/>
-                  <label for="">Field of work </label>
-                  <input type="text" name="field" class="form-control" placeholder="field of workshop">
-                </div>
-                <div class="form-group" id="individual" style="display:none">
-                  <label for="competition">Deadline to register </label>
+                <div class="from-group" id="individual" style="display:none">
+                    <label for="starting"> Dead line to register </label>
                     <div class='input-group date' id='datetimepicker6'>
-                      <input type='text' name="deadline" class="form-control" />
+                      <input type='text' name="deadline" class="form-control" required/>
                       <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
                       </span>
                     </div>
-                    <br/>
                 </div>
-                <div class="form-group" id="team" style="display:none">
-                  <label for="competition">Deadline to register </label>
+                <div class="from-group" id="team" style="display:none">
+                    <label for="starting"> Dead line to register </label>
                     <div class='input-group date' id='datetimepicker8'>
-                      <input type='text' name="deadline1" class="form-control" />
+                      <input type='text' name="deadline1" class="form-control" required/>
                       <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
                       </span>
                     </div>
-                    <br/>
-                    <label for="teammembers">Max Team Members</label>
-                    <input type="text" name="teammembers" class="form-control" />
                 </div>
-                <script type="text/javascript">
-                $(document).ready(function(){
-                    $("#type").change(function() 
-                    {
-                      if ($(this).val() == "individual") {
-                          $("#individual").show();
-                      }else{
-                          $("#individual").hide();
-                      } 
-                    });                
-                    $("#type").change(function() 
-                    {
-                      if ($(this).val() == "team") {
-                          $("#team").show();
-                      }else{
-                          $("#team").hide();
-                      } 
-                    });                
-                    $("#type").change(function() 
-                    {
-                      if ($(this).val() == "workshop") {
-                          $("#workshop").show();
-                      }else{
-                          $("#workshop").hide();
-                      } 
-                    });
-                    $("#type").change(function() 
-                    {
-                      if ($(this).val() == "lecture") {
-                          $("#lecture").show();
-                      }else{
-                          $("#lecture").hide();
-                      } 
-                    });
-                });</script>
+
                 <button type="submit" class="btn btn-default">Create Event</button>
               </form>
             </div>
           </div>
+<script type="text/javascript">
+    $(document).ready(function()
+    {
+      $("#type").change(function()
+      {
+        if(document.getElementById("type").checked = true)
+        {
+            $("#reg").show();
+        }
+        else
+        {
+          $("#reg").hide();
+        }
+      }); 
+});
+
+</script>
+
+
+{% comment %}
+#Three type of Events:
+1.which require Registration:
+2.individual registration
+3.team registration
+{% endcomment %}
 <script type="text/javascript">
   $(function () {
     $('#datetimepicker7').datetimepicker();
