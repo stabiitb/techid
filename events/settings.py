@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+ROOT_DIR = os.path.dirname( os.path.dirname( __file__ ) )
 
 
 # Quick-start development settings - unsuitable for production
@@ -34,17 +35,17 @@ TEMPLATE_CONTEXT_PROCESSORS = TCP + (
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    "/home/madhukar/django/events/templates"
+    ROOT_DIR+'/templates/',
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
 )
 
 # Application definition
 STATICFILES_DIRS = (
-    '/home/madhukar/django/events/static/',
+    ROOT_DIR+'/static/',
 )
-STATIC_ROOT = BASE_DIR + "/staticfiles/"
-MEDIA_ROOT = '/home/madhukar/django/events/media/'
+STATIC_ROOT = ROOT_DIR + "/staticfiles/"
+MEDIA_ROOT = ROOT_DIR+'/media/'
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -56,8 +57,10 @@ INSTALLED_APPS = (
     'event',
     'users',
     'signup',
-    'messages',
+    'misc',
     'registration',
+    'suit_redactor',
+    'django_select2',
     # 'filebrowser',
 
 )
