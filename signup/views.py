@@ -23,3 +23,7 @@ def getValues(ldap_id):
 def index(request):
 	form = LoginForm()
 	return render(request,"index.html",{"form":form})
+
+def signup(request):
+	form =SignupForm()
+	return render(request,"signup.html",{"form":form})

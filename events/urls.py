@@ -16,6 +16,7 @@ urlpatterns = patterns('',
     # url(r'^filebrowser/', include('filebrowser.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^view/$',viewReq),
+    url(r'^signup/$','signup.views.signup'),
     url(r'$','signup.views.index'),
     url(r'^select2/', include('django_select2.urls')),
 
