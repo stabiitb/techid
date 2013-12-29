@@ -34,13 +34,13 @@ class TeamEvent(Event):
 	team_size			 = models.IntegerField(null=True,blank=True,default=0)
 	submission			 = models.BooleanField(default=False)
 	submission_on		= models.DateTimeField(null=True,blank=True)
-	# other_notes	= models.TextField(null=True,blank=True)
+	other_notes	= models.TextField(null=True,blank=True)
 
 class IndividualEvent(Event):
 	deadline_to_register = models.DateTimeField(null=True,blank=True)
 	submission = models.BooleanField(default=False)
 	submission_on		= models.DateTimeField(null=True,blank=True)
-	# other_notes	= models.TextField(null=True,blank=True)
+	other_notes	= models.TextField(null=True,blank=True)
 
 
 class Lecture(Event):

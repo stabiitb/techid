@@ -60,6 +60,7 @@ INSTALLED_APPS = (
     'misc',
     'registration',
     'suit_redactor',
+    'bootstrap3',
     'django_select2',
     # 'filebrowser',
 
