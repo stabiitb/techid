@@ -5,4 +5,4 @@ from django.contrib import admin
 from event.models import *
 from signup.models import *
 
-admin.site.register(Student)
+admin.site.register(User)

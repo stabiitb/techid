@@ -44,6 +44,8 @@ TEMPLATE_DIRS = (
 STATICFILES_DIRS = (
     ROOT_DIR+'/static/',
 )
+AUTH_USER_MODEL = 'signup.User'                  
+
 STATIC_ROOT = ROOT_DIR + "/staticfiles/"
 MEDIA_ROOT = ROOT_DIR+'/media/'
 INSTALLED_APPS = (

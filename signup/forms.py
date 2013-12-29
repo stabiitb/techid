@@ -22,9 +22,14 @@ class SignupForm(ModelForm):
 	class Meta:
 		model = User
 		exclude = ['is_active','is_admin','email','ldap_username','rollno']
-		fields = ['first_name','last_name','department','year','hostel','room','alternate_email','mobile']
+		fields = ['first_name','last_name','department','year','hostel','room','alternate_email','mobile','skill']
 		widgets = {
 		'department' :Select2Widget(attrs={"style":"width:100%"}),
 		'year':Select2Widget(attrs={"style":"width:100%"}),
 		'hostel':Select2Widget(attrs={"style":"width:100%"}),
 		}
+		
+class LoginForm(forms.Form):
+	email = forms.EmailField()
+	password = forms.CharField(widget=forms.PasswordInput(render_value=False),max_length=10)
+

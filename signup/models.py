@@ -57,7 +57,7 @@ class User(AbstractBaseUser):
     rollno=models.CharField(max_length=20,null=True,blank=True)
     alternate_email = models.EmailField(null=True,blank=True)
     room = models.CharField(null=True,blank=True,max_length=10)
-
+    skill = models.ManyToManyField(Skill,null=True,blank=True)
 
     objects = UserManager()
 
