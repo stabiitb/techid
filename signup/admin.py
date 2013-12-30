@@ -6,3 +6,4 @@ from event.models import *
 from signup.models import *
 
 admin.site.register(User)
+admin.site.register(RegistrationCode)

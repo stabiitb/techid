@@ -1,0 +1,122 @@
+[
+{
+    "pk": 1, 
+    "model": "misc.hostel", 
+    "fields": {
+        "name": "Hostel 1", 
+        "description": ""
+    }
+},
+{
+    "pk": 2, 
+    "model": "misc.hostel", 
+    "fields": {
+        "name": "Hostel 2", 
+        "description": ""
+    }
+},
+{
+    "pk": 3, 
+    "model": "misc.hostel", 
+    "fields": {
+        "name": "Hostel 3", 
+        "description": ""
+    }
+},
+{
+    "pk": 4, 
+    "model": "misc.hostel", 
+    "fields": {
+        "name": "Hostel 4", 
+        "description": ""
+    }
+},
+{
+    "pk": 5, 
+    "model": "misc.hostel", 
+    "fields": {
+        "name": "Hostel 5", 
+        "description": ""
+    }
+},
+{
+    "pk": 6, 
+    "model": "misc.hostel", 
+    "fields": {
+        "name": "Hostel 6", 
+        "description": ""
+    }
+},
+{
+    "pk": 7, 
+    "model": "misc.hostel", 
+    "fields": {
+        "name": "Hostel 7", 
+        "description": ""
+    }
+},
+{
+    "pk": 8, 
+    "model": "misc.hostel", 
+    "fields": {
+        "name": "Hostel 8", 
+        "description": ""
+    }
+},
+{
+    "pk": 9, 
+    "model": "misc.hostel", 
+    "fields": {
+        "name": "Hostel 9", 
+        "description": ""
+    }
+},
+{
+    "pk": 10, 
+    "model": "misc.hostel", 
+    "fields": {
+        "name": "Hostel 10", 
+        "description": ""
+    }
+},
+{
+    "pk": 11, 
+    "model": "misc.hostel", 
+    "fields": {
+        "name": "Hostel 11", 
+        "description": ""
+    }
+},
+{
+    "pk": 12, 
+    "model": "misc.hostel", 
+    "fields": {
+        "name": "Hostel 12", 
+        "description": ""
+    }
+},
+{
+    "pk": 13, 
+    "model": "misc.hostel", 
+    "fields": {
+        "name": "Hostel 13", 
+        "description": ""
+    }
+},
+{
+    "pk": 14, 
+    "model": "misc.hostel", 
+    "fields": {
+        "name": "Hostel 14", 
+        "description": ""
+    }
+},
+{
+    "pk": 15, 
+    "model": "misc.hostel", 
+    "fields": {
+        "name": "Hostel 15", 
+        "description": ""
+    }
+}
+]

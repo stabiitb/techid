@@ -22,7 +22,9 @@
               <h4>Login</h4>
             </div>
               {% load bootstrap3 %}
-              {% bootstrap_messages %}            
+              {% if mobile %}
+              {% bootstrap_messages %}
+              {% endif %}         
             <form role="form" method="post" action="/login/">
               {% csrf_token %}
               {% bootstrap_form form %}
@@ -34,10 +36,8 @@
             <h4> Sign Up here <small> With only valid GPO email address </small> </h4>
           </div>
           <br>
-          <br>
-          {% if error1 %}
-                <div class="alert alert-danger"><Strong>Warning!</strong> Wrong Ldap Id or Ldap username doesn't exists.</div>
-          {% endif %}
+          <br>  
+          {% bootstrap_messages %}
 
           <form role="form" method="get" action="/signup/1/">
             <div class="form-group">
