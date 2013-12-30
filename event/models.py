@@ -1,16 +1,26 @@
 from django.db import models
 
 # Create your models here.
+from misc.models import *
+
 class Event(models.Model):
 	name = models.CharField(max_length=255)
 	description =models.TextField()
-	venue = models.CharField(max_length=255)
+	venue = models.OneToOneField(Venue)
 	start_time = models.DateTimeField()
-	duration = models.CharField(max_length=255)
-	year_elligible = models.CharField(max_length=25)
-	dept_elligible = models.IntegerField(default=0)
-	hostel_elligible = models.IntegerField()
-	picture = models.CharField(max_length=25)
+	duration = models.CharField(max_length=255,null=True,blank=True)
+	year_elligible = models.ManyToManyField(Year,default=Year.objects.all())
+	dept_elligible = models.ManyToManyField(Department,default=Department.objects.all())
+	hostel_elligible = models.ManyToManyField(Hostel,default=Hostel.objects.all())
+	picture = models.ImageField(max_length=100,upload_to='documents/%Y/%m/%d',blank=True,null=True)
+	small_picture =models.ImageField(max_length=100,upload_to='documents/%Y/%m/%d',blank=True,null=True)
+	created_at = models.DateTimeField(auto_now_add=True)
+	updated_at = models.DateTimeField(auto_now=True)
+	attachements = models.FileField(max_length=100,upload_to='documents/%Y/%m/%d',blank=True,null=True)
+	end_note	= models.TextField(null=True,blank=True)
+	special_notes = models.TextField(null=True,blank=True)
+	conducted_by= models.ManyToManyField(Club)
+	ended		= models.BooleanField(default=False)
 
 	@classmethod
 	def isexists(cls,eventid):
@@ -19,33 +29,30 @@ class Event(models.Model):
 		else:
 			return False
 
-class Concert(models.Model):
-    concert = models.ForeignKey(Event)
-    concertby = models.CharField(max_length=255)
+class TeamEvent(Event):
+	deadline_to_register = models.DateTimeField(null=True,blank=True)
+	team_size			 = models.IntegerField(null=True,blank=True,default=0)
+	submission			 = models.BooleanField(default=False)
+	submission_on		= models.DateTimeField(null=True,blank=True)
+	other_notes	= models.TextField(null=True,blank=True)
 
-class Workshop(models.Model):
-	workshop = models.ForeignKey(Event)
-	conductedby = models.CharField(max_length=255)
-	field = models.CharField(max_length=255)
+class IndividualEvent(Event):
+	deadline_to_register = models.DateTimeField(null=True,blank=True)
+	submission = models.BooleanField(default=False)
+	submission_on		= models.DateTimeField(null=True,blank=True)
+	other_notes	= models.TextField(null=True,blank=True)
 
-class Lecture(models.Model):
-	lecture = models.ForeignKey(Event)
-	speaker = models.CharField(max_length=255)
 
-class TeamEvent(models.Model):
-	teamevent = models.ForeignKey(Event)
-	deadline = models.DateTimeField()
-	teamsize = models.IntegerField()
+class Lecture(Event):
+	deadline_to_register = models.DateTimeField(null=True,blank=True)
+	lecture_by		= models.CharField(max_length=255)
+	topic			 = models.CharField(max_length=255)
+	other_notes 	= models.TextField(null=True,blank=True)
 
-class Competition(models.Model):
-	competition = models.ForeignKey(Event)
-	deadline = models.DateTimeField()
+class Workshop(Event):
+	deadline_to_register = models.DateTimeField(null=True,blank=True)
+	workshop_on	= models.CharField(max_length=255)
+	other_notes = models.TextField(null=True,blank=True)
 
-class CultEvent(models.Model):
-	cultevent = models.ForeignKey(Event)
-
-class TechEvent(models.Model):
-	techevent = models.ForeignKey(Event)
-
-class SportEvent(models.Model):
-	sportevent = models.ForeignKey(Event)
+class OtherEvent(Event):
+	other_notes = models.TextField(null=True,blank=True)

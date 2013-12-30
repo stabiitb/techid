@@ -1,0 +1,66 @@
+[
+{
+    "pk": 1, 
+    "model": "misc.year", 
+    "fields": {
+        "name": "First Year", 
+        "short_name": "freshie"
+    }
+},
+{
+    "pk": 2, 
+    "model": "misc.year", 
+    "fields": {
+        "name": "Second Year", 
+        "short_name": "sophie"
+    }
+},
+{
+    "pk": 3, 
+    "model": "misc.year", 
+    "fields": {
+        "name": "Third Year", 
+        "short_name": "thirdie"
+    }
+},
+{
+    "pk": 4, 
+    "model": "misc.year", 
+    "fields": {
+        "name": "Fourth Year", 
+        "short_name": "fourthie"
+    }
+},
+{
+    "pk": 5, 
+    "model": "misc.year", 
+    "fields": {
+        "name": "Dual Degree", 
+        "short_name": "DD"
+    }
+},
+{
+    "pk": 6, 
+    "model": "misc.year", 
+    "fields": {
+        "name": "Mtech 1", 
+        "short_name": "Mtech 1"
+    }
+},
+{
+    "pk": 7, 
+    "model": "misc.year", 
+    "fields": {
+        "name": "Mtech 2", 
+        "short_name": "Mtech 2"
+    }
+},
+{
+    "pk": 8, 
+    "model": "misc.year", 
+    "fields": {
+        "name": "PHD", 
+        "short_name": "PHD"
+    }
+}
+]

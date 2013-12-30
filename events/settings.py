@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+ROOT_DIR = os.path.dirname( os.path.dirname( __file__ ) )
 
 
 # Quick-start development settings - unsuitable for production
@@ -25,32 +26,45 @@ DEBUG = True
 TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
+## Added for the suit settings
+from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
+
+TEMPLATE_CONTEXT_PROCESSORS = TCP + (
+    'django.core.context_processors.request',
+)
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    "/var/www/event/templates"
+    ROOT_DIR+'/templates/',
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
 )
 
 # Application definition
 STATICFILES_DIRS = (
-    '/var/www/event/static/',
+    ROOT_DIR+'/static/',
 )
+AUTH_USER_MODEL = 'signup.User'                  
 
+STATIC_ROOT = ROOT_DIR + "/staticfiles/"
+MEDIA_ROOT = ROOT_DIR+'/media/'
 INSTALLED_APPS = (
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'bootstrap3',
+    'suit',
+    'django.contrib.admin',
     'event',
     'users',
     'signup',
-    'messages',
+    'misc',
     'registration',
+    'suit_redactor',
+    'bootstrap3',
+    'django_select2',
+    # 'filebrowser',
 
 )
 
@@ -74,7 +88,7 @@ WSGI_APPLICATION = 'events.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME':'/var/www/event/db.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
@@ -96,16 +110,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
-
+MEDIA_URL = '/uploads/'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # Host for sending e-mail.
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST = 'localhost'
 
 # Port for sending e-mail.
-EMAIL_PORT = 587
+EMAIL_PORT = 1025
 
-# Optional SMTP authentication information for EMAIL_HOST.
-EMAIL_HOST_USER = 'interiittech@gmail.com'
-EMAIL_HOST_PASSWORD = 'InteriitTech7@'
-EMAIL_USE_TLS = True
+# # Optional SMTP authentication information for EMAIL_HOST.
+# EMAIL_HOST_USER = 'interiittech@gmail.com'
+# EMAIL_HOST_PASSWORD = 'InteriitTech7@'
+# EMAIL_USE_TLS = True
