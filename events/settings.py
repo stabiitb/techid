@@ -24,7 +24,9 @@ SECRET_KEY = 'vn$-p69z0ea^t5#hzhl*z6xichnl70nbv%$8e=5g6$e#0w@r0t'
 DEBUG = True
 
 TEMPLATE_DEBUG = True
-
+FIXTURE_DIRS = (
+    ROOT_DIR + "/fixtures/",
+    )
 ALLOWED_HOSTS = []
 ## Added for the suit settings
 from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
