@@ -1,0 +1,682 @@
+[
+{
+    "pk": 1, 
+    "model": "misc.department", 
+    "fields": {
+        "name": "Computer Science and Engineering", 
+        "short_name": "CSE"
+    }
+},
+{
+    "pk": 2, 
+    "model": "misc.department", 
+    "fields": {
+        "name": "Electrical Engineering", 
+        "short_name": "EE"
+    }
+},
+{
+    "pk": 3, 
+    "model": "misc.department", 
+    "fields": {
+        "name": "Aerospace engineering", 
+        "short_name": "AERO"
+    }
+},
+{
+    "pk": 4, 
+    "model": "misc.department", 
+    "fields": {
+        "name": "Biosciences and Bioengineering", 
+        "short_name": "BIOS"
+    }
+},
+{
+    "pk": 5, 
+    "model": "misc.department", 
+    "fields": {
+        "name": "Chemical Engineering", 
+        "short_name": "CHE"
+    }
+},
+{
+    "pk": 6, 
+    "model": "misc.department", 
+    "fields": {
+        "name": "Chemistry", 
+        "short_name": "CHEM"
+    }
+},
+{
+    "pk": 7, 
+    "model": "misc.department", 
+    "fields": {
+        "name": "Earth sciences", 
+        "short_name": "GEOS"
+    }
+},
+{
+    "pk": 8, 
+    "model": "misc.department", 
+    "fields": {
+        "name": "Energy sciences", 
+        "short_name": "ES"
+    }
+},
+{
+    "pk": 9, 
+    "model": "misc.department", 
+    "fields": {
+        "name": "Humanities and social science", 
+        "short_name": "HSS"
+    }
+},
+{
+    "pk": 10, 
+    "model": "misc.department", 
+    "fields": {
+        "name": "Industrial Design center", 
+        "short_name": "IDC"
+    }
+},
+{
+    "pk": 11, 
+    "model": "misc.department", 
+    "fields": {
+        "name": "Physics", 
+        "short_name": "PHY"
+    }
+},
+{
+    "pk": 12, 
+    "model": "misc.department", 
+    "fields": {
+        "name": "Metallurigcal engineering", 
+        "short_name": "MET"
+    }
+},
+{
+    "pk": 13, 
+    "model": "misc.department", 
+    "fields": {
+        "name": "Other", 
+        "short_name": "OTH"
+    }
+},
+{
+    "pk": 14, 
+    "model": "misc.department", 
+    "fields": {
+        "name": "Mechanical engineering", 
+        "short_name": "MECH"
+    }
+},
+{
+    "pk": 1, 
+    "model": "misc.year", 
+    "fields": {
+        "name": "First Year", 
+        "short_name": "freshie"
+    }
+},
+{
+    "pk": 2, 
+    "model": "misc.year", 
+    "fields": {
+        "name": "Second Year", 
+        "short_name": "sophie"
+    }
+},
+{
+    "pk": 3, 
+    "model": "misc.year", 
+    "fields": {
+        "name": "Third Year", 
+        "short_name": "thirdie"
+    }
+},
+{
+    "pk": 4, 
+    "model": "misc.year", 
+    "fields": {
+        "name": "Fourth Year", 
+        "short_name": "fourthie"
+    }
+},
+{
+    "pk": 5, 
+    "model": "misc.year", 
+    "fields": {
+        "name": "Dual Degree", 
+        "short_name": "DD"
+    }
+},
+{
+    "pk": 6, 
+    "model": "misc.year", 
+    "fields": {
+        "name": "Mtech 1", 
+        "short_name": "Mtech 1"
+    }
+},
+{
+    "pk": 7, 
+    "model": "misc.year", 
+    "fields": {
+        "name": "Mtech 2", 
+        "short_name": "Mtech 2"
+    }
+},
+{
+    "pk": 8, 
+    "model": "misc.year", 
+    "fields": {
+        "name": "PHD", 
+        "short_name": "PHD"
+    }
+},
+{
+    "pk": 1, 
+    "model": "misc.hostel", 
+    "fields": {
+        "name": "Hostel 1", 
+        "description": ""
+    }
+},
+{
+    "pk": 2, 
+    "model": "misc.hostel", 
+    "fields": {
+        "name": "Hostel 2", 
+        "description": ""
+    }
+},
+{
+    "pk": 3, 
+    "model": "misc.hostel", 
+    "fields": {
+        "name": "Hostel 3", 
+        "description": ""
+    }
+},
+{
+    "pk": 4, 
+    "model": "misc.hostel", 
+    "fields": {
+        "name": "Hostel 4", 
+        "description": ""
+    }
+},
+{
+    "pk": 5, 
+    "model": "misc.hostel", 
+    "fields": {
+        "name": "Hostel 5", 
+        "description": ""
+    }
+},
+{
+    "pk": 6, 
+    "model": "misc.hostel", 
+    "fields": {
+        "name": "Hostel 6", 
+        "description": ""
+    }
+},
+{
+    "pk": 7, 
+    "model": "misc.hostel", 
+    "fields": {
+        "name": "Hostel 7", 
+        "description": ""
+    }
+},
+{
+    "pk": 8, 
+    "model": "misc.hostel", 
+    "fields": {
+        "name": "Hostel 8", 
+        "description": ""
+    }
+},
+{
+    "pk": 9, 
+    "model": "misc.hostel", 
+    "fields": {
+        "name": "Hostel 9", 
+        "description": ""
+    }
+},
+{
+    "pk": 10, 
+    "model": "misc.hostel", 
+    "fields": {
+        "name": "Hostel 10", 
+        "description": ""
+    }
+},
+{
+    "pk": 11, 
+    "model": "misc.hostel", 
+    "fields": {
+        "name": "Hostel 11", 
+        "description": ""
+    }
+},
+{
+    "pk": 12, 
+    "model": "misc.hostel", 
+    "fields": {
+        "name": "Hostel 12", 
+        "description": ""
+    }
+},
+{
+    "pk": 13, 
+    "model": "misc.hostel", 
+    "fields": {
+        "name": "Hostel 13", 
+        "description": ""
+    }
+},
+{
+    "pk": 14, 
+    "model": "misc.hostel", 
+    "fields": {
+        "name": "Hostel 14", 
+        "description": ""
+    }
+},
+{
+    "pk": 15, 
+    "model": "misc.hostel", 
+    "fields": {
+        "name": "Hostel 15", 
+        "description": ""
+    }
+},
+{
+    "pk": 1, 
+    "model": "misc.skill", 
+    "fields": {
+        "name": "Solid works", 
+        "short_name": "solid-works"
+    }
+},
+{
+    "pk": 2, 
+    "model": "misc.skill", 
+    "fields": {
+        "name": "CAD & Ansys", 
+        "short_name": "cad"
+    }
+},
+{
+    "pk": 3, 
+    "model": "misc.skill", 
+    "fields": {
+        "name": "Matlab", 
+        "short_name": "matlab"
+    }
+},
+{
+    "pk": 4, 
+    "model": "misc.skill", 
+    "fields": {
+        "name": "Simulink", 
+        "short_name": "simulink"
+    }
+},
+{
+    "pk": 5, 
+    "model": "misc.skill", 
+    "fields": {
+        "name": "Eagle", 
+        "short_name": "eagle"
+    }
+},
+{
+    "pk": 6, 
+    "model": "misc.skill", 
+    "fields": {
+        "name": "Kicad", 
+        "short_name": "kicad"
+    }
+},
+{
+    "pk": 7, 
+    "model": "misc.skill", 
+    "fields": {
+        "name": "Ltspice", 
+        "short_name": "ltspice"
+    }
+},
+{
+    "pk": 8, 
+    "model": "misc.skill", 
+    "fields": {
+        "name": "Simulation software", 
+        "short_name": "simulation-software"
+    }
+},
+{
+    "pk": 9, 
+    "model": "misc.skill", 
+    "fields": {
+        "name": "Labview", 
+        "short_name": "labview"
+    }
+},
+{
+    "pk": 10, 
+    "model": "misc.skill", 
+    "fields": {
+        "name": "Basic sensors (sharp tsop ultrasonic ldr's)", 
+        "short_name": "basic-sensors"
+    }
+},
+{
+    "pk": 11, 
+    "model": "misc.skill", 
+    "fields": {
+        "name": "Advanced sensors (gyroscope accelerometer thermal humidity proximity flex megnetometer)", 
+        "short_name": "advanced-sensors"
+    }
+},
+{
+    "pk": 12, 
+    "model": "misc.skill", 
+    "fields": {
+        "name": "Infra red emitters and sensors", 
+        "short_name": "infra-red-sensors"
+    }
+},
+{
+    "pk": 13, 
+    "model": "misc.skill", 
+    "fields": {
+        "name": "Signal Processing", 
+        "short_name": "signal-processing"
+    }
+},
+{
+    "pk": 14, 
+    "model": "misc.skill", 
+    "fields": {
+        "name": "noise filtering", 
+        "short_name": "noise-filtering"
+    }
+},
+{
+    "pk": 15, 
+    "model": "misc.skill", 
+    "fields": {
+        "name": "control theory", 
+        "short_name": "control-theory"
+    }
+},
+{
+    "pk": 16, 
+    "model": "misc.skill", 
+    "fields": {
+        "name": "system identification", 
+        "short_name": "system-identification"
+    }
+},
+{
+    "pk": 17, 
+    "model": "misc.skill", 
+    "fields": {
+        "name": "system tuning", 
+        "short_name": "system-tuning"
+    }
+},
+{
+    "pk": 18, 
+    "model": "misc.skill", 
+    "fields": {
+        "name": "Pure Mechanical knowledge (assembly", 
+        "short_name": "gear)"
+    }
+},
+{
+    "pk": 19, 
+    "model": "misc.skill", 
+    "fields": {
+        "name": "Motors (servo stepper)", 
+        "short_name": "motors"
+    }
+},
+{
+    "pk": 20, 
+    "model": "misc.skill", 
+    "fields": {
+        "name": "Piston actuation", 
+        "short_name": "piston-actuation"
+    }
+},
+{
+    "pk": 21, 
+    "model": "misc.skill", 
+    "fields": {
+        "name": "Shock Absorbers", 
+        "short_name": "shock-absorbers"
+    }
+},
+{
+    "pk": 22, 
+    "model": "misc.skill", 
+    "fields": {
+        "name": "fabrication processing", 
+        "short_name": "fabrication-processing"
+    }
+},
+{
+    "pk": 23, 
+    "model": "misc.skill", 
+    "fields": {
+        "name": "Arduino basics", 
+        "short_name": "arduino-basics"
+    }
+},
+{
+    "pk": 24, 
+    "model": "misc.skill", 
+    "fields": {
+        "name": "Arduino advanced (serial communication - SPI uart usart coding timers )", 
+        "short_name": "arduino-advanced"
+    }
+},
+{
+    "pk": 25, 
+    "model": "misc.skill", 
+    "fields": {
+        "name": "Avr coding (basic)", 
+        "short_name": "avr-coding-basic"
+    }
+},
+{
+    "pk": 26, 
+    "model": "misc.skill", 
+    "fields": {
+        "name": "Avr coding (advanced)", 
+        "short_name": "avr-coding-advanced"
+    }
+},
+{
+    "pk": 27, 
+    "model": "misc.skill", 
+    "fields": {
+        "name": "Processing software", 
+        "short_name": "processing-software"
+    }
+},
+{
+    "pk": 28, 
+    "model": "misc.skill", 
+    "fields": {
+        "name": "Wireless communication modules (xbee Bluetooth manipulating electro magnetic fields)", 
+        "short_name": "wireless-communication"
+    }
+},
+{
+    "pk": 29, 
+    "model": "misc.skill", 
+    "fields": {
+        "name": "Image processing (visual studio open cv processing)", 
+        "short_name": "image-processing"
+    }
+},
+{
+    "pk": 30, 
+    "model": "misc.skill", 
+    "fields": {
+        "name": "Digital Signal Processing tools", 
+        "short_name": "digital-signal-processing"
+    }
+},
+{
+    "pk": 31, 
+    "model": "misc.skill", 
+    "fields": {
+        "name": "FPGA related coding", 
+        "short_name": "FPGA-coding"
+    }
+},
+{
+    "pk": 32, 
+    "model": "misc.skill", 
+    "fields": {
+        "name": "High power electrical applications", 
+        "short_name": "high-power-electronics"
+    }
+},
+{
+    "pk": 33, 
+    "model": "misc.skill", 
+    "fields": {
+        "name": "HTML", 
+        "short_name": "html"
+    }
+},
+{
+    "pk": 34, 
+    "model": "misc.skill", 
+    "fields": {
+        "name": "C/C++", 
+        "short_name": "C/C++"
+    }
+},
+{
+    "pk": 35, 
+    "model": "misc.skill", 
+    "fields": {
+        "name": "Python", 
+        "short_name": "python"
+    }
+},
+{
+    "pk": 36, 
+    "model": "misc.skill", 
+    "fields": {
+        "name": "Java", 
+        "short_name": "java"
+    }
+},
+{
+    "pk": 37, 
+    "model": "misc.skill", 
+    "fields": {
+        "name": "CSS", 
+        "short_name": "css"
+    }
+},
+{
+    "pk": 38, 
+    "model": "misc.skill", 
+    "fields": {
+        "name": "PHP", 
+        "short_name": "php"
+    }
+},
+{
+    "pk": 39, 
+    "model": "misc.skill", 
+    "fields": {
+        "name": "MySQL", 
+        "short_name": "mysql"
+    }
+},
+{
+    "pk": 40, 
+    "model": "misc.skill", 
+    "fields": {
+        "name": "Javascript", 
+        "short_name": "javascript"
+    }
+},
+{
+    "pk": 41, 
+    "model": "misc.skill", 
+    "fields": {
+        "name": "Android", 
+        "short_name": "android"
+    }
+},
+{
+    "pk": 42, 
+    "model": "misc.skill", 
+    "fields": {
+        "name": "Ruby on Rails", 
+        "short_name": "RoR"
+    }
+},
+{
+    "pk": 43, 
+    "model": "misc.skill", 
+    "fields": {
+        "name": "iPhone programming", 
+        "short_name": "iphone-programming"
+    }
+},
+{
+    "pk": 44, 
+    "model": "misc.skill", 
+    "fields": {
+        "name": "Telescope handling", 
+        "short_name": "telescope-handling"
+    }
+},
+{
+    "pk": 45, 
+    "model": "misc.skill", 
+    "fields": {
+        "name": "Observational Astronomy", 
+        "short_name": "observational-astronomy"
+    }
+},
+{
+    "pk": 46, 
+    "model": "misc.skill", 
+    "fields": {
+        "name": "Flying aeroplane", 
+        "short_name": "flying-airplane"
+    }
+},
+{
+    "pk": 47, 
+    "model": "misc.skill", 
+    "fields": {
+        "name": "Board Games( Chess checkers.go etc.)", 
+        "short_name": "board-games"
+    }
+},
+{
+    "pk": 48, 
+    "model": "misc.skill", 
+    "fields": {
+        "name": "Sudoku", 
+        "short_name": "sudoku"
+    }
+}
+]

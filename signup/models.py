@@ -56,6 +56,7 @@ class User(AbstractBaseUser):
     alternate_email = models.EmailField(null=True,blank=True)
     room = models.CharField(max_length=10)
     skill = models.ManyToManyField(Skill,null=True,blank=True)
+    photo = models.ImageField(max_length=100,upload_to='documents/%Y/%m/%d',blank=True,null=True)
 
     objects = UserManager()
 
@@ -72,17 +73,13 @@ class User(AbstractBaseUser):
         return self.is_admin
 
     def __unicode__(self):
-        return self.email
+        return self.ldap_username
 
     def has_perm(self, perm, obj=None):
         return True
 
     def has_module_perms(self, app_label):
         return True
-
-class OtherInfo(models.Model):
-    user = models.OneToOneField(User)
-    photo = models.ImageField(max_length=100,upload_to='documents/%Y/%m/%d',blank=True,null=True)
 
 class RegistrationCode(models.Model):
     user = models.OneToOneField(User)

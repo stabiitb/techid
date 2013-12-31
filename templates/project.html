@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% include "head.html" %}
+  <body>
+    {% include "navbar.html" %}
+    <br/>
+    <br/>
+    <script type="text/javascript" src="/static/jquery-migrate-1.0.0.js"></script>
+      <link rel="stylesheet" href="/static/redactor/css/redactor.css" />
+      <script type="text/javascript" src="/static/redactor/redactor.js"></script>
+    <div class="container">
+      <div class="row">
+      <hr>
+        <div class="col-lg-8 col-lg-offset-2">
+          <div class="page-header">
+            <h3> Create a new project </h3>
+          </div>
+            {% load bootstrap3 %}
+            {% bootstrap_messages %}
+            <form rol="role" action="" method="post">
+              {% csrf_token %}
+              {% bootstrap_form form %}
+            <button class="btn btn-info" type="submit">save profile</button>
+          </form>
+        </div>
+      </div>
+      <script type="text/javascript">
+      $(".help-block").hide();
+      </script>
+      {% include "footer.html" %}
+
+    </div>
+  </body>
+</html>
+

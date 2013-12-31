@@ -34,6 +34,7 @@ def index(request):
 	if request.method == "GET":
 		form = LoginForm()
 		if request.session.get("login"):
+			request.session["login"]=False
 			return render(request,"index.html",
 			{"form":form,"login":True})
 		return render(request,"index.html",
