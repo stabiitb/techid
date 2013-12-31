@@ -23,9 +23,45 @@ from projects.models import *
 from django.views.generic.edit import FormView
 from projects.forms import *
 
+@login_required
 def new_project(request):
-	return render(request,"project.html",{"form":ProjectForm()})
+	if request.method == "GET":
+		return render(request,"project.html",{"form":ProjectForm(),"form_name":"Create a new project"})
+	else:
+		form = ProjectForm(request.POST,request.FILES)
+		if form.is_valid():
+			info = form.save(commit=False)
+			info.user = request.user
+			info.save()
+			form.save_m2m()
+			return HttpResponseRedirect("/myprojects")
+		else:
+			messages.add_message(request,messages.ERROR,"Error creating the form")
+			return render(request,"project.html",{"form":form,"form_name":"Create a new project"})
 
+@login_required
+def edit_project(request,code):
+	user = request.user
+	try:
+		project = Project.objects.get(id=code,user=user)
+	except Excpetion,e:
+		return HttpResponseRedirect("/myprojects")
+	if request.method == "GET":
+		return render(request,"project.html",{"form":ProjectForm(instance=project),
+			"form_name":"Edit project"})
+	elif request.method =="POST":
+		form = ProjectForm(request.POST,request.FILES,instance=project)
+		if form.is_valid():
+			form.save(commit=False)
+			form.save_m2m()
+			return HttpResponseRedirect("/myprojects")
+		else:
+			messages.add_message(request,messages.ERROR,"Error creating the form")
+			return render(request,"project.html",{"form":form,"form_name":"Create a new project"})
+
+@login_required
+def delete_project(request,code):
+	pass
 class ProjectView(FormView):
     template_name = 'project.html'
     form_class = ProjectForm

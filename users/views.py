@@ -32,5 +32,17 @@ def logout(request):
 
 @login_required
 def edit_profile(request):
-	form = EditForm()
-	return render(request,"edit.html",{"form":EditForm()})
+	if request.method == "GET":
+		form = EditForm()
+		return render(request,"edit.html",{"form":EditForm(instance=request.user)})
+	elif request.method == "POST":
+		form = EditForm(request.POST,request.FILES,instance=request.user)
+		if form.is_valid():
+			info=form.save(commit=False)
+			form.save_m2m()
+			info.save()
+			messages.add_message(request,messages.INFO,"Updated succesfully")
+			return HttpResponseRedirect("/edit/profile/")
+		else:
+			messages.add_message(request,messages.ERROR,"error Updating your details")
+			return render(request,"edit.html",{"form":EditForm(instance=request.user)})

@@ -12,7 +12,7 @@
         <div class="col-lg-8 col-lg-offset-2">
           <div class="row">
             <div class="col-lg-4">
-              <img class="img-responsive" src="http://placehold.it/150X200" style="max-width:150px;max-height:200px">
+              <img class="img-responsive" {% if user.photo.name %} src="/uploads/{{user.photo}}" {% else %}src="http://placehold.it/150X200" {% endif %} style="max-width:150px;max-height:200px">
             </div>
             <div class="col-lg-8">
               <blockquote>

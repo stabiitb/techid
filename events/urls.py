@@ -29,5 +29,8 @@ urlpatterns = patterns('',
     url(r'^edit/profile/$','users.views.edit_profile'),
     url(r'^projects/new/$','projects.views.new_project'),
     url(r'^redactor/', include('redactor.urls')),
+    url(r'^project/edit/(\d+)/$',"projects.views.edit_project"),
 
-)+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+)+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)+static(settings.MEDIA_URL,
+     document_root=settings.MEDIA_ROOT)
+
