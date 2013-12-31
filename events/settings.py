@@ -60,13 +60,18 @@ INSTALLED_APPS = (
     'users',
     'signup',
     'misc',
+    'redactor',
     'registration',
     'suit_redactor',
     'bootstrap3',
     'django_select2',
+    'projects',
     # 'filebrowser',
 
 )
+
+REDACTOR_OPTIONS = {'lang': 'en'}
+REDACTOR_UPLOAD = 'uploads/'
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',

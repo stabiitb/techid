@@ -27,5 +27,7 @@ urlpatterns = patterns('',
     url(r'^profile/$','users.views.view_profile'),
     url(r'^logout/$','users.views.logout'),
     url(r'^edit/profile/$','users.views.edit_profile'),
+    url(r'^projects/new/$','projects.views.new_project'),
+    url(r'^redactor/', include('redactor.urls')),
 
 )+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

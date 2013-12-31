@@ -72,7 +72,7 @@ class User(AbstractBaseUser):
         return self.is_admin
 
     def __unicode__(self):
-        return self.email
+        return self.ldap_username
 
     def has_perm(self, perm, obj=None):
         return True
