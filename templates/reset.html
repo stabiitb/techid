@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+ {% include "head.html" %}
+  <body>
+    {% include "nav-signup.html" %}
+  <hr>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 col-lg-offset-2">
+          <div class="page-header">
+            <h2> {{ form_name }}</h2>
+          </div>
+           {% load bootstrap3 %}
+           {% bootstrap_messages %}
+            <form class="form-horizontal" method="post" action="">
+               {% csrf_token %}
+               {% bootstrap_form form %}
+              <button type="submit" class="btn btn-success btn-lg btn-block">Submit</button>
+            </form>
+          </div>
+        </div>
+        {% include "footer.html" %}
+    </div>
+</body>
+</html>

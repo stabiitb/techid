@@ -77,3 +77,9 @@ class LoginForm(forms.Form):
 	email = forms.EmailField()
 	password = forms.CharField(widget=forms.PasswordInput(render_value=False),max_length=10)
 
+class ResetForm(forms.Form):
+    password = forms.CharField(widget=forms.PasswordInput(render_value=False),max_length=10)
+    re_password = forms.CharField(widget=forms.PasswordInput(render_value=False),max_length=10)
+    
+class EmailForm(forms.Form):
+    email = forms.EmailField(required=True)

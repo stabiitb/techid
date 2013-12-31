@@ -20,6 +20,8 @@ urlpatterns = patterns('',
     url(r'^signup/$','signup.views.signup'),
     url(r'^$','signup.views.index'),
     url(r'^select2/', include('django_select2.urls')),
-
+    url(r'^activate/(?P<code>\w+)/(?P<email>[a-zA-Z0-9_.@-]+)/$','signup.views.activate'),
+    url(r'^reset/password/(?P<code>\w+)/$','signup.views.reset_password'),
+    url(r'^forgot/password/$',"signup.views.forgot_password"),
 
 )+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
