@@ -103,3 +103,11 @@ def allprojects(request):
 		messages.add_message(request,messages.INFO,"No projects are added.")
 		return render(request,"projectlist.html",{"myprojects":True})
 
+@login_required
+def viewproject(request,code):
+	try:
+		project = Project.objects.get(id=code)
+		return render(request,"projectview.html",{"project":project})	
+	except Exception,e:
+		print e
+		return HttpResponseRedirect("/projects/all/")
