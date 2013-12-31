@@ -37,5 +37,6 @@ class Club(models.Model):
 
 class Skill(models.Model):
 	name = models.CharField(unique=True,max_length=255)
+	short_name = models.CharField(unique=True,max_length=255)
 	def __unicode__(self):
 		return self.name
