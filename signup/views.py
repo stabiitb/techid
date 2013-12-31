@@ -28,9 +28,49 @@ def getValues(ldap_id):
 	array = json.loads(the_page)
 	return array
 
+@require_http_methods(["GET","POST"])
 def index(request):
-	form = LoginForm()
-	return render(request,"index.html",{"form":form})
+	form_name = "Login Here with you email"
+	if request.method == "GET":
+		form = LoginForm()
+		if request.session.get("login"):
+			return render(request,"index.html",
+			{"form":form,"login":True})
+		return render(request,"index.html",
+			{"form":form})
+	elif request.method == "POST":
+		form = LoginForm(request.POST)
+		if form.is_valid():
+			email = form.cleaned_data['email']
+			password = form.cleaned_data['password']
+			try:
+				k= User.objects.get(email=email)
+			except Exception,e:
+				messages.add_message(request,messages.ERROR,
+					"Please signup to get an user account")
+				return render(request,"index.html",{"form":form,"login":True})
+			check =k.check_password(password)
+			if k is not None and check:
+				if k.is_active:
+					user = authenticate(email=email,password=password)
+					login(request,user)
+					return HttpResponseRedirect("/profile/")
+				else:
+					messages.add_message(request,messages.INFO,
+						"Please  confirm your registration,we already have your email in our database")
+					return render(request,"index.html",{"form":form,"login":True})
+			elif k is None:
+				messages.add_message(request,messages.ERROR,
+					"Please signup to get an user account")
+				return render(request,"index.html",{"form":form,"login":True})
+			else:
+				messages.add_message(request,messages.ERROR,
+					"Passwords did not match")
+				return render(request,"index.html",{"form":form,"login":True})
+
+		else:
+			return render(request,"index.html",{"form":form,"login":True})
+
 
 def signup(request):
 	if request.method == "GET":
@@ -121,3 +161,105 @@ def check_signup(request):
 				return HttpResponseRedirect("/signup")
 	else:
 		return HttpResponseRedirect("/")
+
+
+def activate(request,code,email):
+	code = code
+	email = email
+	try:
+
+		u = RegistrationCode.objects.get(user=User.objects.get(email=email),
+			registration_code=code)
+		u.delete()
+		user=User.objects.get(email=email)
+		user.is_active = True
+		user.save()
+		messages.add_message(request,messages.INFO,"Your  account is verified, Please login")
+		request.session["login"] = True
+		return HttpResponseRedirect("/")
+	except Exception,e:
+		messages.add_message(request,messages.ERROR,"wrong verification code")
+		request.session["login"] = True
+		return HttpResponseRedirect("/")
+
+def reset_password(request,code):
+	form_name = "Reset your Password"
+	if request.method == "GET":
+		try:
+			r = ResetCode.objects.get(reset_code=code)
+			messages.add_message(request,messages.INFO,"""Please enter a new 
+				password to get access""")
+			return render(request,"reset.html",{"form_name":form_name,"form":ResetForm()})
+		except Exception,e:
+			print e
+			messages.add_message(request,messages.ERROR,"""The reset password link is invalid. 
+				Please request a new one""")
+			return HttpResponseRedirect("/forgot/password/")
+	elif request.method == "POST":
+		form = ResetForm(request.POST)
+		if form.is_valid():
+			password = form.cleaned_data["password"]
+			re_password = form.cleaned_data["re_password"]
+			if password==re_password:
+				r = ResetCode.objects.get(reset_code=code)
+				user = r.user
+				user.set_password(password)
+				user.save()
+				r.delete()
+				messages.add_message(request,messages.INFO,"""Your password been reset.
+					Please login with your new password """)
+				request.session["login"]=True
+				return HttpResponseRedirect("/")
+			else:
+				messages.add_message(request,messages.ERROR,"""Passwords don't match""")
+				return render(request,"reset.html",{"form_name":form_name,
+					"form":ResetForm()})
+		else:
+			return render(request,"reset.html",{"form_name":form_name,
+				"form":ResetForm()})
+
+def forgot_password(request):
+	form_name = "Forgot Password"
+	if request.method == "GET":
+		return render(request,"reset.html",{"form_name":form_name,"form":EmailForm()})
+	elif request.method == "POST":
+		#check if the user exists:
+		form = EmailForm(request.POST)
+		if form.is_valid():
+			email = form.cleaned_data['email']
+			try:
+				u=User.objects.get(email=email)
+			except Exception,e:
+				messages.add_message(request,messages.INFO, """ We cannot find you in our database,
+					Please signup""")
+				return HttpResponseRedirect("/")
+			try:
+				r = ResetCode.objects.get(user=u)
+				mail_message = "Please click on the password reset link %s"%r.reset_code
+				send_mail('Subject here',mail_message, 'bila@billa.com',
+					[email], fail_silently=False)
+			except Exception,e:
+				print e
+				from signup.helper import *
+				r = ResetCode(user=u,reset_code=activation_code(email))
+				r.save()
+				mail_message = "Please click on the password reset link %s"%r.reset_code
+				send_mail('Subject here',mail_message, 'billa@billa.com',
+					[email], fail_silently=False)
+			messages.add_message(request,messages.INFO,"""reset link is sent to the email %s"""%email)
+			return HttpResponseRedirect("/forgot/password/")
+		else:
+			return render(request,"reset.html",{"form_name":form_name,
+				"form":form,})
+
+def user_complete(request):
+	r = User.objects.all()
+	data = []
+	for i in r:
+		h = {}
+		h["name"] = i.first_name+" "+i.last_name
+		h["value"] = i.ldap_username
+		h["roll"] = i.rollno
+		h["tokens"] = [i.first_name,i.last_name]
+		data+=[h]
+	return HttpResponse(json.dumps(data,indent=4),mimetype="application/json")

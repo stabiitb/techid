@@ -1,0 +1,48 @@
+1,Solid works,solid-works,,1
+2,CAD & Ansys,cad,,1
+3,Matlab,matlab,,1
+4,Simulink,simulink,,1
+5,Eagle,eagle,,1
+6,Kicad,kicad,,1
+7,Ltspice,ltspice,,1
+8,Simulation software,simulation-software,,1
+9,Labview,labview,,1
+10,Basic sensors (sharp tsop ultrasonic ldr's),basic-sensors,,1
+11,Advanced sensors (gyroscope accelerometer thermal humidity proximity flex megnetometer),advanced-sensors,,1
+12,Infra red emitters and sensors,infra-red-sensors,,1
+13,Signal Processing,signal-processing,,1
+14,noise filtering,noise-filtering,,1
+15,control theory,control-theory,,1
+16,system identification,system-identification,,1
+17,system tuning,system-tuning,,1
+18,Pure Mechanical knowledge (assembly, gear),pure-mechanics,,1
+19,Motors (servo stepper),motors,,1
+20,Piston actuation,piston-actuation,,1
+21,Shock Absorbers,shock-absorbers,,1
+22,fabrication processing,fabrication-processing,,1
+23,Arduino basics,arduino-basics,,1
+24,Arduino advanced (serial communication - SPI uart usart coding timers ),arduino-advanced,,1
+25,Avr coding (basic),avr-coding-basic,,1
+26,Avr coding (advanced),avr-coding-advanced,,1
+27,Processing software,processing-software,,1
+28,Wireless communication modules (xbee Bluetooth manipulating electro magnetic fields),wireless-communication,,1
+29,Image processing (visual studio open cv processing),image-processing,,1
+30,Digital Signal Processing tools,digital-signal-processing,,1
+31,FPGA related coding,FPGA-coding,,1
+32,High power electrical applications,high-power-electronics,,1
+33,HTML,html,,1
+34,C/C++,C/C++,,1
+35,Python,python,,1
+36,Java,java,,1
+37,CSS,css,,1
+38,PHP,php,,1
+39,MySQL,mysql,,1
+40,Javascript,javascript,,1
+41,Android,android,,1
+42,Ruby on Rails,RoR,,1
+43,iPhone programming,iphone-programming,,1
+44,Telescope handling,telescope-handling,,1
+45,Observational Astronomy,observational-astronomy,,1
+46,Flying aeroplane,flying-airplane,,1
+47,Board Games( Chess checkers.go etc.),board-games,,1
+48,Sudoku,sudoku,,1

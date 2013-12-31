@@ -77,3 +77,26 @@ class LoginForm(forms.Form):
 	email = forms.EmailField()
 	password = forms.CharField(widget=forms.PasswordInput(render_value=False),max_length=10)
 
+class ResetForm(forms.Form):
+    password = forms.CharField(widget=forms.PasswordInput(render_value=False),max_length=10)
+    re_password = forms.CharField(widget=forms.PasswordInput(render_value=False),max_length=10)
+
+class EmailForm(forms.Form):
+    email = forms.EmailField(required=True)
+
+class EditForm(ModelForm):
+	department = fields.ModelChoiceField(queryset=Department.objects.all(),
+		widget=Select2Widget(attrs={"style":"width:100%"}),initial=0)
+	year = fields.ModelChoiceField(queryset=Year.objects.all(),
+		widget=Select2Widget(attrs={"style":"width:100%"}),initial=0)
+	hostel = fields.ModelChoiceField(queryset=Hostel.objects.all(),
+		widget=Select2Widget(attrs={"style":"width:100%"}),initial=0)
+	email = forms.EmailField(widget=forms.HiddenInput(),required=False)
+	rollno = forms.CharField(widget=forms.HiddenInput(),required=False)
+	skill = forms.ModelMultipleChoiceField(queryset=Skill.objects.all(),widget=
+		Select2MultipleWidget(attrs={"style":"width:100%"}))
+	class Meta:
+		model = User
+		exclude = ['is_active','is_admin','email','ldap_username','rollno']
+		fields = ['first_name','last_name','department','year','hostel','room',
+		'alternate_email','mobile','skill']
