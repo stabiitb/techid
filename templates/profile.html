@@ -36,13 +36,13 @@
                   <div class="row">
                     <div class="col-lg-12">
                       <h3><span class="glyphicon glyphicon-italic"></span>nterests:</h3>
-                      {% if not user.skill %}
-                        {% for i in user.skill %}
+                      {% if  user.skill.all %}
+                        {% for i in user.skill.all %}
                          <button type="button" class="btn btn-default">{{i}}</button>
                          {% endfor %}
-                      <p> No skills are added yet, please add your skills <a href="/users/edit/">here</a> </p>
+                          <p> Edit your interests <a href="/users/edit/">here</a> </p>
                       {% else %}
-                      <p> Edit your interests <a href="/users/edit/">here</a> </p>
+                      <p> No skills are added yet, please add your skills <a href="/users/edit/">here</a> </p>
                       {% endif %}
                     </div>
                   </div>

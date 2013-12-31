@@ -25,5 +25,7 @@ urlpatterns = patterns('',
     url(r'^forgot/password/$',"signup.views.forgot_password"),
     url(r'^user.json/$','signup.views.user_complete'),
     url(r'^profile/$','users.views.view_profile'),
+    url(r'^logout/$','users.views.logout'),
+    url(r'^edit/profile/$','users.views.edit_profile'),
 
 )+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
