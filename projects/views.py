@@ -52,8 +52,9 @@ def edit_project(request,code):
 	elif request.method =="POST":
 		form = ProjectForm(request.POST,request.FILES,instance=project)
 		if form.is_valid():
-			form.save(commit=False)
+			info=form.save(commit=False)
 			form.save_m2m()
+			info.save()
 			return HttpResponseRedirect("/myprojects")
 		else:
 			messages.add_message(request,messages.ERROR,"Error creating the form")
@@ -61,10 +62,44 @@ def edit_project(request,code):
 
 @login_required
 def delete_project(request,code):
-	pass
+	user = request.user
+	try:
+		project = Project.objects.get(id=code,user=user)
+	except Excpetion,e:
+		return HttpResponseRedirect("/myprojects")
+	if request.method == "POST":
+		project.delete()
+		messages.add_message(request,messages.INFO,"Project deleted")
+		return HttpResponseRedirect("/myprojects")
+	else:
+		messages.add_message(request,messages.ERROR,"Unable to delete the project")
+		return HttpResponseRedirect("/myprojects")
+
 class ProjectView(FormView):
     template_name = 'project.html'
     form_class = ProjectForm
 
     def form_valid(self, form):
         return super(ProjectView, self).form_valid(form)
+
+@login_required
+def myprojects(request):
+	user = request.user
+	try:
+		project = Project.objects.filter(user=user)
+		project[0]
+		return render(request,"projectlist.html",{"entries":project,"myprojects":True})
+	except Exception,e:
+		messages.add_message(request,messages.INFO,"No projects are added.")
+		return render(request,"projectlist.html",{"myprojects":True})
+
+@login_required
+def allprojects(request):
+	project = Project.objects.all().order_by('updated_at')
+	try:
+		project[0]
+		return render(request,"projectlist.html",{"entries":project})
+	except Exception,e:
+		messages.add_message(request,messages.INFO,"No projects are added.")
+		return render(request,"projectlist.html",{"myprojects":True})
+

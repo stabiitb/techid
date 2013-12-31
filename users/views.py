@@ -21,8 +21,20 @@ from misc.models import *
 from signup.forms import *
 @login_required
 def view_profile(request):
-	user = request.user
-	return render(request,"profile.html",{"user":user})
+	if request.method=="GET":
+		if "query" in request.GET:
+			return HttpResponseRedirect("/profile/"+request.GET["query"])
+		user = request.user
+		return render(request,"profile.html",{"user":user})
+
+@login_required
+def view_other_profile(request,code):
+	try:
+		user = User.objects.get(ldap_username=code,is_active=True)
+		return render(request,"otherprofile.html",{"user":user})
+	except Exception,e:
+		print e
+		raise Http404
 
 def logout(request):
 	request.session.flush()

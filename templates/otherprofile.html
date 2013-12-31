@@ -40,11 +40,8 @@
                         {% for i in user.skill.all %}
                          <button type="button" class="btn btn-default">{{i}}</button>
                          {% endfor %}
-                         <br/> <br/>
-                          <p> Edit your interests <a href="/users/edit/">here</a> </p>
                       {% else %}
-                       <br/> <br/>
-                      <p> No skills are added yet, please add your skills <a href="/users/edit/">here</a> </p>
+                        <p> No skills are added to the list </p>
                       {% endif %}
                     </div>
                   </div>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% include "head.html" %}
+  <body>
+    {% include "navbar.html" %}
+    <br/>
+    <br/>
+    <script type="text/javascript" src="/static/jquery-migrate-1.0.0.js"></script>
+      <link rel="stylesheet" href="/static/redactor/css/redactor.css" />
+      <script type="text/javascript" src="/static/redactor/redactor.js"></script>
+    <div class="container">
+      <div class="row">
+      <hr>
+      	{% load bootstrap3 %}
+      	{% bootstrap_messages %}
+        <div class="col-lg-12">
+          <div class="page-header">
+            <h3> Project Lists </h3>
+          </div>
+          {% load endless %}
+        {% if entries %}
+		{% paginate entries %}
+		{% for entry in entries %}
+		    <div class="row">
+		    	<div class="col-lg-8 col-lg-offset-2">
+		    		<h2><a href="/projects/{{entry.id}}">{{entry.name}}</a></h2>
+		    		<h3> {{ entry.short_description }}</h3>
+		    		<h4> Club : {% for club in  entry.club.all %} {{ club }}, {% endfor %} </h4>
+		    		<p> last_update : {{ entry.updated_at }}</p>
+		    		<p> Created on : {{ entry.created_at }}</p>
+		    		<h5>Team:</h5>
+		    		<ul style="list-style:none">
+		    			{% for i in entry.team.all %}
+		    			<li><a href="/profile/{{i.ldap_username}}">{{i.ldap_username}}</a></li>
+		    			{% endfor %}
+		    		</ul>
+		    	</div>
+		    	<div class="col-lg-2">
+		    		<br/>
+		    		<a href="/projects/{{ entry.id }}" class="btn btn-primary btn-lg"> See more </a>
+		    		{% if myprojects %}
+		    		<br /><br /><br />
+		    		<a href="/project/edit/{{ entry.id }}" class="btn btn-info btn-lg"> Edit Project </a>
+		    		<br /><br /><br />
+		    		<form role="form" method="post" action="/project/delete/{{entry.id}}/">
+		    			{% csrf_token %}
+		    			<button class="btn btn-danger btn-lg" type="submit">Delete</button>
+		    		</form>
+		    		{% endif %}
+		    	</div>
+		    </div>
+		    <hr>
+		{% endfor %}
+		{% show_pages %}
+		{% endif %}
+		</div>
+	</div>
+	{% include "footer.html" %}
+</div>
+</body>
+</html>

@@ -68,6 +68,7 @@ INSTALLED_APPS = (
     'bootstrap3',
     'django_select2',
     'projects',
+    'endless_pagination',
     # 'filebrowser',
 
 )
