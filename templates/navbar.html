@@ -34,17 +34,14 @@
           </form>
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><!-- {{ request.session.user }} -->
-              {% if username %}  {% endif %} username  <b class="caret"></b></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ request.user.ldap_username }}
+               <b class="caret"></b></a>
               <ul class="dropdown-menu" id="caret">
-                <li><a href="#">Edit Profile</a></li>
+                <li><a href="/edit/profile">Edit Profile</a></li>
                 <li><a href="#">Notifications</a></li>
                 <li><a href="#">History</a></li>
-              {%if manager %}
-                <li><a href="#">Manager Mode</a></li>
-              {% endif %}
                 <li class="divider"></li>
-                <li><a href="#">Logout</a></li>
+                <li><a href="/logout">Logout</a></li>
               </ul>
             </li>
           </ul>
@@ -54,7 +51,9 @@
   <script type="text/javascript" ></script>
   <script type="text/javascript">
      $('#query').typeahead({        
-          local: ['alpha','allpha2','alpha3','bravo','charlie','delta','epsilon','gamma','zulu']
+        name: 'query',
+        prefetch: '/user.json',
+        limit: 10,
       });
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
   $('.tt-query').css('background-color','#fff');

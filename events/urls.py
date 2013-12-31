@@ -23,5 +23,6 @@ urlpatterns = patterns('',
     url(r'^activate/(?P<code>\w+)/(?P<email>[a-zA-Z0-9_.@-]+)/$','signup.views.activate'),
     url(r'^reset/password/(?P<code>\w+)/$','signup.views.reset_password'),
     url(r'^forgot/password/$',"signup.views.forgot_password"),
+    url(r'^user.json/$','signup.views.user_complete'),
 
 )+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
