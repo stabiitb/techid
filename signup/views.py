@@ -28,9 +28,46 @@ def getValues(ldap_id):
 	array = json.loads(the_page)
 	return array
 
+@require_http_methods(["GET","POST"])
 def index(request):
-	form = LoginForm()
-	return render(request,"index.html",{"form":form})
+	form_name = "Login Here with you email"
+	if request.method == "GET":
+		form = LoginForm()
+		return render(request,"index.html",
+			{"form":form,"login":True})
+	elif request.method == "POST":
+		form = LoginForm(request.POST)
+		if form.is_valid():
+			email = form.cleaned_data['email']
+			password = form.cleaned_data['password']
+			try:
+				k= User.objects.get(email=email)
+			except Exception,e:
+				messages.add_message(request,messages.ERROR,
+					"Please signup to get an user account")
+				return render(request,"index.html",{"form":form,"login":True})
+			check =k.check_password(password)
+			if k is not None and check:
+				if k.is_active:
+					user = authenticate(email=email,password=password)
+					login(request,user)
+					return HttpResponseRedirect("/profile/")
+				else:
+					messages.add_message(request,messages.INFO,
+						"Please  confirm your registration,we already have your email in our database")
+					return render(request,"index.html",{"form":form,"login":True})
+			elif k is None:
+				messages.add_message(request,messages.ERROR,
+					"Please signup to get an user account")
+				return render(request,"index.html",{"form":form,"login":True})
+			else:
+				messages.add_message(request,messages.ERROR,
+					"Passwords did not match")
+				return render(request,"index.html",{"form":form,"login":True})
+
+		else:
+			return render(request,"index.html",{"form":form,"login":True})
+
 
 def signup(request):
 	if request.method == "GET":
