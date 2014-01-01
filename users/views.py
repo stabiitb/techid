@@ -53,6 +53,7 @@ def edit_profile(request):
 			info=form.save(commit=False)
 			form.save_m2m()
 			info.save()
+			print info.photo
 			messages.add_message(request,messages.INFO,"Updated succesfully")
 			return HttpResponseRedirect("/edit/profile/")
 		else:
