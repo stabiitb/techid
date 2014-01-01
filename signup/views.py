@@ -115,7 +115,7 @@ def signup(request):
 					registration_code=code)
 				r.save()
 				mail_message  = "click on this registration link below to activate your account"
-				mail_message += "<a href='http://techid.stab.iitb.org/"+code + "/" +mail+">Click here</a>"
+				mail_message += "http://techid.stab.iitb.org/"+code + "/" +mail
 				try:
 					send_mail('[Tech ID] Registration link',mail_message, 
 						'stab.iitb@gmail.com',
@@ -241,8 +241,8 @@ def forgot_password(request):
 			try:
 				r = ResetCode.objects.get(user=u)
 				mail_message = """Please click on the password reset link 
-				<a href="http://techid.stab-iitb.org/reset/password/%s">Here </a>"""%r.reset_code
-				send_mail('Subject here',mail_message, 'bila@billa.com',
+				http://techid.stab-iitb.org/reset/password/%s"""%r.reset_code
+				send_mail('Registration link',mail_message, 'bila@billa.com',
 					[email], fail_silently=False)
 			except Exception,e:
 				print e
@@ -250,8 +250,8 @@ def forgot_password(request):
 				r = ResetCode(user=u,reset_code=activation_code(email))
 				r.save()
 				mail_message = """Please click on the password reset link 
-				<a href="http://techid.stab-iitb.org/reset/password/%s">Here </a>"""%r.reset_code
-				send_mail('Subject here',mail_message, 'billa@billa.com',
+				http://techid.stab-iitb.org/reset/password/%s"""%r.reset_code
+				send_mail('Registration Link',mail_message, 'billa@billa.com',
 					[email], fail_silently=False)
 			messages.add_message(request,messages.INFO,"""reset link is sent to the email %s"""%email)
 			return HttpResponseRedirect("/forgot/password/")
@@ -281,7 +281,7 @@ def resend_activation(request):
 			try:
 				r = RegistrationCode.objects.get(user=u)
 				mail_message = """Please click on the password reset link 
-				<a href="http://techid.stab-iitb.org/activate/%s/%s">Here </a>"""%(r.registration_code,email)
+				http://techid.stab-iitb.org/activate/%s/%s"""%(r.registration_code,email)
 				send_mail('Subject here',mail_message, 'bila@billa.com',
 					[email], fail_silently=False)
 			except Exception,e:
@@ -292,7 +292,7 @@ def resend_activation(request):
 				except Exception,e:
 					pass
 				mail_message = """Please click on the password reset link 
-				<a href="http://techid.stab-iitb.org/activate/%s/%s">Here </a>"""%(r.registration_code,email)
+				http://techid.stab-iitb.org/activate/%s/%s"""%(r.registration_code,email)
 				send_mail('Subject here',mail_message, 'billa@billa.com',
 					[email], fail_silently=False)
 			messages.add_message(request,messages.INFO,"""registration link is sent to the email %s"""%email)
