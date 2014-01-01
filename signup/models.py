@@ -73,13 +73,19 @@ class User(AbstractBaseUser):
         return self.is_admin
 
     def __unicode__(self):
-        return self.ldap_username
+        if self.ldap_username:
+            return self.ldap_username
+        else:
+            return "admin"
 
     def has_perm(self, perm, obj=None):
         return True
 
     def has_module_perms(self, app_label):
         return True
+
+    def is_superuser(self):
+        return self.is_admin
 
 class RegistrationCode(models.Model):
     user = models.OneToOneField(User)

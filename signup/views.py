@@ -31,6 +31,10 @@ def getValues(ldap_id):
 @require_http_methods(["GET","POST"])
 def index(request):
 	form_name = "Login Here with you email"
+	if request.user and request.user.is_authenticated():
+		print request.user
+		return HttpResponseRedirect("/profile")
+
 	if request.method == "GET":
 		form = LoginForm()
 		if request.session.get("login"):
@@ -110,11 +114,11 @@ def signup(request):
 				r=RegistrationCode(user=user,
 					registration_code=code)
 				r.save()
-				mail_message  = "click on this registration link"
-				mail_message += code + "/" +mail 
+				mail_message  = "click on this registration link below to activate your account"
+				mail_message += "http://techid.stab.iitb.org/"+code + "/" +mail
 				try:
-					send_mail('Registraion Link',mail_message, 
-						'billa@billa.com',
+					send_mail('[Tech ID] Registration link',mail_message, 
+						'stab.iitb@gmail.com',
 	    				[mail], fail_silently=True)
 				except Exception,e:
 					print e
@@ -236,16 +240,18 @@ def forgot_password(request):
 				return HttpResponseRedirect("/")
 			try:
 				r = ResetCode.objects.get(user=u)
-				mail_message = "Please click on the password reset link %s"%r.reset_code
-				send_mail('Subject here',mail_message, 'bila@billa.com',
+				mail_message = """Please click on the password reset link 
+				http://techid.stab-iitb.org/reset/password/%s"""%r.reset_code
+				send_mail('Registration link',mail_message, 'bila@billa.com',
 					[email], fail_silently=False)
 			except Exception,e:
 				print e
 				from signup.helper import *
 				r = ResetCode(user=u,reset_code=activation_code(email))
 				r.save()
-				mail_message = "Please click on the password reset link %s"%r.reset_code
-				send_mail('Subject here',mail_message, 'billa@billa.com',
+				mail_message = """Please click on the password reset link 
+				http://techid.stab-iitb.org/reset/password/%s"""%r.reset_code
+				send_mail('Registration Link',mail_message, 'billa@billa.com',
 					[email], fail_silently=False)
 			messages.add_message(request,messages.INFO,"""reset link is sent to the email %s"""%email)
 			return HttpResponseRedirect("/forgot/password/")
@@ -253,6 +259,48 @@ def forgot_password(request):
 			return render(request,"reset.html",{"form_name":form_name,
 				"form":form,})
 
+def resend_activation(request):
+	form_name = "Resend Activation code"
+	if request.method == "GET":
+		return render(request,"reset.html",{"form_name":form_name,"form":EmailForm()})
+	elif request.method == "POST":
+		#check if the user exists:
+		form = EmailForm(request.POST)
+		if form.is_valid():
+			email = form.cleaned_data['email']
+			try:
+				u=User.objects.get(email=email)
+				if u.is_active:
+					messages.add_message(request,messages.INFO,""" You account is already been activated,
+						please click on forgot password""")
+					return HttpResponseRedirect("/")
+			except Exception,e:
+				messages.add_message(request,messages.INFO, """ We cannot find you in our database,
+					Please signup""")
+				return HttpResponseRedirect("/")
+			try:
+				r = RegistrationCode.objects.get(user=u)
+				mail_message = """Please click on the password reset link 
+				http://techid.stab-iitb.org/activate/%s/%s"""%(r.registration_code,email)
+				send_mail('Subject here',mail_message, 'bila@billa.com',
+					[email], fail_silently=False)
+			except Exception,e:
+				from signup.helper import *
+				try:
+					r = RegistrationCode(user=u,registration_code=activation_code(email))
+					r.save()
+				except Exception,e:
+					pass
+				mail_message = """Please click on the password reset link 
+				http://techid.stab-iitb.org/activate/%s/%s"""%(r.registration_code,email)
+				send_mail('Subject here',mail_message, 'billa@billa.com',
+					[email], fail_silently=False)
+			messages.add_message(request,messages.INFO,"""registration link is sent to the email %s"""%email)
+			request.session["login"] = True
+			return HttpResponseRedirect("/")
+		else:
+			return render(request,"reset.html",{"form_name":form_name,
+				"form":form,})
 def user_complete(request):
 	r = User.objects.all()
 	data = []
@@ -264,3 +312,4 @@ def user_complete(request):
 		h["tokens"] = [i.first_name,i.last_name]
 		data+=[h]
 	return HttpResponse(json.dumps(data,indent=4),mimetype="application/json")
+

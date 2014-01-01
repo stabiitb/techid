@@ -29,5 +29,20 @@ urlpatterns = patterns('',
     url(r'^edit/profile/$','users.views.edit_profile'),
     url(r'^projects/new/$','projects.views.new_project'),
     url(r'^redactor/', include('redactor.urls')),
+    url(r'^project/edit/(\d+)/$',"projects.views.edit_project"),
+    url(r'^project/delete/(\d+)/$',"projects.views.delete_project"),
+    url(r'^profile/([0-9A-Za-z_\-.]+)/$',"users.views.view_other_profile"),
+    url(r'^myprojects/$','projects.views.myprojects'),
+    url(r'^projects/all/$','projects.views.allprojects'),
+    url(r'^projects/(\d+)/$','projects.views.viewproject'),
+    url(r'^accounts/login/$','signup.views.index'),
+    url(r'^resend/$','signup.views.resend_activation'),
+)+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)+static(settings.MEDIA_URL,
+     document_root=settings.MEDIA_ROOT)
 
-)+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+# from wiki.urls import get_pattern as get_wiki_pattern
+# from django_notify.urls import get_pattern as get_notify_pattern
+# urlpatterns += patterns('',
+#     (r'^wiki/notify/', get_notify_pattern()),
+#     (r'^wiki/', get_wiki_pattern())
+# )

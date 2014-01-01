@@ -12,8 +12,9 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 ROOT_DIR = os.path.dirname( os.path.dirname( __file__ ) )
-
-
+#sudo apt-get install libjpeg62-dev zlib1g-dev libfreetype6-dev liblcms1-dev
+#sudo apt-get install libjpeg-dev
+WIKI_MARKDOWN_KWARGS = {'extensions': ['footnotes', 'attr_list', 'headerid', 'extra', 'codehilite', ]}
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
@@ -22,7 +23,8 @@ SECRET_KEY = 'vn$-p69z0ea^t5#hzhl*z6xichnl70nbv%$8e=5g6$e#0w@r0t'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
+SITE_ID = 1
+WIKI_ACCOUNT_HANDLING = False
 TEMPLATE_DEBUG = True
 FIXTURE_DIRS = (
     ROOT_DIR + "/fixtures/",
@@ -33,6 +35,7 @@ from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
 
 TEMPLATE_CONTEXT_PROCESSORS = TCP + (
     'django.core.context_processors.request',
+    # "sekizai.context_processors.sekizai",
 )
 
 TEMPLATE_DIRS = (
@@ -68,8 +71,20 @@ INSTALLED_APPS = (
     'bootstrap3',
     'django_select2',
     'projects',
+    'endless_pagination',
     # 'filebrowser',
-
+    # 'django.contrib.humanize',
+    # 'django.contrib.sites',
+    # 'south',
+    # 'django_notify',
+    # 'mptt',
+    # 'sekizai',
+    # 'sorl.thumbnail',
+    # 'wiki',
+    # 'wiki.plugins.attachments',
+    # 'wiki.plugins.notifications',
+    # 'wiki.plugins.images',
+    # 'wiki.plugins.macros',
 )
 
 REDACTOR_OPTIONS = {'lang': 'en'}
@@ -121,12 +136,14 @@ MEDIA_URL = '/uploads/'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # Host for sending e-mail.
-EMAIL_HOST = 'localhost'
+# EMAIL_HOST = 'localhost'
 
-# Port for sending e-mail.
-EMAIL_PORT = 1025
+# # Port for sending e-mail.
+# EMAIL_PORT = 1025
 
-# # Optional SMTP authentication information for EMAIL_HOST.
-# EMAIL_HOST_USER = 'interiittech@gmail.com'
-# EMAIL_HOST_PASSWORD = 'InteriitTech7@'
-# EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT =  587
+# Optional SMTP authentication information for EMAIL_HOST.
+EMAIL_HOST_USER = 'stab.iitb@gmail.com'
+EMAIL_HOST_PASSWORD = 'stab2011'
+EMAIL_USE_TLS = True

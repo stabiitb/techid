@@ -21,8 +21,20 @@ from misc.models import *
 from signup.forms import *
 @login_required
 def view_profile(request):
-	user = request.user
-	return render(request,"profile.html",{"user":user})
+	if request.method=="GET":
+		if "query" in request.GET:
+			return HttpResponseRedirect("/profile/"+request.GET["query"])
+		user = request.user
+		return render(request,"profile.html",{"user":user})
+
+@login_required
+def view_other_profile(request,code):
+	try:
+		user = User.objects.get(ldap_username=code,is_active=True)
+		return render(request,"otherprofile.html",{"user":user})
+	except Exception,e:
+		print e
+		raise Http404
 
 def logout(request):
 	request.session.flush()
@@ -32,5 +44,20 @@ def logout(request):
 
 @login_required
 def edit_profile(request):
-	form = EditForm()
-	return render(request,"edit.html",{"form":EditForm()})
+	if request.method == "GET":
+		form = EditForm()
+		return render(request,"edit.html",{"form":EditForm(instance=request.user)})
+	elif request.method == "POST":
+		form = EditForm(request.POST,request.FILES,instance=request.user)
+		print form
+		if form.is_valid():
+			info=form.save(commit=False)
+			form.save_m2m()
+			info.save()
+			# info.photo= request.POST.get('photo',False)
+			# info.save()
+			messages.add_message(request,messages.INFO,"Updated succesfully")
+			return HttpResponseRedirect("/edit/profile/")
+		else:
+			messages.add_message(request,messages.ERROR,"error Updating your details")
+			return render(request,"edit.html",{"form":EditForm(instance=request.user)})

@@ -14,7 +14,7 @@
           </div>
             {% load bootstrap3 %}
             {% bootstrap_messages %}
-            <form rol="role" action="" method="post">
+            <form rol="role" action="" enctype="multipart/form-data" method="post">
               {% csrf_token %}
               {% bootstrap_form form %}
             <button class="btn btn-info" type="submit">save profile</button>

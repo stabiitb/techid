@@ -12,7 +12,7 @@
         <div class="col-lg-8 col-lg-offset-2">
           <div class="row">
             <div class="col-lg-4">
-              <img class="img-responsive" src="http://placehold.it/150X200" style="max-width:150px;max-height:200px">
+              <img class="img-responsive" {% if user.photo.name %} src="/uploads/{{user.photo}}" {% else %}src="http://placehold.it/150X200" {% endif %} style="max-width:150px;max-height:200px">
             </div>
             <div class="col-lg-8">
               <blockquote>
@@ -40,9 +40,11 @@
                         {% for i in user.skill.all %}
                          <button type="button" class="btn btn-default">{{i}}</button>
                          {% endfor %}
-                          <p> Edit your interests <a href="/users/edit/">here</a> </p>
+                         <br/> <br/>
+                          <p> Edit your interests <a href="/edit/profile/">here</a> </p>
                       {% else %}
-                      <p> No skills are added yet, please add your skills <a href="/users/edit/">here</a> </p>
+                       <br/> <br/>
+                      <p> No skills are added yet, please add your skills <a href="/edit/profile/">here</a> </p>
                       {% endif %}
                     </div>
                   </div>

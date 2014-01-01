@@ -65,7 +65,6 @@ class SignupForm(ModelForm):
 			data["mobile"] = self.cleaned_data["mobile"]
 			data["ldap_username"] = email.split("@")[0]
 			data["rollno"] = roll
-			print self.fields["email"].value,"hhjj"
 			new_user=User.objects.create_user(email=email,
 		                                    first_name=self.cleaned_data['first_name'],
 		                                    last_name=self.cleaned_data['last_name'],
@@ -99,4 +98,4 @@ class EditForm(ModelForm):
 		model = User
 		exclude = ['is_active','is_admin','email','ldap_username','rollno']
 		fields = ['first_name','last_name','department','year','hostel','room',
-		'alternate_email','mobile','skill']
+		'alternate_email','mobile','skill','photo']
