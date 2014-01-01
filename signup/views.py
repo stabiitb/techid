@@ -114,11 +114,11 @@ def signup(request):
 				r=RegistrationCode(user=user,
 					registration_code=code)
 				r.save()
-				mail_message  = "click on this registration link"
-				mail_message += code + "/" +mail 
+				mail_message  = "click on this registration link below to activate your account"
+				mail_message += "<a href='http://techid.stab.iitb.org/"+code + "/" +mail+">Click here</a>"
 				try:
-					send_mail('Registraion Link',mail_message, 
-						'billa@billa.com',
+					send_mail('[Tech ID] Registration link',mail_message, 
+						'stab.iitb@gmail.com',
 	    				[mail], fail_silently=True)
 				except Exception,e:
 					print e
@@ -240,7 +240,8 @@ def forgot_password(request):
 				return HttpResponseRedirect("/")
 			try:
 				r = ResetCode.objects.get(user=u)
-				mail_message = "Please click on the password reset link %s"%r.reset_code
+				mail_message = """Please click on the password reset link 
+				<a href="http://techid.stab-iitb.org/reset/password/%s">Here </a>"""%r.reset_code
 				send_mail('Subject here',mail_message, 'bila@billa.com',
 					[email], fail_silently=False)
 			except Exception,e:
@@ -248,7 +249,8 @@ def forgot_password(request):
 				from signup.helper import *
 				r = ResetCode(user=u,reset_code=activation_code(email))
 				r.save()
-				mail_message = "Please click on the password reset link %s"%r.reset_code
+				mail_message = """Please click on the password reset link 
+				<a href="http://techid.stab-iitb.org/reset/password/%s">Here </a>"""%r.reset_code
 				send_mail('Subject here',mail_message, 'billa@billa.com',
 					[email], fail_silently=False)
 			messages.add_message(request,messages.INFO,"""reset link is sent to the email %s"""%email)
