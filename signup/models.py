@@ -84,6 +84,9 @@ class User(AbstractBaseUser):
     def has_module_perms(self, app_label):
         return True
 
+    def is_superuser(self):
+        return self.is_admin
+
 class RegistrationCode(models.Model):
     user = models.OneToOneField(User)
     registration_code = models.CharField(max_length=255)

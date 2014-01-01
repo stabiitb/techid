@@ -31,7 +31,8 @@ def getValues(ldap_id):
 @require_http_methods(["GET","POST"])
 def index(request):
 	form_name = "Login Here with you email"
-	if request.user:
+	if request.user and request.user.is_authenticated():
+		print request.user
 		return HttpResponseRedirect("/profile")
 
 	if request.method == "GET":

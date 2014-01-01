@@ -35,7 +35,13 @@ urlpatterns = patterns('',
     url(r'^myprojects/$','projects.views.myprojects'),
     url(r'^projects/all/$','projects.views.allprojects'),
     url(r'projects/(\d+)/$','projects.views.viewproject'),
-
+    url(r'accounts/login/$','signup.views.index'),
 )+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)+static(settings.MEDIA_URL,
      document_root=settings.MEDIA_ROOT)
 
+from wiki.urls import get_pattern as get_wiki_pattern
+from django_notify.urls import get_pattern as get_notify_pattern
+urlpatterns += patterns('',
+    (r'^wiki/notify/', get_notify_pattern()),
+    (r'^wiki/', get_wiki_pattern())
+)
