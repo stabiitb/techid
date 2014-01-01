@@ -136,12 +136,14 @@ MEDIA_URL = '/uploads/'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # Host for sending e-mail.
-EMAIL_HOST = 'localhost'
+# EMAIL_HOST = 'localhost'
 
-# Port for sending e-mail.
-EMAIL_PORT = 1025
+# # Port for sending e-mail.
+# EMAIL_PORT = 1025
 
-# # Optional SMTP authentication information for EMAIL_HOST.
-# EMAIL_HOST_USER = 'interiittech@gmail.com'
-# EMAIL_HOST_PASSWORD = 'InteriitTech7@'
-# EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT =  465
+# Optional SMTP authentication information for EMAIL_HOST.
+EMAIL_HOST_USER = 'stab.iitb@gmail.com'
+EMAIL_HOST_PASSWORD = 'stab2011'
+EMAIL_USE_TLS = True
