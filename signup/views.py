@@ -286,8 +286,11 @@ def resend_activation(request):
 					[email], fail_silently=False)
 			except Exception,e:
 				from signup.helper import *
-				r = RegistrationCode(user=u,registration_code=activation_code(email))
-				r.save()
+				try:
+					r = RegistrationCode(user=u,registration_code=activation_code(email))
+					r.save()
+				except Exception,e:
+					pass
 				mail_message = """Please click on the password reset link 
 				<a href="http://techid.stab-iitb.org/activate/%s/%s">Here </a>"""%(r.registration_code,email)
 				send_mail('Subject here',mail_message, 'billa@billa.com',
