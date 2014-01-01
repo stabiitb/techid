@@ -34,8 +34,9 @@ urlpatterns = patterns('',
     url(r'^profile/([0-9A-Za-z_\-.]+)/$',"users.views.view_other_profile"),
     url(r'^myprojects/$','projects.views.myprojects'),
     url(r'^projects/all/$','projects.views.allprojects'),
-    url(r'projects/(\d+)/$','projects.views.viewproject'),
-    url(r'accounts/login/$','signup.views.index'),
+    url(r'^projects/(\d+)/$','projects.views.viewproject'),
+    url(r'^accounts/login/$','signup.views.index'),
+    url(r'^resend/$','signup.views.resend_activation'),
 )+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)+static(settings.MEDIA_URL,
      document_root=settings.MEDIA_ROOT)
 

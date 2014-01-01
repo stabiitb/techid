@@ -259,6 +259,45 @@ def forgot_password(request):
 			return render(request,"reset.html",{"form_name":form_name,
 				"form":form,})
 
+def resend_activation(request):
+	form_name = "Resend Activation code"
+	if request.method == "GET":
+		return render(request,"reset.html",{"form_name":form_name,"form":EmailForm()})
+	elif request.method == "POST":
+		#check if the user exists:
+		form = EmailForm(request.POST)
+		if form.is_valid():
+			email = form.cleaned_data['email']
+			try:
+				u=User.objects.get(email=email)
+				if u.is_active:
+					messages.add_message(request,messages.INFO,""" You account is already been activated,
+						please click on forgot password""")
+					return HttpResponseRedirect("/")
+			except Exception,e:
+				messages.add_message(request,messages.INFO, """ We cannot find you in our database,
+					Please signup""")
+				return HttpResponseRedirect("/")
+			try:
+				r = RegistrationCode.objects.get(user=u)
+				mail_message = """Please click on the password reset link 
+				<a href="http://techid.stab-iitb.org/activate/%s/%s">Here </a>"""%(r.registration_code,email)
+				send_mail('Subject here',mail_message, 'bila@billa.com',
+					[email], fail_silently=False)
+			except Exception,e:
+				from signup.helper import *
+				r = RegistrationCode(user=u,registration_code=activation_code(email))
+				r.save()
+				mail_message = """Please click on the password reset link 
+				<a href="http://techid.stab-iitb.org/activate/%s/%s">Here </a>"""%(r.registration_code,email)
+				send_mail('Subject here',mail_message, 'billa@billa.com',
+					[email], fail_silently=False)
+			messages.add_message(request,messages.INFO,"""registration link is sent to the email %s"""%email)
+			request.session["login"] = True
+			return HttpResponseRedirect("/")
+		else:
+			return render(request,"reset.html",{"form_name":form_name,
+				"form":form,})
 def user_complete(request):
 	r = User.objects.all()
 	data = []

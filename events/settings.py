@@ -142,7 +142,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # EMAIL_PORT = 1025
 
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT =  465
+EMAIL_PORT =  587
 # Optional SMTP authentication information for EMAIL_HOST.
 EMAIL_HOST_USER = 'stab.iitb@gmail.com'
 EMAIL_HOST_PASSWORD = 'stab2011'
