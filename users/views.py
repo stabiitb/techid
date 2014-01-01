@@ -49,11 +49,13 @@ def edit_profile(request):
 		return render(request,"edit.html",{"form":EditForm(instance=request.user)})
 	elif request.method == "POST":
 		form = EditForm(request.POST,request.FILES,instance=request.user)
+		print form
 		if form.is_valid():
 			info=form.save(commit=False)
 			form.save_m2m()
 			info.save()
-			print info.photo
+			# info.photo= request.POST.get('photo',False)
+			# info.save()
 			messages.add_message(request,messages.INFO,"Updated succesfully")
 			return HttpResponseRedirect("/edit/profile/")
 		else:
