@@ -21,6 +21,8 @@ WIKI_MARKDOWN_KWARGS = {'extensions': ['footnotes', 'attr_list', 'headerid', 'ex
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'vn$-p69z0ea^t5#hzhl*z6xichnl70nbv%$8e=5g6$e#0w@r0t'
 
+USE_TZ = True
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 SITE_ID = 1
@@ -72,6 +74,8 @@ INSTALLED_APPS = (
     'django_select2',
     'projects',
     'endless_pagination',
+    'bootstrap3_datetime',
+    'tinkerer',
     # 'filebrowser',
     # 'django.contrib.humanize',
     # 'django.contrib.sites',
@@ -119,13 +123,12 @@ DATABASES = {
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Calcutta'
 
 USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
