@@ -45,7 +45,7 @@ def timesubmit(request):
 	if Entered.objects.filter(user=request.user,is_active=True).exists():
 		form = SignOutForm(request.POST)
 		dt = ""
-		entry=Entered.objects.filter(user=request.user)[0]
+		entry=Entered.objects.filter(user=request.user,is_active=True)[0]
 		if form.is_valid():
 			print form.cleaned_data["left"]
 			if form.cleaned_data["left"] == None:

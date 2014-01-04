@@ -12,3 +12,6 @@ class Entered(models.Model):
 
 	def get_difftime(self):
 		return self.left - self.enter
+
+	def __unicode__(self):
+		return self.user.email
