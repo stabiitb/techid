@@ -8,7 +8,9 @@ from signup.models import *
 from django.contrib.auth.decorators import *
 from django.views.decorators.http import require_http_methods
 from django.contrib import messages
-from datetime import datetime
+from datetime import datetime,timedelta
+def days_hours_minutes(td):
+    return td.days, td.seconds//3600, (td.seconds//60)%60
 
 @login_required
 def tinkererlogs(request):
@@ -17,7 +19,10 @@ def tinkererlogs(request):
 	if Entered.objects.filter(user=request.user,is_active=True).exists():
 		if Entered.objects.filter(user=request.user).exists():
 			entries = Entered.objects.filter(user=request.user,is_active=False)
-			totaltime = sum(us.left - us.enter  for us in entries)
+			totaltime = timedelta(0,0,0)
+			for us in entries:
+				totaltime = totaltime + us.left - us.enter
+			totaltime = days_hours_minutes(totaltime)
 			return render(request,template_html,{"entries":entries,"totaltime":totaltime,"form":form,
 				"active":True})
 		else:
@@ -26,7 +31,10 @@ def tinkererlogs(request):
 	else:
 		if Entered.objects.filter(user=request.user).exists():
 			entries = Entered.objects.filter(user=request.user,is_active=False)
-			totaltime = 0
+			totaltime = timedelta(0,0,0)
+			for us in entries:
+				totaltime = totaltime + us.left - us.enter
+			totaltime = days_hours_minutes(totaltime)
 			return render(request,template_html,{"entries":entries,"totaltime":totaltime,"form":form})
 		else:
 			messages.add_message(request,messages.INFO,"No logs for tinkerer's lab yet")

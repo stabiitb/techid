@@ -13,7 +13,11 @@
     		<h1>Tinkerer's Lab <small>IIT bombay </small></h1>
     	</div>
       {% if totaltime %}
-        <h1> Total time spent in Tinkerer's Lab <span class="glyphicon glyphicon-dashboard"></span>{{ totaltime}} </h1>
+        <h1> Total time spent in Tinkerer's Lab: &nbsp; <span class="glyphicon glyphicon-dashboard"></span>
+
+        {%if totaltime.0 > 0 %} {{totaltime.0}} days {% endif %}
+        {%if totaltime.1 > 0 %} {{totaltime.1}} Hours {% endif %}
+        {%if totaltime.2 > 0 %} {{totaltime.2}} Minutes {% endif %} </h1>
       {% endif %}
       {% bootstrap_messages %}
       {% if not active %}
