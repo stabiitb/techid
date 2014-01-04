@@ -31,7 +31,7 @@ TEMPLATE_DEBUG = True
 FIXTURE_DIRS = (
     ROOT_DIR + "/fixtures/",
     )
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['techid.stab-iitb.org']
 ## Added for the suit settings
 from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
 
@@ -111,13 +111,21 @@ WSGI_APPLICATION = 'events.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'OPTIONS': {
+                'read_default_file': '/var/www/event/database.conf',
+            },
+        }
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
