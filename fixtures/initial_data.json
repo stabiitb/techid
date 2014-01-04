@@ -91,7 +91,7 @@
     "pk": 12, 
     "model": "misc.department", 
     "fields": {
-        "name": "Metallurigcal engineering", 
+        "name": "Metallurigical engineering", 
         "short_name": "MET"
     }
 },
@@ -109,6 +109,14 @@
     "fields": {
         "name": "Mechanical engineering", 
         "short_name": "MECH"
+    }
+},
+{
+    "pk": 15, 
+    "model": "misc.department", 
+    "fields": {
+        "name": "Civil Engineering", 
+        "short_name": "CIVIL"
     }
 },
 {
@@ -292,6 +300,69 @@
     "model": "misc.hostel", 
     "fields": {
         "name": "Hostel 15", 
+        "description": ""
+    }
+},
+{
+    "pk": 1, 
+    "model": "misc.club", 
+    "fields": {
+        "image": "", 
+        "name": "Robotics Club", 
+        "description": ""
+    }
+},
+{
+    "pk": 2, 
+    "model": "misc.club", 
+    "fields": {
+        "image": "", 
+        "name": "Wncc Club", 
+        "description": ""
+    }
+},
+{
+    "pk": 3, 
+    "model": "misc.club", 
+    "fields": {
+        "image": "", 
+        "name": "Krittika Club", 
+        "description": ""
+    }
+},
+{
+    "pk": 4, 
+    "model": "misc.club", 
+    "fields": {
+        "image": "", 
+        "name": "MnP Club", 
+        "description": ""
+    }
+},
+{
+    "pk": 5, 
+    "model": "misc.club", 
+    "fields": {
+        "image": "", 
+        "name": "Electronics Club", 
+        "description": ""
+    }
+},
+{
+    "pk": 6, 
+    "model": "misc.club", 
+    "fields": {
+        "image": "", 
+        "name": "Technovation club", 
+        "description": ""
+    }
+},
+{
+    "pk": 7, 
+    "model": "misc.club", 
+    "fields": {
+        "image": "", 
+        "name": "Aero Club", 
         "description": ""
     }
 },
