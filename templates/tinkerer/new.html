@@ -6,11 +6,88 @@
     {% include "navbar.html" %}
     <br/>
     <br/>
+    {% load bootstrap3 %}
+
     <div class="container">
     	<div class="page-header">
-    		<h1>Tinkerer's Lab <small>IIT bombay </h1>
+    		<h1>Tinkerer's Lab <small>IIT bombay </small></h1>
     	</div>
-    	
+      {% if totaltime %}
+        <h1> Total time spent in Tinkerer's Lab <span class="glyphicon glyphicon-dashboard"></span>{{ totaltime}} </h1>
+      {% endif %}
+      {% bootstrap_messages %}
+      {% if not active %}
+    	<div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+          <h4> Sign into Tinkerer's lab</h4>
+        </br>
+          <form role="form" method="post" action="/tinkerer/enter/">
+            {% csrf_token %}
+            <button class="btn btn-success btn-lg" type="submit">Sign into Tinkerer's Lab</button>
+          </form>
+        </div>
+      </div>
+      {% else %}
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+          <h4> Sign out of Tinkerer's lab</h4>
+        </br>
+          <form role="form" method="post" action="/tinkerer/leave/">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <button class="btn btn-success btn-lg" type="submit">Leave Tinkerer's Lab</button>
+          </form>
+        </div>
+      </div>
+    {% endif %}
+    <br/>
+    <br/>
+    <br/>
+    {% if entries %}
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+            <div class="panel panel-default">
+              <!-- Default panel contents -->
+              <div class="panel-heading">Previous Logs</div>
+              <div class="panel-body">
+                <p>Logs of your tinkerer labs</p>
+              </div>
+
+              <!-- Table -->
+              <table class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+                   <td>Entered into Lab</td>
+                   <td>Left the Lab </td>
+                   <td> Total time Spent </td>
+                  </tr>
+                </thead>
+                <tbody>
+          {% load endless %}
+          {% paginate entries %}
+          {% for entry in entries %}
+            <tr>
+              <td>
+                {{ entry.enter}}
+              </td>
+              <td>
+                {{ entry.left }}
+              </td>
+              <td>
+                {{ entry.left|timeuntil:entry.enter }}
+              </td>
+            </tr>
+          {% endfor %}
+
+
+                </tbody>
+              </table>
+            </div>
+        </div>
+      </div>
+    {% endif %}
+
+
 
     {% include "footer.html" %}
     </div>

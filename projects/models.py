@@ -5,6 +5,7 @@ from misc.models import *
 from signup.models import *
 from redactor.fields import *
 
+
 class Project(models.Model):
 	user = models.ForeignKey(User,related_name='user')
 	name = models.CharField(max_length=255)

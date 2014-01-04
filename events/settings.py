@@ -139,14 +139,24 @@ MEDIA_URL = '/uploads/'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # Host for sending e-mail.
-# EMAIL_HOST = 'localhost'
+EMAIL_HOST = 'localhost'
 
-# # Port for sending e-mail.
-# EMAIL_PORT = 1025
+# Port for sending e-mail.
+EMAIL_PORT = 1025
 
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT =  587
-# Optional SMTP authentication information for EMAIL_HOST.
-EMAIL_HOST_USER = 'stab.iitb@gmail.com'
-EMAIL_HOST_PASSWORD = 'stab2011'
-EMAIL_USE_TLS = True
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT =  587
+# # Optional SMTP authentication information for EMAIL_HOST.
+# EMAIL_HOST_USER = 'stab.iitb@gmail.com'
+# EMAIL_HOST_PASSWORD = 'stab2011'
+# EMAIL_USE_TLS = True
+
+BLEACH_VALID_TAGS = ['p', 'b', 'i', 'strike', 'ul', 'li', 'ol', 'br',
+                     'span', 'blockquote', 'hr', 'a', 'img']
+BLEACH_VALID_ATTRS = {
+    'span': ['style', ],
+    'p': ['align', ],
+    'a': ['href', 'rel'],
+    'img': ['src', 'alt', 'style'],
+}
+BLEACH_VALID_STYLES = ['color', 'cursor', 'float', 'margin']

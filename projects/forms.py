@@ -20,6 +20,10 @@ from misc.models import *
 from projects.models import *
 from redactor.widgets import RedactorEditor
 
+import bleach
+
+from django.conf import settings
+
 class ProjectForm(ModelForm):
 	team = forms.ModelMultipleChoiceField(queryset=User.objects.all(),widget=
 		Select2MultipleWidget(attrs={"style":"width:100%"}))
@@ -30,3 +34,9 @@ class ProjectForm(ModelForm):
 		'description':RedactorEditor(redactor_options={'lang': 'en', 'focus': 'true'}),
 		'club':Select2MultipleWidget(attrs={"style":"width:100%"}),
 		}
+
+    def clean_description(self):
+        myfield = self.cleaned_data.get('description', '')
+        cleaned_text = bleach.clean(description, settings.BLEACH_VALID_TAGS,
+         settings.BLEACH_VALID_ATTRS, settings.BLEACH_VALID_STYLES)
+        return cleaned_text #sanitize html
