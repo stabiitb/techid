@@ -35,8 +35,8 @@ class ProjectForm(ModelForm):
 		'club':Select2MultipleWidget(attrs={"style":"width:100%"}),
 		}
 
-    def clean_description(self):
-        myfield = self.cleaned_data.get('description', '')
-        cleaned_text = bleach.clean(description, settings.BLEACH_VALID_TAGS,
+	def clean_description(self):
+		description = self.cleaned_data.get('description', '')
+		cleaned_text = bleach.clean(description, settings.BLEACH_VALID_TAGS,
          settings.BLEACH_VALID_ATTRS, settings.BLEACH_VALID_STYLES)
-        return cleaned_text #sanitize html
+		return cleaned_text #sanitize html

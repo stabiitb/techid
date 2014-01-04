@@ -14,6 +14,6 @@ class Project(models.Model):
 	link	= models.URLField(null=True,blank=True)
 	team = models.ManyToManyField(User,null=True,blank=True)
 	is_verified = models.BooleanField(default=False)
-	club 	= models.ManyToManyField(Club)
+	club 	= models.ManyToManyField(Club,null=True,blank=True)
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(auto_now=True)
