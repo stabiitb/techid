@@ -309,7 +309,7 @@ def user_complete(request):
 		h["name"] = i.first_name+" "+i.last_name
 		h["value"] = i.ldap_username
 		h["roll"] = i.rollno
-		h["tokens"] = [i.first_name,i.last_name]
+		h["tokens"] = [i.first_name,i.last_name,i.ldap_username,i.rollno]
 		data+=[h]
 	return HttpResponse(json.dumps(data,indent=4),mimetype="application/json")
 

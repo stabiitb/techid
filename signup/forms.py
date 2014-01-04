@@ -93,7 +93,7 @@ class EditForm(ModelForm):
 	email = forms.EmailField(widget=forms.HiddenInput(),required=False)
 	rollno = forms.CharField(widget=forms.HiddenInput(),required=False)
 	skill = forms.ModelMultipleChoiceField(queryset=Skill.objects.all(),widget=
-		Select2MultipleWidget(attrs={"style":"width:100%"}))
+		Select2MultipleWidget(attrs={"style":"width:100%"}),required=False)
 	class Meta:
 		model = User
 		exclude = ['is_active','is_admin','email','ldap_username','rollno']
