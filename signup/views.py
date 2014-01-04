@@ -283,7 +283,7 @@ def resend_activation(request):
 				url = "http://techid.stab-iitb.org/activate/%s/%s"""%(r.registration_code,email)
 				template_email = "emails/registration.txt" 
 				send_email(template=template_email,subject="[Tech ID Registration]",
-					from_email="stab.iitb@gmail.com",to_email=mail,data={"username":mail,"url":url})
+					from_email="stab.iitb@gmail.com",to_email=email,data={"username":email,"url":url})
 			except Exception,e:
 				from signup.helper import *
 				try:
@@ -295,8 +295,8 @@ def resend_activation(request):
 				url = "http://techid.stab-iitb.org/activate/%s/%s"""%(r.registration_code,email)
 				template_email = "emails/registration.txt" 
 				send_email(template=template_email,subject="[Tech ID Registration]",
-					from_email="stab.iitb@gmail.com",to_email=mail,data={"username":mail,"url":url})
-				
+					from_email="stab.iitb@gmail.com",to_email=email,data={"username":email,"url":url})
+
 			messages.add_message(request,messages.INFO,"""registration link is sent to the email %s"""%email)
 			request.session["login"] = True
 			return HttpResponseRedirect("/")
