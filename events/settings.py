@@ -76,6 +76,7 @@ INSTALLED_APPS = (
     'endless_pagination',
     'bootstrap3_datetime',
     'tinkerer',
+    'south',
     # 'filebrowser',
     # 'django.contrib.humanize',
     # 'django.contrib.sites',
