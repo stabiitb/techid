@@ -18,7 +18,7 @@ from django.core.validators import validate_email
 from django.contrib.auth.decorators import *
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth.hashers import *
-
+from signup.mail import *
 ##function to get the detials of the user:
 def getValues(ldap_id):
 	url = "http://www.cse.iitb.ac.in/~prithvirajbilla/ldap-api/?user="+ldap_id
@@ -114,12 +114,11 @@ def signup(request):
 				r=RegistrationCode(user=user,
 					registration_code=code)
 				r.save()
-				mail_message  = "click on this registration link below to activate your account"
-				mail_message += "http://techid.stab.iitb.org/"+code + "/" +mail
+				url = "http://techid.stab.iitb.org/activate/"+code + "/" +mail
+				template_email = "emails/registration.txt" 
 				try:
-					send_mail('[Tech ID] Registration link',mail_message, 
-						'stab.iitb@gmail.com',
-	    				[mail], fail_silently=True)
+					send_email(template=template_email,subject="[Tech ID Registration]",
+						from_email="stab.iitb@gmail.com",to_email=mail,data={"username":mail,"url":url})
 				except Exception,e:
 					print e
 					pass
@@ -240,19 +239,20 @@ def forgot_password(request):
 				return HttpResponseRedirect("/")
 			try:
 				r = ResetCode.objects.get(user=u)
-				mail_message = """Please click on the password reset link 
-				http://techid.stab-iitb.org/reset/password/%s"""%r.reset_code
-				send_mail('Registration link',mail_message, 'bila@billa.com',
-					[email], fail_silently=False)
+				url = """http://techid.stab-iitb.org/reset/password/%s"""%r.reset_code
+				template_email = "emails/reset.txt"
+				send_email(subject="[Password Reset]",template=template_email,from_email="stab.iitb@gmail.com",
+					to_email=email,data={"username":email,"url":url})
 			except Exception,e:
 				print e
 				from signup.helper import *
 				r = ResetCode(user=u,reset_code=activation_code(email))
 				r.save()
-				mail_message = """Please click on the password reset link 
-				http://techid.stab-iitb.org/reset/password/%s"""%r.reset_code
-				send_mail('Registration Link',mail_message, 'billa@billa.com',
-					[email], fail_silently=False)
+				url = """http://techid.stab-iitb.org/reset/password/%s"""%r.reset_code
+				template_email = "emails/reset.txt"
+				send_email(subject="[Password Reset]",template=template_email,from_email="stab.iitb@gmail.com",
+					to_email=email,data={"username":email,"url":url})
+
 			messages.add_message(request,messages.INFO,"""reset link is sent to the email %s"""%email)
 			return HttpResponseRedirect("/forgot/password/")
 		else:
@@ -280,10 +280,10 @@ def resend_activation(request):
 				return HttpResponseRedirect("/")
 			try:
 				r = RegistrationCode.objects.get(user=u)
-				mail_message = """Please click on the password reset link 
-				http://techid.stab-iitb.org/activate/%s/%s"""%(r.registration_code,email)
-				send_mail('Subject here',mail_message, 'bila@billa.com',
-					[email], fail_silently=False)
+				url = "http://techid.stab-iitb.org/activate/%s/%s"""%(r.registration_code,email)
+				template_email = "emails/registration.txt" 
+				send_email(template=template_email,subject="[Tech ID Registration]",
+					from_email="stab.iitb@gmail.com",to_email=mail,data={"username":mail,"url":url})
 			except Exception,e:
 				from signup.helper import *
 				try:
@@ -291,10 +291,12 @@ def resend_activation(request):
 					r.save()
 				except Exception,e:
 					pass
-				mail_message = """Please click on the password reset link 
-				http://techid.stab-iitb.org/activate/%s/%s"""%(r.registration_code,email)
-				send_mail('Subject here',mail_message, 'billa@billa.com',
-					[email], fail_silently=False)
+				r = RegistrationCode.objects.get(user=u)
+				url = "http://techid.stab-iitb.org/activate/%s/%s"""%(r.registration_code,email)
+				template_email = "emails/registration.txt" 
+				send_email(template=template_email,subject="[Tech ID Registration]",
+					from_email="stab.iitb@gmail.com",to_email=mail,data={"username":mail,"url":url})
+				
 			messages.add_message(request,messages.INFO,"""registration link is sent to the email %s"""%email)
 			request.session["login"] = True
 			return HttpResponseRedirect("/")

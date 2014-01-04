@@ -1,0 +1,8 @@
+Hello {{ username }},
+
+	It seems that you have request for a password reset link.
+	If so, please click on the link below
+	{{ url }}
+
+	Thank you,
+	Stab IITBombay.

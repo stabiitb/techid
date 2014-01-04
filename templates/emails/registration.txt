@@ -1,0 +1,8 @@
+Hello {{username}},
+
+	Please visit this link to get your account activated.
+	{{ url }}
+
+	Thank you,
+	Stab IITB.
+
