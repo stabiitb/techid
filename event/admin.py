@@ -29,7 +29,8 @@ class EventAdmin(admin.ModelAdmin):
 	form = EventForm
 
 
-
+from tinkere.models import *
+admin.site.register(Entered)
 admin.site.register(TeamEvent,EventAdmin)
 admin.site.register(IndividualEvent,EventAdmin)
 admin.site.register(Lecture,EventAdmin)
