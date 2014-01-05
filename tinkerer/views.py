@@ -18,16 +18,16 @@ def tinkererlogs(request):
 	form = SignOutForm()
 	if Entered.objects.filter(user=request.user,is_active=True).exists():
 		if Entered.objects.filter(user=request.user).exists():
-			entries = Entered.objects.filter(user=request.user,is_active=False)
+			entries = Entered.objects.filter(user=request.user,is_active=False).order_by("-enter")
 			totaltime = timedelta(0,0,0)
 			for us in entries:
 				totaltime = totaltime + us.left - us.enter
 			totaltime = days_hours_minutes(totaltime)
 			return render(request,template_html,{"entries":entries,"totaltime":totaltime,"form":form,
-				"active":True})
+				"active":True,"purposeform":PurposeForm()})
 		else:
 			messages.add_message(request,messages.INFO,"No logs for tinkerer's lab yet")
-			return render(request,template_html,{"form":form,"active":True})
+			return render(request,template_html,{"form":form,"active":True,"purposeform":PurposeForm()})
 	else:
 		if Entered.objects.filter(user=request.user).exists():
 			entries = Entered.objects.filter(user=request.user,is_active=False)
@@ -35,10 +35,11 @@ def tinkererlogs(request):
 			for us in entries:
 				totaltime = totaltime + us.left - us.enter
 			totaltime = days_hours_minutes(totaltime)
-			return render(request,template_html,{"entries":entries,"totaltime":totaltime,"form":form})
+			return render(request,template_html,{"entries":entries,"totaltime":totaltime,"form":form
+				,"purposeform":PurposeForm()})
 		else:
 			messages.add_message(request,messages.INFO,"No logs for tinkerer's lab yet")
-			return render(request,template_html,{"form":form})
+			return render(request,template_html,{"form":form,"purposeform":PurposeForm()})
 
 @login_required
 def timesubmit(request):
@@ -51,13 +52,17 @@ def timesubmit(request):
 			if form.cleaned_data["left"] == None:
 				dt = datetime.now()
 			else:
-				if entry.enter < datetime(form.cleaned_data["left"]) \
-				 and datetime(form.cleaned_data["left"]) < datetime.now():
-					dt = form.cleaned_data["left"]
-				else:
-					messages.add_message(request,messages.ERROR,""""Left time should be greater than 
-						entered time""")
-					return HttpResponseRedirect("/tinkerer/")
+				try:
+					if entry.enter < form.cleaned_data["left"] \
+					 and form.cleaned_data["left"] < datetime.now():
+						dt = form.cleaned_data["left"]
+					else:
+						messages.add_message(request,messages.ERROR,""""Left time should be greater than 
+							entered time""")
+						return HttpResponseRedirect("/tinkerer/")
+				except Exception,e:
+					messages.add_message(request,messages.ERROR,""" Fill the required details correctly """)
+					return HttpResponseRedirect("/tinkerer")
 		else:
 			dt = datetime.now()
 
@@ -77,6 +82,11 @@ def timeEnter(request):
 		messages.add_message(request,messages.INFO,"you have already been signed up in Tinkerer's Lab")
 		return HttpResponseRedirect("/tinkerer/")
 	else:
-		Entered.objects.create(user=request.user)
-		messages.add_message(request,messages.INFO,"you have signed into Tinkerer's lab")
-		return HttpResponseRedirect("/tinkerer")
+		form = PurposeForm(request.POST)
+		if form.is_valid():
+			Entered.objects.create(user=request.user,purpose=form.cleaned_data["purpose"])
+			messages.add_message(request,messages.INFO,"you have signed into Tinkerer's lab")
+			return HttpResponseRedirect("/tinkerer")
+		else:
+			messages.add_message(request,messages.ERROR,"Fill the required fields")
+			return HttpResponseRedirect("/tinkerer")

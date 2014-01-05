@@ -6,3 +6,6 @@ class SignOutForm(forms.Form):
 	left = forms.DateTimeField(required=False, label="Leaving Time",
 		widget=DateTimePicker(options={"format": "YYYY-MM-DD HH:mm",
 		"pickSeconds": False},attrs={"placeholder":"Not required"}))
+
+class PurposeForm(forms.Form):
+	purpose = forms.CharField(widget=forms.Textarea)

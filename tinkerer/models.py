@@ -9,7 +9,7 @@ class Entered(models.Model):
 	enter = models.DateTimeField(auto_now_add=True)
 	left = models.DateTimeField(blank=True,null=True)
 	is_active = models.BooleanField(default=True)
-
+	purpose = models.TextField(max_length=500)
 	def get_difftime(self):
 		return self.left - self.enter
 

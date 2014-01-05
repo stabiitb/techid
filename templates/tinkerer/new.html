@@ -12,21 +12,26 @@
     	<div class="page-header">
     		<h1>Tinkerer's Lab <small>IIT bombay </small></h1>
     	</div>
-      {% if totaltime %}
+      {% if totaltime.0 > 0 or totaltome.1 > 0 or totaltime.2 > 0 %}
         <h1> Total time spent in Tinkerer's Lab: &nbsp; <span class="glyphicon glyphicon-dashboard"></span>
 
         {%if totaltime.0 > 0 %} {{totaltime.0}} days {% endif %}
         {%if totaltime.1 > 0 %} {{totaltime.1}} Hours {% endif %}
         {%if totaltime.2 > 0 %} {{totaltime.2}} Minutes {% endif %} </h1>
       {% endif %}
+      <br/>
+      <br/>
       {% bootstrap_messages %}
       {% if not active %}
     	<div class="row">
         <div class="col-lg-8 col-lg-offset-2">
+          <div class="page-header">
           <h4> Sign into Tinkerer's lab</h4>
+          </div>
         </br>
           <form role="form" method="post" action="/tinkerer/enter/">
             {% csrf_token %}
+            {% bootstrap_form purposeform %}
             <button class="btn btn-success btn-lg" type="submit">Sign into Tinkerer's Lab</button>
           </form>
         </div>

@@ -126,6 +126,7 @@ else:
                 'read_default_file': '/var/www/event/database.conf',
             },
         }
+        }
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
@@ -161,7 +162,8 @@ EMAIL_PORT = 1025
 # EMAIL_USE_TLS = True
 
 BLEACH_VALID_TAGS = ['p', 'b', 'i', 'strike', 'ul', 'li', 'ol', 'br',
-                     'span', 'blockquote', 'hr', 'a', 'img']
+                     'span', 'blockquote', 'hr', 'a', 'img','div','h1','h2','h3',
+                     'h4','h5','h6','dd','dl','em']
 BLEACH_VALID_ATTRS = {
     'span': ['style', ],
     'p': ['align', ],

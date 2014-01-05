@@ -8,3 +8,4 @@ def send_email(template,subject,from_email,to_email,data):
 	text_content = plaintext.render(d)
 	msg = EmailMultiAlternatives(subject, text_content, from_email, [to_email])
 	msg.send()
+
