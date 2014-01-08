@@ -2,6 +2,10 @@
 <html lang="en">
 {% include "head.html" %}
 <body>
+    {% load like_button %}
+
+    {% like_button_js_tag %}
+
     {% if request.user.id != None %}
     {% include "navbar.html" %}
     {% else %}
@@ -106,7 +110,7 @@
                     <h3 class="alert alert-success"> Event Summary: </h3>
                     {{ entry.end_note | safe }}
                   {% endif %}
-                </div>
+                  {% like_button_tag %}
 
 
         </div>

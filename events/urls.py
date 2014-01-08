@@ -39,6 +39,8 @@ urlpatterns = patterns('',
     url(r'^accounts/login/$','signup.views.index'),
     url(r'^resend/$','signup.views.resend_activation'),
     url(r'^tinkerer/', include('tinkerer.urls')),
+    url(r'', include('like_button.urls')),
+
 )+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)+static(settings.MEDIA_URL,
      document_root=settings.MEDIA_ROOT)
 

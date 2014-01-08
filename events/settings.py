@@ -78,6 +78,7 @@ INSTALLED_APPS = (
     'tinkerer',
     'easy_thumbnails',
     'image_cropping',
+    'like_button',
     # 'south',
     # 'filebrowser',
     # 'django.contrib.humanize',
@@ -183,3 +184,8 @@ THUMBNAIL_PROCESSORS = (
 IMAGE_CROPPING_SIZE_WARNING = True
 
 JQUERY_URL = "/static/jquery.js"
+
+FACEBOOK_APP_ID = "714398431904909"
+FACEBOOK_SHOW_SEND = "true"   # or "false, default is "true"
+FACEBOOK_LIKE_WIDTH = "450"   # "numeric value for width", default is 450
+FACEBOOK_SHOW_FACES = "true"  # or "false, default is "true"
