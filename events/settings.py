@@ -151,19 +151,19 @@ USE_L10N = True
 STATIC_URL = '/static/'
 MEDIA_URL = '/uploads/'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-
+if DEBUG:
 # Host for sending e-mail.
-EMAIL_HOST = 'localhost'
+    EMAIL_HOST = 'localhost'
 
-# Port for sending e-mail.
-EMAIL_PORT = 1025
-
-# EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_PORT =  587
-# # Optional SMTP authentication information for EMAIL_HOST.
-# EMAIL_HOST_USER = 'stab.iitb@gmail.com'
-# EMAIL_HOST_PASSWORD = 'stab2011'
-# EMAIL_USE_TLS = True
+    # Port for sending e-mail.
+    EMAIL_PORT = 1025
+else:
+    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_PORT =  587
+    # Optional SMTP authentication information for EMAIL_HOST.
+    EMAIL_HOST_USER = 'stab.iitb@gmail.com'
+    EMAIL_HOST_PASSWORD = 'stab2011'
+    EMAIL_USE_TLS = True
 
 BLEACH_VALID_TAGS = ['p', 'b', 'i', 'strike', 'ul', 'li', 'ol', 'br',
                      'span', 'blockquote', 'hr', 'a', 'img','div','h1','h2','h3',
