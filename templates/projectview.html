@@ -9,6 +9,17 @@
       <link rel="stylesheet" href="/static/redactor/css/redactor.css" />
       <script type="text/javascript" src="/static/redactor/redactor.js"></script>
     <div class="container">
+      {% if project.is_verified %}
+      <div class="alert alert-success fade in">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <strong>Hurray!</strong> This project has been verified.
+      </div>      
+      {% else %}
+      <div class="alert alert-warning fade in">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <strong>Holy guacamole!</strong> This project is not yet verified.
+      </div>
+      {% endif %}
       <div class="row">
       <hr>
         <div class="col-lg-9 col-lg-offset-1">

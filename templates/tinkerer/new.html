@@ -69,6 +69,7 @@
                 <thead>
                   <tr>
                    <td>Entered into Lab</td>
+                   <td> Purpose </td>
                    <td>Left the Lab </td>
                    <td> Total time Spent </td>
                   </tr>
@@ -80,6 +81,9 @@
             <tr>
               <td>
                 {{ entry.enter}}
+              </td>
+              <td>
+                {{ entry.purpose | truncatechars:50 }}
               </td>
               <td>
                 {{ entry.left }}
