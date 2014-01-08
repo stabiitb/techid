@@ -57,7 +57,7 @@ class User(AbstractBaseUser):
     room = models.CharField(max_length=10)
     skill = models.ManyToManyField(Skill,null=True,blank=True)
     photo = ImageCropField(max_length=100,upload_to='documents/%Y/%m/%d',blank=True,null=True)
-    cropping = ImageRatioField('photo', '150x200')
+    cropping = ImageRatioField('photo', '150x200',size_warning=True)
     objects = UserManager()
 
     USERNAME_FIELD = 'email'

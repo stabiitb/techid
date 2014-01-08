@@ -12,14 +12,25 @@ from registration.models import *
 def viewEventIndividualPage(request,code):
 	template_html="events/view.html"
 	entry = IndividualEvent.objects.filter(id=code)
+	register = True
+	try:
+		user = request.user
+		i = IndividualRegistration.objects.filter(user=user,event=entry[0])
+		print i
+		if i.exists():
+			register = False
+		else:
+			register = True
+	except Exception,e:
+		pass
 	if entry.exists():
-		return render(request,template_html,{"entry":entry[0],"eventtype":"Individual Event"})
+		return render(request,template_html,{"entry":entry[0],"eventtype":"Individual","register":register})
 
 def viewEventTeamPage(request,code):
 	template_html="events/view.html"
 	entry = TeamEvent.objects.filter(id=code)
 	if entry.exists():
-		return render(request,template_html,{"entry":entry[0],"eventtype":"Team Event"})
+		return render(request,template_html,{"entry":entry[0],"eventtype":"Team"})
 
 def viewEventLecturePage(request,code):
 	template_html="events/view.html"
