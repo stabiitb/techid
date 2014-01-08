@@ -54,6 +54,13 @@ def deregisterIndividual(request,code):
 	return HttpResponseRedirect("/events/individual/"+str(code))
 
 
+import django_tables2 as tables
+
+class SimpleTable(tables.Table):
+	
+    class Meta:
+        model = IndividualRegistration
+
 def viewAllIndividual(request,code):
 	register = True
 	entry = IndividualEvent.objects.filter(id=code)
@@ -73,6 +80,7 @@ def viewAllIndividual(request,code):
 		if entries.exists():
 			return render(request,"events/registered.html",{"registered":entries,
 				"eventtype":"Individual","entry":IndividualEvent.objects.get(id=code),
+				"table":SimpleTable(entries),
 				"register":register})
 	except Exception:
 		pass
