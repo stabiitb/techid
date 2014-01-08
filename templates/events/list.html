@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include "head.html" %}
+  <body>
+    {% if request.user.id != None %}
+    {% include "navbar.html" %}
+    {% else %}
+    {% include "nav-signup.html" %}
+    {% endif %}
+    <br/>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+            <div class="page-header">
+              <h3>Events </h3>
+            </div>
+            {%include "events/nav.html" %}
+            <div id="myTabContent" class="tab-content">
+                <div class="tab-pane fade active in" id="concert">
+                  <br/>
+                  <div class="row">
+                    <div class="col-lg-12">
+                      {% if not entries %}
+                      <div class="alert alert-info">
+                        <a href="#" class="alert-link">No Events are present in this category</a>
+                        <a class="close" data-dismiss="alert" href="#" aria-hidden="true">&times;</a>
+                      </div>
+                      {% else %}
+                      {% load endless %}
+                      {% paginate entries %}
+                      {% for o in entries %}
+                      <div class="col-lg-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                              <h3 class="panel-title">{{ o.name }}</h3>
+                            </div>
+                          <div class="panel-body">
+                          <div class="media">
+                         {% if o.picture.name %}
+                            {% load cropping %}
+                            <img src="{% cropped_thumbnail o "small_cropping"  %}">
+                            {% else %}
+                            <img class="img-responsive" src="/static/images/cover.jpg"  style="width:200px;height:200px" width="100" height="100">
+                            {% endif %}
+                          <div class="media-body">
+                            <p> {{o.description | truncatechars:100 | safe}} </p>
+                            <p> Venue: {{o.venue }}</p>
+                            <p> Time : {{ o.start_time }}</p>
+                            <a class="btn btn-sm btn-success pull-right" href="/events/{{type}}/{{o.id}}"> View Details</a>
+                          </div>
+                        </div>
+                          </div>
+                        </div>
+                        </div>
+                      {% endfor %}
+                      {% endif %}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+      {% include "footer.html" %}
+    </div>
+  </body>
+</html>
+

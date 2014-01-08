@@ -2,125 +2,111 @@
 <html lang="en">
 {% include "head.html" %}
 <body>
-	{% include "navbar.html" %}
+    {% if request.user.id != None %}
+    {% include "navbar.html" %}
+    {% else %}
+    {% include "nav-signup.html" %}
+    {% endif %}
     <br/>
     <div class="row">
       <div class="container">
         <div class="col-lg-10 col-lg-offset-1">
           <div class="row">
             <div class="col-lg-12">
-              {% load thumbnail %}
-            {% thumbnail entry.picture 1024x300 box=entry.cropping crop detail %}
+              {% if entry.ended %}
+              <div class="alert alert-warning fade in">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+              <strong>Holy guacamole!</strong> This Event is ended.
+              </div>  
+              {% endif %}           
+           {% if entry.picture.name %}
+              {% load cropping %}
+              <img src="{% cropped_thumbnail entry "cropping"  %}">
+              {% else %}
+              <img class="img-responsive" src="/static/images/cover.jpg"  style="width:1024px;height:300px" width="100" height="100">
+              {% endif %}
             </div>
             <div class="col-lg-12">
               <div class="page-header">
-                <h3>{{ event.name }} &nbsp;<span class="badge">{{ type }}</span>
-                {% if type == "team" %}
-                   <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#myModal">Register<span class="glyphicon glyphicon-chevron-right"></span></button> 
-                {% elif type == "competition" %}
-                 <form method="post" action="/event/register/" name="type" value="competition">{% csrf_token %}<button type="submit" name="eventid" value="{{ event.id }}" class="btn btn-success pull-right">Register <span class="glyphicon glyphicon-chevron-right"></span></button> </form>
-                 {% endif %}
+                <h3>{{ entry.name }} &nbsp;<span class="badge">{{ eventtype }}</span>
                </h3> 
               </div>
-                  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                          <h4 class="modal-title" id="myModalLabel">Registration Status</h4>
-                        </div>
-                        <div class="modal-body">
-                          <form role="form" id="myform">
-                              <div class="form-group">
-                                <label for="exampleInputEmail1">Teamname</label>
-                                <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter Your Teamname" name="teamname">
-                                <hr>
-                                <p class="text-center"> OR </p>
-                                <label for="example">Team ID </label>
-                                <input type="text" name="teamid" class="form-control" id="example" placeholder="enter Your Team Id">
-                                <input type="hidden" name="eventid" value="{{ event.id }}" />
-                              </div>
-                              <button type="submit" class="btn btn-default">Submit</button>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
-                      </div><!-- /.modal-content -->
-                    </div><!-- /.modal-dialog -->
-                  </div><!-- /.modal -->
-
 
               <ul id="myTab" class="nav nav-tabs">
                 <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
-                {% if type == "competition" or type == "team" %}
-                <li class=""><a href="#reg" data-toggle="tab">Registered &nbsp;<span class="badge pull-right">{{ reg | length }}</span></a></li>
+                {% if type %}
+                <li class=""><a href="#" data-toggle="tab">Registered &nbsp;<span class="badge pull-right">{{ registerd | length }}</span></a></li>
                 {% endif %}
               </ul>
 
               <div id="myTabContent" class="tab-content">
                 <div class="tab-pane fade active in" id="home">
                   <br/>
-                  <h4>Description:</h4>
-                  <p>{{ event.description }}</p>
-                  <h4> Venue: </h4>
-                  <p><span class="glyphicon glyphicon-map-marker"></span>  {{ event.venue }} </p>
-                  <h4> Time : </h4>
-                  <p><span class="glyphicon glyphicon-calendar"></span> {{ event.start_time }} </p>
-                  <h4> Duration : </h4>
-                  <p><span class="glyphicon glyphicon-time"></span> {{ event.duration }} </p>
-                  <h4> Elligibilty : </h4>
-                  <button type="button" class="btn btn-default btn-sm">
-                    <span class="glyphicon glyphicon-star"></span> Year Elligibility: {{ event.year_elligible }}
-                  </button>
-                  <button type="button" class="btn btn-default btn-sm">
-                    <span class="glyphicon glyphicon-star"></span> Dept Elligibility: {{ event.dept_elligible }}
-                  </button>
-                  <button type="button" class="btn btn-default btn-sm">
-                    <span class="glyphicon glyphicon-star"></span> Hostel Elligibility: {{ event.hostel_elligible }}
-                  </button>
-                     {% if type == "concert" %}
+                  <h3>Description:</h3>
+                  {{ entry.description | safe}}
+                  <h3> Venue: </h3>
+                  <span class="glyphicon glyphicon-map-marker"></span>  {{ entry.venue }} <small> {{ entry.venue.description }}</small>
+                  <h3> Time : </h3>
+                  <p><span class="glyphicon glyphicon-calendar"></span> {{ entry.start_time }} </p>
+                  <h3> Duration : </h3>
+                  <p><span class="glyphicon glyphicon-time"></span> {{ entry.duration }} </p>
+                  {% if entry.deadline_to_register %}
+                  <h3> Dead line to register : </h3>
+                  <p><span class="glyphicon glyphicon-calendar"></span> {{ entry.deadline_to_register }} </p>
+                  {% endif %}
 
-                        <h4> Concert By: </h4>
-                          <p> {{ concert.concertby }} </p>
-
-                     {% elif type == "workshop" %}
-                        <h4> Workshop By: </h4>
-                        <p> {{ workshop.conductedby}} </h4>
-                        <h4> Field of Workshop: </h4>
-                        <p> %NAME% </p>
-                     {% elif type == "lecture" %}
-                      <h4> Lecture By: </h4>
-                      <p> {{ workshop.field }} </p>
-                   
-                     {% elif type == "competition" %}
-                      <h4>Dead line to register </h4>
-                      <p><span class="glyphicon glyphicon-calendar"></span> {{ competition.deadline }} </span></p>
-                    {% elif type == "team" %}
-                      <h4>Dead line to register </h4>
-                      <p><spanclass="glyphicon glyphicon-calendar"></span> {{ team.deadline }} </span></p>
-                      <h4> Max Team Size </h4>
-                      <p>{{ team.teamsize }}
-                    {% endif %}
-                 <h4><span class="label label-primary">%Event Type%</span></h4>
-
+                  {% if entry.topic %}
+                  <h3> Topic on : </h3>
+                  {{ entry.topic }}
+                  {% endif %}
+                  {% if entry.workshop_on %}
+                  <h3> Workshop On : </h3>
+                  {{ entry.workshop_on }}
+                  {% endif %}
+                  {% if entry.team_size %}
+                  <h3> Team Size : </h3>
+                  {{ entry.team_size }}
+                  {% endif %}
+                  <h3> For Students: </h3>
+                  <style type="text/css">
+                   .btn-default
+                    {
+                      margin-bottom: 3px;
+                    }
+                  </style>
+                  {% for item in  entry.year_elligible.all %}
+                  <a class="btn btn-default" href="#" role="button">{{ item }}</a>
+                  {% endfor %}
+                  <h3>For Departments: </h3>
+                  {% for item in  entry.dept_elligible.all %}
+                  <a class="btn btn-default " href="#" role="button">{{ item }}</a>
+                  {% endfor %}
+                  <h3> For Hostels: </h3>
+                  {% for item in  entry.hostel_elligible.all %}
+                  <a class="btn btn-default " href="#" role="button">{{ item }}</a>
+                  {% endfor %}
+                  <h3> Conducted by : </h3>
+                  {% for item in  entry.conducted_by.all %}
+                  <a class="btn btn-default btn-warning " href="#" role="button">{{ item }}</a>
+                  {% endfor %}
                 </div>
-                <div class="tab-pane fade" id="reg">
+                  {% if entry.special_notes|length != "0" %}
+                    <h3> Special Notes </h3>
+                    {{ entry.special_notes | safe }}
+                  {% endif %}
+                  {% if entry.other_notes|length != "0" %}
+                    <h3> Note: </h3>
+                    {{ entry.other_notes | safe }}
+                  {% endif %}
                   <br/>
-                  <table class="table-bordered">
-                    {% if not reg %}
-                    <div class="alert alert-info"> No Registrations Yet </div>
-                    {% else %}
-                    <thead><tr><td>Studentname</td><td>RollNo</td></tr></thead>
-                    <tbody>
-                    {% for o in reg %}
-                    <tr><td>{{ o.sid.name }}</td><td>{{ o.sid.rollno }}</td></tr>
-                    {% endfor %}
-                    {% endif %}
-                    </tbody>
-                  </table>
+                  {% if entry.attachements %}
+                  <a href="/uploads/{{ entry.attachements}}" class="btn btn-default btn-success"> Download Attachements </a>
+                  {% endif %}
+                  {% if entry.ended %}
+                    <h3 class="alert alert-success"> Event Summary: </h3>
+                    {{ entry.end_note | safe }}
+                  {% endif %}
                 </div>
-            </div>
 
 
         </div>

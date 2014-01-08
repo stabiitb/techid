@@ -9,7 +9,53 @@ from event.models import *
 from django.http import HttpResponse,HttpResponseRedirect,Http404,HttpResponseNotFound
 from registration.models import *
 
-def viewEventPage(request,code):
+def viewEventIndividualPage(request,code):
 	template_html="events/view.html"
 	entry = IndividualEvent.objects.filter(id=code)
-	return render(request,template_html,{"entry":entry})
+	if entry.exists():
+		return render(request,template_html,{"entry":entry[0],"eventtype":"Individual Event"})
+
+def viewEventTeamPage(request,code):
+	template_html="events/view.html"
+	entry = TeamEvent.objects.filter(id=code)
+	if entry.exists():
+		return render(request,template_html,{"entry":entry[0],"eventtype":"Team Event"})
+
+def viewEventLecturePage(request,code):
+	template_html="events/view.html"
+	entry = Lecture.objects.filter(id=code)
+	if entry.exists():
+		return render(request,template_html,{"entry":entry[0],"eventtype":"Lecture"})
+
+def viewEventWorkshopPage(request,code):
+	template_html="events/view.html"
+	entry = Workshop.objects.filter(id=code)
+	if entry.exists():
+		return render(request,template_html,{"entry":entry[0],"eventtype":"Workshop"})
+
+def viewEventOtherPage(request,code):
+	template_html = "events/view.html"
+	entry = OtherEvent.objects.filter(id=code)
+	if entry.exists():
+		return render(request,template_html,{"entry":entry[0],"eventtype":"Other"})
+
+
+def viewIndividual(request):
+	entries=IndividualEvent.objects.all()
+	return render(request,"events/list.html",{"ind":True,"entries":entries,"type":"individual"})
+
+def viewTeam(request):
+	entries=TeamEvent.objects.all()
+	return render(request,"events/list.html",{"team":True,"entries":entries,"type":"team"})
+
+def viewLecture(request):
+	entries=Lecture.objects.all()
+	return render(request,"events/list.html",{"lecture":True,"entries":entries,"type":"lecture"})
+
+def viewWorkshop(request):
+	entries = Workshop.objects.all()
+	return render(request,"events/list.html",{"workshop":True,"entries":entries,"type":"workshop"})
+
+def viewOther(request):
+	entries =OtherEvent.objects.all()
+	return render(request,"events/list.html",{"other":True,"entries":entries,"type":"other"})

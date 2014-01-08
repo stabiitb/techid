@@ -1,5 +1,15 @@
 from django.conf.urls import patterns, include, url
 
 urlpatterns = patterns('',
-	url(r'^individual/(\d+)/$',"event.views.viewEventPage"),
+	url(r'^individual/$','event.views.viewIndividual'),
+	url(r'^team/$','event.views.viewTeam'),
+	url(r'^lecture/$','event.views.viewLecture'),
+	url(r'^workshop/$','event.views.viewWorkshop'),
+	url(r'^other/$','event.views.viewOther'),
+	url(r'^individual/(\d+)/$',"event.views.viewEventIndividualPage"),
+	url(r'^team/(\d+)/$',"event.views.viewEventTeamPage"),
+	url(r'^lecture/(\d+)/$',"event.views.viewEventLecturePage"),
+	url(r'^workshop/(\d+)/$',"event.views.viewEventWorkshopPage"),
+	url(r'^other/(\d+)/$',"event.views.viewEventOtherPage"),
+
 )	
