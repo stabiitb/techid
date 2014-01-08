@@ -93,7 +93,6 @@
                   {% for item in  entry.conducted_by.all %}
                   <a class="btn btn-default btn-warning " href="#" role="button">{{ item }}</a>
                   {% endfor %}
-                </div>
                   {% if entry.special_notes|length != "0" %}
                     <h3> Special Notes </h3>
                     {{ entry.special_notes | safe }}
@@ -117,6 +116,8 @@
       </div>
     </div>
   </div>
+</div>
+</div>
   	{% include "footer.html" %}
 </div>
 		<script type="text/javascript">
