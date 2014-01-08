@@ -52,21 +52,21 @@ def viewEventOtherPage(request,code):
 
 
 def viewIndividual(request):
-	entries=IndividualEvent.objects.all()
+	entries=IndividualEvent.objects.filter(start_time__gte=datetime.now())
 	return render(request,"events/list.html",{"ind":True,"entries":entries,"type":"individual"})
 
 def viewTeam(request):
-	entries=TeamEvent.objects.all()
+	entries=TeamEvent.objects.filter(start_time__gte=datetime.now())
 	return render(request,"events/list.html",{"team":True,"entries":entries,"type":"team"})
 
 def viewLecture(request):
-	entries=Lecture.objects.all()
+	entries=Lecture.objects.filter(start_time__gte=datetime.now())
 	return render(request,"events/list.html",{"lecture":True,"entries":entries,"type":"lecture"})
 
 def viewWorkshop(request):
-	entries = Workshop.objects.all()
+	entries = Workshop.objects.filter(start_time__gte=datetime.now())
 	return render(request,"events/list.html",{"workshop":True,"entries":entries,"type":"workshop"})
 
 def viewOther(request):
-	entries =OtherEvent.objects.all()
+	entries =OtherEvent.objects.filter(start_time__gte=datetime.now())
 	return render(request,"events/list.html",{"other":True,"entries":entries,"type":"other"})
