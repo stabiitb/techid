@@ -41,7 +41,9 @@
 
               <ul id="myTab" class="nav nav-tabs">
                 <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
+                {% if not type %}
                 <li class=""><a href="/register/{{eventtype|lower}}/view/{{entry.id}}/">Registered &nbsp;</a></li>
+                {% endif %}
               </ul>
               {% block content %}
               <div id="myTabContent" class="tab-content">

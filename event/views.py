@@ -30,7 +30,7 @@ def viewEventTeamPage(request,code):
 	template_html="events/view.html"
 	entry = TeamEvent.objects.filter(id=code)
 	if entry.exists():
-		return render(request,template_html,{"entry":entry[0],"eventtype":"Team"})
+		return render(request,template_html,{"entry":entry[0],"eventtype":"Team","type":True})
 
 def viewEventLecturePage(request,code):
 	template_html="events/view.html"
@@ -53,14 +53,26 @@ def viewEventLecturePage(request,code):
 def viewEventWorkshopPage(request,code):
 	template_html="events/view.html"
 	entry = Workshop.objects.filter(id=code)
+	register = True
+	try:
+		user = request.user
+		i = WorkshopRegistration.objects.filter(user=user,event=entry[0])
+		print i
+		if i.exists():
+			register = False
+		else:
+			register = True
+	except Exception,e:
+		pass
 	if entry.exists():
-		return render(request,template_html,{"entry":entry[0],"eventtype":"Workshop"})
+		return render(request,template_html,{"entry":entry[0],"eventtype":"Workshop",
+			"register":register})
 
 def viewEventOtherPage(request,code):
 	template_html = "events/view.html"
 	entry = OtherEvent.objects.filter(id=code)
 	if entry.exists():
-		return render(request,template_html,{"entry":entry[0],"eventtype":"Other"})
+		return render(request,template_html,{"entry":entry[0],"eventtype":"Other","type":True})
 
 
 def viewIndividual(request):

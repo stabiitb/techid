@@ -106,6 +106,32 @@ def viewAllLecture(request,code):
 			{"eventtype":"Lecture",
 			"entry":Lecture.objects.get(id=code),"register":register})
 
+def viewAllWorkshop(request,code):
+	register = True
+	entry = Workshop.objects.filter(id=code)
+	try:
+		user = request.user
+		i = WorkshopRegistration.objects.filter(user=user,event=entry[0])
+		print i
+		if i.exists():
+			register = False
+		else:
+			register = True
+	except Exception,e:
+		pass
+
+	try:
+		entries=WorkshopRegistration.objects.filter(event=Workshop.objects.get(id=code))
+		if entries.exists():
+			return render(request,"events/registered.html",{"registered":entries,
+				"eventtype":"Workshop","entry":Workshop.objects.get(id=code),
+				"register":register})
+	except Exception:
+		pass
+	return render(request,"events/registered.html",
+			{"eventtype":"Workshop",
+			"entry":Workshop.objects.get(id=code),"register":register})
+
 @login_required
 def registerLecture(request,code):
 	try:
@@ -152,7 +178,7 @@ def registerWorkshop(request,code):
 		print e
 		messages.add_message(request,messages.ERROR,"unable to register you")
 		
-	return HttpResponseRedirect("/events/individual/"+str(code))
+	return HttpResponseRedirect("/events/workshop/"+str(code))
 
 @login_required
 def deregisterWorkshop(request,code):
@@ -166,5 +192,5 @@ def deregisterWorkshop(request,code):
 		print e
 		messages.add_message(request,messages.ERROR,"unable to deregister you")
 		
-	return HttpResponseRedirect("/events/individual/"+str(code))
+	return HttpResponseRedirect("/events/workshop/"+str(code))
 
