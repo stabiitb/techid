@@ -12,3 +12,23 @@ class IndividualRegistration(models.Model):
 
 	def __unicode__(self):
 		return self.user.email+" | "+self.event.name
+
+class LectureRegistration(models.Model):
+	user = models.ForeignKey(User)
+	event = models.ForeignKey(Lecture)
+
+	class Meta:
+		unique_together=('user','event')
+
+	def __unicode__(self):
+		return self.user.email+" | "+self.event.name
+
+class WorkshopRegistration(models.Model):
+	user = models.ForeignKey(User)
+	event = models.ForeignKey(Workshop)
+
+	class Meta:
+		unique_together=('user','event')
+
+	def __unicode__(self):
+		return self.user.email+" | "+self.event.name

@@ -22,7 +22,6 @@ from django.views.decorators.http import require_http_methods
 from django.contrib.auth.hashers import *
 
 @login_required
-
 def registerIndividual(request,code):
 	try:
 		entry=IndividualRegistration.objects.filter(user=request.user,
@@ -54,12 +53,6 @@ def deregisterIndividual(request,code):
 	return HttpResponseRedirect("/events/individual/"+str(code))
 
 
-import django_tables2 as tables
-
-class SimpleTable(tables.Table):
-	
-    class Meta:
-        model = IndividualRegistration
 
 def viewAllIndividual(request,code):
 	register = True
@@ -80,10 +73,98 @@ def viewAllIndividual(request,code):
 		if entries.exists():
 			return render(request,"events/registered.html",{"registered":entries,
 				"eventtype":"Individual","entry":IndividualEvent.objects.get(id=code),
-				"table":SimpleTable(entries),
 				"register":register})
 	except Exception:
 		pass
 	return render(request,"events/registered.html",
 			{"eventtype":"Individual",
 			"entry":IndividualEvent.objects.get(id=code),"register":register})
+
+def viewAllLecture(request,code):
+	register = True
+	entry = Lecture.objects.filter(id=code)
+	try:
+		user = request.user
+		i = LectureRegistration.objects.filter(user=user,event=entry[0])
+		print i
+		if i.exists():
+			register = False
+		else:
+			register = True
+	except Exception,e:
+		pass
+
+	try:
+		entries=LectureRegistration.objects.filter(event=Lecture.objects.get(id=code))
+		if entries.exists():
+			return render(request,"events/registered.html",{"registered":entries,
+				"eventtype":"Lecture","entry":Lecture.objects.get(id=code),
+				"register":register})
+	except Exception:
+		pass
+	return render(request,"events/registered.html",
+			{"eventtype":"Lecture",
+			"entry":Lecture.objects.get(id=code),"register":register})
+
+@login_required
+def registerLecture(request,code):
+	try:
+		entry=LectureRegistration.objects.filter(user=request.user,
+			event=Lecture.objects.get(id=code))
+		if entry.exists():
+			messages.add_message(request,messages.ERROR,"unable to register you")
+		else:
+			LectureRegistration.objects.create(user=request.user,
+				event=Lecture.objects.get(id=code))
+			messages.add_message(request,messages.SUCCESS,"you are successfully registerd for the event")
+	except Exception,e:
+		print e
+		messages.add_message(request,messages.ERROR,"unable to register you")
+		
+	return HttpResponseRedirect("/events/lecture/"+str(code))
+
+@login_required
+def deregisterLecture(request,code):
+	try:
+		i = LectureRegistration.objects.filter(user=request.user,
+			event=Lecture.objects.get(id=code))
+		for items in i:
+			i.delete()
+		messages.add_message(request,messages.SUCCESS,"you have been de registered from event")
+	except Exception,e:
+		print e
+		messages.add_message(request,messages.ERROR,"unable to deregister you")
+		
+	return HttpResponseRedirect("/events/lecture/"+str(code))
+
+@login_required
+def registerWorkshop(request,code):
+	try:
+		entry=WorkshopRegistration.objects.filter(user=request.user,
+			event=Workshop.objects.get(id=code))
+		if entry.exists():
+			messages.add_message(request,messages.ERROR,"unable to register you")
+		else:
+			WorkshopRegistration.objects.create(user=request.user,
+				event=Workshop.objects.get(id=code))
+			messages.add_message(request,messages.SUCCESS,"you are successfully registerd for the event")
+	except Exception,e:
+		print e
+		messages.add_message(request,messages.ERROR,"unable to register you")
+		
+	return HttpResponseRedirect("/events/individual/"+str(code))
+
+@login_required
+def deregisterWorkshop(request,code):
+	try:
+		i = WorkshopRegistration.objects.filter(user=request.user,
+			event=Workshop.objects.get(id=code))
+		for items in i:
+			i.delete()
+		messages.add_message(request,messages.SUCCESS,"you have been de registered from event")
+	except Exception,e:
+		print e
+		messages.add_message(request,messages.ERROR,"unable to deregister you")
+		
+	return HttpResponseRedirect("/events/individual/"+str(code))
+

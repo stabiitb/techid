@@ -47,11 +47,36 @@
               <div id="myTabContent" class="tab-content">
                 <div class="tab-pane fade active in" id="home">
                   <br/>
-        <link rel="stylesheet" href="{{ STATIC_URL }}django_tables2/themes/paleblue/css/screen.css" />
-              {% load django_tables2 %}
-              {% render_table table %}
 
-
+                  {% if registered %}
+                  <table class="table table-hover table-bordered" >
+                      <thead>
+                          <tr>
+                              <th>Name</th>
+                              <th>Ldap Username</th>
+                              <th>Department</th>
+                              <th>Hostel</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                        {% load endless %}
+                        {% paginate registered %}
+                        {% for entry in registered %}
+                        <tr>
+                          <td>{{ entry.user.first_name}}{{ entry.user.last_name }}</td>
+                          <td>{{ entry.user.ldap_username }}</td>
+                          <td>{{ entry.user.department}} </td>
+                          <td>{{ entry.user.hostel }}</td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                  </table>
+                {% else %}
+              <div class="alert alert-info fade in">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+              <strong>Huhh!</strong> No one is registered yet!!, You are the first one to register.
+              </div>  
+                {% endif %}
         </div>
       </div>
       {% endblock %}

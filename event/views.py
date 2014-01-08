@@ -35,8 +35,20 @@ def viewEventTeamPage(request,code):
 def viewEventLecturePage(request,code):
 	template_html="events/view.html"
 	entry = Lecture.objects.filter(id=code)
+	register = True
+	try:
+		user = request.user
+		i = LectureRegistration.objects.filter(user=user,event=entry[0])
+		print i
+		if i.exists():
+			register = False
+		else:
+			register = True
+	except Exception,e:
+		pass
 	if entry.exists():
-		return render(request,template_html,{"entry":entry[0],"eventtype":"Lecture"})
+		return render(request,template_html,{"entry":entry[0],"eventtype":"Lecture",
+			"register":register})
 
 def viewEventWorkshopPage(request,code):
 	template_html="events/view.html"
