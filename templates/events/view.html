@@ -9,15 +9,9 @@
         <div class="col-lg-10 col-lg-offset-1">
           <div class="row">
             <div class="col-lg-12">
-               <img class="img-responsive" src="http://placehold.it/1024X300">
+              {% load thumbnail %}
+            {% thumbnail entry.picture 1024x300 box=entry.cropping crop detail %}
             </div>
-            {% if p == "success" %}
-                <div class="alert alert-info"><Strong>Success!</strong>Registration Successfull</div>
-            {% elif p == "already" %}
-                <div class="alert alert-danger"><Strong>Warning!</strong>You have already registered</div>
-            {% elif p == "error" %}
-                <div class="alert alert-danger"><Strong>Warning!</strong>Cannot register to the event</div>
-            {% endif %}
             <div class="col-lg-12">
               <div class="page-header">
                 <h3>{{ event.name }} &nbsp;<span class="badge">{{ type }}</span>

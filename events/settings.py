@@ -76,7 +76,9 @@ INSTALLED_APPS = (
     'endless_pagination',
     'bootstrap3_datetime',
     'tinkerer',
-    'south',
+    'easy_thumbnails',
+    'image_cropping',
+    # 'south',
     # 'filebrowser',
     # 'django.contrib.humanize',
     # 'django.contrib.sites',
@@ -91,6 +93,7 @@ INSTALLED_APPS = (
     # 'wiki.plugins.images',
     # 'wiki.plugins.macros',
 )
+
 
 REDACTOR_OPTIONS = {'lang': 'en'}
 REDACTOR_UPLOAD = 'uploads/'
@@ -171,3 +174,12 @@ BLEACH_VALID_ATTRS = {
     'img': ['src', 'alt', 'style'],
 }
 BLEACH_VALID_STYLES = ['color', 'cursor', 'float', 'margin']
+
+from easy_thumbnails.conf import Settings as thumbnail_settings
+THUMBNAIL_PROCESSORS = (
+    'image_cropping.thumbnail_processors.crop_corners',
+) + thumbnail_settings.THUMBNAIL_PROCESSORS
+
+IMAGE_CROPPING_SIZE_WARNING = True
+
+JQUERY_URL = "/static/jquery.js"

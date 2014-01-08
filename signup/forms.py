@@ -18,6 +18,7 @@ from django_select2 import *
 from signup.models import *
 from misc.models import *
 
+
 class SignupForm(ModelForm):
 	department = fields.ModelChoiceField(queryset=Department.objects.all(),
 		widget=Select2Widget(attrs={"style":"width:100%"}),initial=0)
@@ -82,7 +83,7 @@ class ResetForm(forms.Form):
 
 class EmailForm(forms.Form):
     email = forms.EmailField(required=True)
-
+from image_cropping import ImageCropWidget
 class EditForm(ModelForm):
 	department = fields.ModelChoiceField(queryset=Department.objects.all(),
 		widget=Select2Widget(attrs={"style":"width:100%"}),initial=0)
@@ -94,8 +95,9 @@ class EditForm(ModelForm):
 	rollno = forms.CharField(widget=forms.HiddenInput(),required=False)
 	skill = forms.ModelMultipleChoiceField(queryset=Skill.objects.all(),widget=
 		Select2MultipleWidget(attrs={"style":"width:100%"}),required=False)
+
 	class Meta:
 		model = User
 		exclude = ['is_active','is_admin','email','ldap_username','rollno']
 		fields = ['first_name','last_name','department','year','hostel','room',
-		'alternate_email','mobile','skill','photo']
+		'alternate_email','mobile','skill','photo','cropping']

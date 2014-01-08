@@ -29,6 +29,7 @@ urlpatterns = patterns('',
     url(r'^edit/profile/$','users.views.edit_profile'),
     url(r'^projects/new/$','projects.views.new_project'),
     url(r'^redactor/', include('redactor.urls')),
+    url(r'^events/', include('event.urls')),
     url(r'^project/edit/(\d+)/$',"projects.views.edit_project"),
     url(r'^project/delete/(\d+)/$',"projects.views.delete_project"),
     url(r'^profile/([0-9A-Za-z_\-.]+)/$',"users.views.view_other_profile"),
@@ -41,9 +42,3 @@ urlpatterns = patterns('',
 )+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)+static(settings.MEDIA_URL,
      document_root=settings.MEDIA_ROOT)
 
-# from wiki.urls import get_pattern as get_wiki_pattern
-# from django_notify.urls import get_pattern as get_notify_pattern
-# urlpatterns += patterns('',
-#     (r'^wiki/notify/', get_notify_pattern()),
-#     (r'^wiki/', get_wiki_pattern())
-# )

@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 from event.models import *
-
+from image_cropping import ImageCroppingMixin
 from django.contrib.admin import ModelAdmin, SimpleListFilter
 from django.contrib.auth.admin import UserAdmin
 from suit_redactor.widgets import RedactorWidget
@@ -25,7 +25,7 @@ class EventForm(ModelForm):
 		'other_notes':RedactorWidget(editor_options={'lang': 'en'}),
 		}
 
-class EventAdmin(admin.ModelAdmin):
+class EventAdmin(ImageCroppingMixin,admin.ModelAdmin):
 	form = EventForm
 
 

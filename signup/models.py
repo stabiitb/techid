@@ -39,7 +39,7 @@ class UserManager(BaseUserManager):
         user.is_admin = True
         user.save(using=self._db)
         return user
-
+from image_cropping import ImageCropField, ImageRatioField
 
 class User(AbstractBaseUser):
     email = models.EmailField(max_length=254, unique=True, db_index=True)
@@ -56,8 +56,8 @@ class User(AbstractBaseUser):
     alternate_email = models.EmailField(null=True,blank=True)
     room = models.CharField(max_length=10)
     skill = models.ManyToManyField(Skill,null=True,blank=True)
-    photo = models.ImageField(max_length=100,upload_to='documents/%Y/%m/%d',blank=True,null=True)
-
+    photo = ImageCropField(max_length=100,upload_to='documents/%Y/%m/%d',blank=True,null=True)
+    cropping = ImageRatioField('photo', '150x200')
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
