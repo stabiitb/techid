@@ -79,7 +79,7 @@ INSTALLED_APPS = (
     'easy_thumbnails',
     'image_cropping',
     'like_button',
-    'django_tables2',
+    # 'django_tables2',
     # 'south',
     # 'filebrowser',
     # 'django.contrib.humanize',
