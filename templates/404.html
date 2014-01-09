@@ -4,7 +4,7 @@
 {% include "head.html" %}
 
 <body>
-{% if request.user.ldap_username %}
+{% if request.user.id != None %}
 {% include 'navbar.html' %}
 {% else %}
 {% include 'nav-signup.html' %}

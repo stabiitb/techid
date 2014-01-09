@@ -24,7 +24,7 @@ SECRET_KEY = 'vn$-p69z0ea^t5#hzhl*z6xichnl70nbv%$8e=5g6$e#0w@r0t'
 USE_TZ = True
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 SITE_ID = 1
 WIKI_ACCOUNT_HANDLING = False
 TEMPLATE_DEBUG = True
@@ -79,7 +79,7 @@ INSTALLED_APPS = (
     'easy_thumbnails',
     'image_cropping',
     'like_button',
-    'django_tables2',
+    # 'django_tables2',
     # 'south',
     # 'filebrowser',
     # 'django.contrib.humanize',
