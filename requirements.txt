@@ -3,4 +3,3 @@ django-facebook
 django-endless-pagination
 pygments
 django-image-cropping
-django-disqus

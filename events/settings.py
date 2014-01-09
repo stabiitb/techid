@@ -79,7 +79,6 @@ INSTALLED_APPS = (
     'easy_thumbnails',
     'image_cropping',
     'like_button',
-    'disqus',
     # 'django_tables2',
     # 'south',
     # 'filebrowser',
@@ -192,9 +191,3 @@ FACEBOOK_SHOW_SEND = "true"   # or "false, default is "true"
 FACEBOOK_LIKE_WIDTH = "450"   # "numeric value for width", default is 450
 FACEBOOK_SHOW_FACES = "true"  # or "false, default is "true"
 
-DISQUS_API_KEY = "Qh4KGptKTqCZ4kd09YvVQgdid4pOgHjmnqxQJwX2Www1h3JWOUjkciabAzAblfAd"
-<<<<<<< HEAD
-DISQUS_WEBSITE_SHORTNAME = "techid"
-=======
-DISQUS_WEBSITE_SHORTNAME = "techid"
->>>>>>> 723803b4307e215f8620b6398a06b90f427ded72
