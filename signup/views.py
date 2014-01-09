@@ -114,7 +114,7 @@ def signup(request):
 				r=RegistrationCode(user=user,
 					registration_code=code)
 				r.save()
-				url = "http://techid.stab.iitb.org/activate/"+code + "/" +mail
+				url = "http://techid.stab-iitb.org/activate/"+code + "/" +mail
 				template_email = "emails/registration.txt" 
 				try:
 					send_email(template=template_email,subject="[Tech ID Registration]",
@@ -311,7 +311,7 @@ def user_complete(request):
 		h["name"] = i.ldap_username
 		h["value"] = i.ldap_username
 		h["roll"] = i.rollno
-		h["tokens"] = [i.first_name,i.last_name]
+		#h["tokens"] = [i.first_name,i.last_name]
 		data+=[h]
 	return HttpResponse(json.dumps(data,indent=4),mimetype="application/json")
 
