@@ -31,7 +31,10 @@
             <p> Created on : {{ project.created_at }}</p>
             <hr>
             {{ project.description | safe }}
+            <hr>
+            {% include "discus.html" %}
         </div>
+
       </div>
       <script type="text/javascript">
       $(".help-block").hide();
