@@ -3,5 +3,5 @@ db.sqlite3
 .*/.*pyc
 database.conf
 staticfiles
-media/.*
+media
 *.pyc
