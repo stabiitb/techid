@@ -308,7 +308,7 @@ def user_complete(request):
 	data = []
 	for i in r:
 		h = {}
-		h["name"] = i.first_name+" "+i.last_name
+		h["name"] = i.ldap_username
 		h["value"] = i.ldap_username
 		h["roll"] = i.rollno
 		h["tokens"] = [i.first_name,i.last_name]

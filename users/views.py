@@ -30,7 +30,7 @@ def view_profile(request):
 @login_required
 def view_other_profile(request,code):
 	try:
-		user = User.objects.get(ldap_username=code,is_active=True)
+		user = User.objects.get(ldap_username=code)
 		return render(request,"otherprofile.html",{"user":user})
 	except Exception,e:
 		print e
