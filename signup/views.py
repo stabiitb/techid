@@ -123,7 +123,7 @@ def signup(request):
 					print e
 					pass
 				messages.add_message(request,messages.INFO,"Registration activation link is sent to your email")
-				return HttpResponseRedirect("/signup")
+				return HttpResponseRedirect("/")
 			else:
 				return render(request,"signup.html",{"form":form,"session":request.session})
 		else:
