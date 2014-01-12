@@ -32,7 +32,9 @@ class EventAdmin(ImageCroppingMixin,admin.ModelAdmin):
 from tinkerer.models import *
 from registration.models import *
 from projects.models import *
+from resources.models import *
 admin.site.register(Entered)
+admin.site.register(Resource)
 admin.site.register(Project)
 admin.site.register(IndividualRegistration)
 admin.site.register(TeamEvent,EventAdmin)
