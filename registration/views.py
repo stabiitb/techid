@@ -237,7 +237,7 @@ def registerOtherEvent(request,code):
 		print e
 		messages.add_message(request,messages.ERROR,"unable to register you")
 		
-	return HttpResponseRedirect("/events/other/"+str(code))
+	return HttpResponseRedirect("/events/otherevent/"+str(code))
 
 @login_required
 def deregisterOtherEvent(request,code):
@@ -251,4 +251,4 @@ def deregisterOtherEvent(request,code):
 		print e
 		messages.add_message(request,messages.ERROR,"unable to deregister you")
 		
-	return HttpResponseRedirect("/events/other/"+str(code))
+	return HttpResponseRedirect("/events/otherevent/"+str(code))

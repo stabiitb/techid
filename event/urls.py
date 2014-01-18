@@ -10,6 +10,6 @@ urlpatterns = patterns('',
 	url(r'^team/(\d+)/$',"event.views.viewEventTeamPage"),
 	url(r'^lecture/(\d+)/$',"event.views.viewEventLecturePage"),
 	url(r'^workshop/(\d+)/$',"event.views.viewEventWorkshopPage"),
-	url(r'^other/(\d+)/$',"event.views.viewEventOtherPage"),
+	url(r'^otherevent/(\d+)/$',"event.views.viewEventOtherPage"),
 
 )	
