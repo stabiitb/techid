@@ -194,3 +194,61 @@ def deregisterWorkshop(request,code):
 		
 	return HttpResponseRedirect("/events/workshop/"+str(code))
 
+
+def viewAllOtherEvent(request,code):
+	register = True
+	entry = OtherEvent.objects.filter(id=code)
+	try:
+		user = request.user
+		i = OtherEventRegistration.objects.filter(user=user,event=entry[0])
+		print i
+		if i.exists():
+			register = False
+		else:
+			register = True
+	except Exception,e:
+		pass
+
+	try:
+		entries=OtherEventRegistration.objects.filter(event=OtherEvent.objects.get(id=code))
+		if entries.exists():
+			return render(request,"events/registered.html",{"registered":entries,
+				"eventtype":"OtherEvent","entry":OtherEvent.objects.get(id=code),
+				"register":register})
+	except Exception:
+		pass
+	return render(request,"events/registered.html",
+			{"eventtype":"OtherEvent",
+			"entry":OtherEvent.objects.get(id=code),"register":register})
+
+
+@login_required
+def registerOtherEvent(request,code):
+	try:
+		entry=OtherEventRegistration.objects.filter(user=request.user,
+			event=OtherEvent.objects.get(id=code))
+		if entry.exists():
+			messages.add_message(request,messages.ERROR,"unable to register you")
+		else:
+			OtherEventRegistration.objects.create(user=request.user,
+				event=OtherEvent.objects.get(id=code))
+			messages.add_message(request,messages.SUCCESS,"you are successfully registerd for the event")
+	except Exception,e:
+		print e
+		messages.add_message(request,messages.ERROR,"unable to register you")
+		
+	return HttpResponseRedirect("/events/other/"+str(code))
+
+@login_required
+def deregisterOtherEvent(request,code):
+	try:
+		i = OtherEventRegistration.objects.filter(user=request.user,
+			event=OtherEvent.objects.get(id=code))
+		for items in i:
+			i.delete()
+		messages.add_message(request,messages.SUCCESS,"you have been de registered from event")
+	except Exception,e:
+		print e
+		messages.add_message(request,messages.ERROR,"unable to deregister you")
+		
+	return HttpResponseRedirect("/events/other/"+str(code))

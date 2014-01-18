@@ -69,10 +69,22 @@ def viewEventWorkshopPage(request,code):
 			"register":register})
 
 def viewEventOtherPage(request,code):
-	template_html = "events/view.html"
+	template_html="events/view.html"
 	entry = OtherEvent.objects.filter(id=code)
+	register = True
+	try:
+		user = request.user
+		i = OtherEventRegistration.objects.filter(user=user,event=entry[0])
+		print i
+		if i.exists():
+			register = False
+		else:
+			register = True
+	except Exception,e:
+		pass
 	if entry.exists():
-		return render(request,template_html,{"entry":entry[0],"eventtype":"Other","type":True})
+		return render(request,template_html,{"entry":entry[0],"eventtype":"Other",
+			"register":register})
 
 
 def viewIndividual(request):
