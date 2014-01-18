@@ -37,6 +37,9 @@ def index(request):
 
 	if request.method == "GET":
 		form = LoginForm()
+		if request.GET.get("next"):
+			request.session["next"] = request.GET["next"]
+
 		if request.session.get("login"):
 			request.session["login"]=False
 			return render(request,"index.html",
@@ -59,6 +62,9 @@ def index(request):
 				if k.is_active:
 					user = authenticate(email=email,password=password)
 					login(request,user)
+					if request.session.get("next"):
+						return HttpResponseRedirect(request.session["next"])
+					
 					return HttpResponseRedirect("/profile/")
 				else:
 					messages.add_message(request,messages.INFO,
