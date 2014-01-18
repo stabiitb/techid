@@ -25,7 +25,7 @@
               <strong>Holy guacamole!</strong> This Event is ended.
               </div>  
               {% endif %}
-              {% if request.user.id %}
+              {% if request.user.id != None %}
               <div class="alert alert-info fade in">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                 <strong>Holy guacamole!</strong> Please login or singup to register <a href="/">here</a>
