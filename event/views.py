@@ -105,4 +105,4 @@ def viewWorkshop(request):
 
 def viewOther(request):
 	entries =OtherEvent.objects.filter(start_time__gte=datetime.now())
-	return render(request,"events/list.html",{"other":True,"entries":entries,"type":"other"})
+	return render(request,"events/list.html",{"other":True,"entries":entries,"type":"otherevent"})
