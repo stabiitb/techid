@@ -83,7 +83,7 @@ def viewEventOtherPage(request,code):
 	except Exception,e:
 		pass
 	if entry.exists():
-		return render(request,template_html,{"entry":entry[0],"eventtype":"Other",
+		return render(request,template_html,{"entry":entry[0],"eventtype":"OtherEvent",
 			"register":register})
 
 
