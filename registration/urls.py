@@ -10,8 +10,8 @@ urlpatterns = patterns('',
 	url(r'^lecture/deregister/(\d+)/$','registration.views.deregisterLecture'),
 	url(r'^workshop/(\d+)/$','registration.views.registerWorkshop'),
 	url(r'^workshop/deregister/(\d+)/$','registration.views.deregisterWorkshop'),
-	url(r'^other/view/(\d+)/$','registration.views.viewAllOther'),
-	url(r'^other/(\d+)/$','registration.views.registerOther'),
-	url(r'^other/deregister/(\d+)/$','registration.views.deregisterOther'),
+	url(r'^other/view/(\d+)/$','registration.views.viewAllOtherEvent'),
+	url(r'^other/(\d+)/$','registration.views.registerOtherEvent'),
+	url(r'^other/deregister/(\d+)/$','registration.views.deregisterOtherEvent'),
 
 )
