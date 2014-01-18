@@ -1,5 +1,4 @@
 	{% if not type %}  
-   {% if request.user.id != None %}
    {% if register %}
 
    <a href="/register/{{eventtype | lower}}/{{ entry.id}}" class="btn btn-default btn-primary pull-right"> Register</a>
@@ -7,6 +6,5 @@
    {% else %}
 
    <a href="/register/{{eventtype | lower}}/deregister/{{ entry.id}}" class="btn btn-default btn-warning pull-right"> De register</a>
-   {% endif %}
    {% endif %}
    {% endif %}
