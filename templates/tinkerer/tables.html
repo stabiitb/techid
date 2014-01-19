@@ -2,7 +2,7 @@
 <html lang="en">
   {% include "head.html" %}
   <body>
-  {% if request.use.id %}
+  {% if request.user.id %}
       {% include "navbar.html" %}
   {% else %}
       {% include "nav-signup.html" %}
