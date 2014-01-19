@@ -90,3 +90,9 @@ def timeEnter(request):
 		else:
 			messages.add_message(request,messages.ERROR,"Fill the required fields")
 			return HttpResponseRedirect("/tinkerer")
+
+
+@login_required
+def table_view(request):
+	entries = Component.objects.all()
+	return render(request,"tinkerer/tables.html",{"entries":entries})

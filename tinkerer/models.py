@@ -36,3 +36,5 @@ class Component(models.Model):
 	number = models.CharField(max_length=255)
 	typeOfComponent = models.CharField(max_length=255,choices=CHOICES)
 
+	def __unicode__(self):
+		return self.idNo + " " + self.name
