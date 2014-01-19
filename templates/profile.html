@@ -17,7 +17,8 @@
               <img src="{% cropped_thumbnail request.user "cropping"  %}">
               {% else %}
 
-              <img class="img-responsive" src="http://placehold.it/150X200"  style="max-width:150px;max-height:200px">
+              <img class="img-responsive" src="/static/images/profile.png"  width="200px" height="150px">
+              <p> Change your profile pic here <a href="/edit/profile"> Here</a></p>
               {% endif %}
 
             </div>
