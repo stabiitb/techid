@@ -34,6 +34,7 @@ from registration.models import *
 from projects.models import *
 from resources.models import *
 admin.site.register(Entered)
+admin.site.register(Component)
 admin.site.register(Resource)
 admin.site.register(Project)
 admin.site.register(IndividualRegistration)
