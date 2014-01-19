@@ -1,0 +1,7 @@
+Hello {{username}},
+
+	You have registered for this event.
+	{{ url }}
+
+	Thank you,
+	Stab IITB.
