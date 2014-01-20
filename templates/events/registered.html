@@ -59,8 +59,6 @@
                           </tr>
                       </thead>
                       <tbody>
-                        {% load endless %}
-                        {% paginate registered %}
                         {% for entry in registered %}
                         <tr>
                           <td>{{ entry.user.first_name}}{{ entry.user.last_name }}</td>
@@ -71,7 +69,6 @@
                         {% endfor %}
                       </tbody>
                   </table>
-               {% show_pages %}
                 {% else %}
               <div class="alert alert-info fade in">
               <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
