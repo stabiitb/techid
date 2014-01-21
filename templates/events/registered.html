@@ -61,7 +61,7 @@
                       <tbody>
                         {% for entry in registered %}
                         <tr>
-                          <td>{{ entry.user.first_name}}{{ entry.user.last_name }}</td>
+                          <td>{{ entry.user.first_name | title}} {{ entry.user.last_name | title }}</td>
                           <td>{{ entry.user.ldap_username }}</td>
                           <td>{{ entry.user.department}} </td>
                           <td>{{ entry.user.hostel }}</td>
