@@ -24,7 +24,7 @@ SECRET_KEY = 'vn$-p69z0ea^t5#hzhl*z6xichnl70nbv%$8e=5g6$e#0w@r0t'
 USE_TZ = True
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 SITE_ID = 1
 WIKI_ACCOUNT_HANDLING = False
 TEMPLATE_DEBUG = True

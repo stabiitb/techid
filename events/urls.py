@@ -7,6 +7,7 @@ from registration.views import *
 from signup.views import *
 from event.views import *
 from django.contrib import admin
+
 admin.autodiscover()
 
 urlpatterns = patterns('',

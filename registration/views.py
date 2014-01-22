@@ -20,10 +20,16 @@ from django.core.validators import validate_email
 from django.contrib.auth.decorators import *
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth.hashers import *
-
+from signup.mail import *
 @login_required
 def registerIndividual(request,code):
+	template = "emails/thankyou.txt"
+	subject = "[Event Registration] Confirmation:"
+	from_email = "stab.iitb@gmail.com"
+	to_email = request.user.email
+	url = "http://techid.stab-iitb.org/"+"events/individual/"
 	try:
+		event =IndividualEvent.objects.get(id=code)
 		entry=IndividualRegistration.objects.filter(user=request.user,
 			event=IndividualEvent.objects.get(id=code))
 		if entry.exists():
@@ -31,6 +37,11 @@ def registerIndividual(request,code):
 		else:
 			IndividualRegistration.objects.create(user=request.user,
 				event=IndividualEvent.objects.get(id=code))
+			try:
+				data = {"username":request.user.first_name,"url":url+str(event.id)}
+				send_email(template,subject,from_email,to_email,data)
+			except Exception,e:
+				print e
 			messages.add_message(request,messages.SUCCESS,"you are successfully registerd for the event")
 	except Exception,e:
 		print e

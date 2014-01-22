@@ -25,11 +25,20 @@ class EventForm(ModelForm):
 		'other_notes':RedactorWidget(editor_options={'lang': 'en'}),
 		}
 
+
+def send_an_email(modeladmin, request, queryset):
+    pass
+
+send_an_email.short_description = "Send an email"
+
 class EventAdmin(ImageCroppingMixin,admin.ModelAdmin):
 	form = EventForm
 
 class RegistrationAdmin(admin.ModelAdmin):
 	list_filter = ('event',)
+	actions = [send_an_email]
+
+
 
 from tinkerer.models import *
 from registration.models import *
