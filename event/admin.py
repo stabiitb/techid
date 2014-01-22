@@ -32,6 +32,8 @@ def send_an_email(modeladmin, request, queryset):
 send_an_email.short_description = "Send an email"
 
 class EventAdmin(ImageCroppingMixin,admin.ModelAdmin):
+	list_display = ('id','name','venue','start_time',)
+	search_fields = ('name',)
 	form = EventForm
 
 class RegistrationAdmin(admin.ModelAdmin):
@@ -44,6 +46,7 @@ from tinkerer.models import *
 from registration.models import *
 from projects.models import *
 from resources.models import *
+
 admin.site.register(Entered)
 admin.site.register(Component)
 admin.site.register(Resource)

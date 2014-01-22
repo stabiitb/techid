@@ -25,7 +25,7 @@ USE_TZ = True
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-REAL_DEBUG = False
+REAL_DEBUG = True
 SITE_ID = 1
 WIKI_ACCOUNT_HANDLING = False
 TEMPLATE_DEBUG = True
