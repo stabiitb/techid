@@ -28,6 +28,8 @@ class EventForm(ModelForm):
 class EventAdmin(ImageCroppingMixin,admin.ModelAdmin):
 	form = EventForm
 
+class RegistrationAdmin(admin.ModelAdmin):
+	list_filter = ('event',)
 
 from tinkerer.models import *
 from registration.models import *
@@ -37,7 +39,11 @@ admin.site.register(Entered)
 admin.site.register(Component)
 admin.site.register(Resource)
 admin.site.register(Project)
-admin.site.register(IndividualRegistration)
+admin.site.register(IndividualRegistration,RegistrationAdmin)
+admin.site.register(LectureRegistration,RegistrationAdmin)
+admin.site.register(WorkshopRegistration,RegistrationAdmin)
+admin.site.register(OtherEventRegistration,RegistrationAdmin)
+
 admin.site.register(TeamEvent,EventAdmin)
 admin.site.register(IndividualEvent,EventAdmin)
 admin.site.register(Lecture,EventAdmin)
