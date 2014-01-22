@@ -24,15 +24,15 @@ SECRET_KEY = 'vn$-p69z0ea^t5#hzhl*z6xichnl70nbv%$8e=5g6$e#0w@r0t'
 USE_TZ = True
 
 # SECURITY WARNING: don't run with debug turned on in production!
-<<<<<<< HEAD
+#<<<<<<< HEAD
 
 DEBUG = False
 REAL_DEBUG = False
 
-=======
+#=======
 DEBUG = True
-REAL_DEBUG = True
->>>>>>> 37801b7d7ede8da75c24402d749145eab00ef03b
+REAL_DEBUG = False
+#>>>>>>> 37801b7d7ede8da75c24402d749145eab00ef03b
 SITE_ID = 1
 WIKI_ACCOUNT_HANDLING = False
 TEMPLATE_DEBUG = True
@@ -85,10 +85,11 @@ INSTALLED_APPS = (
     'endless_pagination',
     'bootstrap3_datetime',
     'tinkerer',
-    'easy_thumbnails',
+#    'easy_thumbnails',
     'image_cropping',
     'like_button',
     'resources',
+    'sorl.thumbnail',
     'calendar_sms',
     'imperavi',
     'newsletter',
