@@ -24,13 +24,8 @@ SECRET_KEY = 'vn$-p69z0ea^t5#hzhl*z6xichnl70nbv%$8e=5g6$e#0w@r0t'
 USE_TZ = True
 
 # SECURITY WARNING: don't run with debug turned on in production!
-<<<<<<< HEAD
 DEBUG = True
 REAL_DEBUG = True
-=======
-DEBUG = False
-REAL_DEBUG = False
->>>>>>> 853d13ef94a67a2797e0980f2cd13c2d8ff35624
 SITE_ID = 1
 WIKI_ACCOUNT_HANDLING = False
 TEMPLATE_DEBUG = True
@@ -88,6 +83,8 @@ INSTALLED_APPS = (
     'like_button',
     'resources',
     'calendar_sms',
+    'imperavi',
+    'newsletter',
     # 'django_tables2',
     # 'south',
     # 'filebrowser',
@@ -122,7 +119,7 @@ ROOT_URLCONF = 'events.urls'
 
 WSGI_APPLICATION = 'events.wsgi.application'
 
-
+NEWSLETTER_RICHTEXT_WIDGET = "imperavi.widget.ImperaviWidget"
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 if REAL_DEBUG:
