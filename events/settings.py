@@ -25,6 +25,7 @@ USE_TZ = True
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+REAL_DEBUG = True
 SITE_ID = 1
 WIKI_ACCOUNT_HANDLING = False
 TEMPLATE_DEBUG = True
@@ -119,7 +120,7 @@ WSGI_APPLICATION = 'events.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
-if DEBUG:
+if REAL_DEBUG:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -155,7 +156,7 @@ USE_L10N = True
 STATIC_URL = '/static/'
 MEDIA_URL = '/uploads/'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-if DEBUG:
+if REAL_DEBUG:
 # Host for sending e-mail.
     EMAIL_HOST = 'localhost'
 
