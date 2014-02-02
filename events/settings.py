@@ -30,7 +30,7 @@ REAL_DEBUG = False
 
 #=======
 DEBUG = True
-REAL_DEBUG = False
+REAL_DEBUG = True
 #>>>>>>> 37801b7d7ede8da75c24402d749145eab00ef03b
 SITE_ID = 1
 WIKI_ACCOUNT_HANDLING = False

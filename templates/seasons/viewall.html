@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% include "head.html" %}
+  <body>
+    {% if request.user.id != None %}
+    {% include "navbar.html" %}
+    {% else %}
+    {% include "nav-signup.html" %}
+    {% endif %}
+    <br/>
+    <br/>
+    <script type="text/javascript" src="/static/jquery-migrate-1.0.0.js"></script>
+      <link rel="stylesheet" href="/static/redactor/css/redactor.css" />
+      <script type="text/javascript" src="/static/redactor/redactor.js"></script>
+    <div class="container">
+      <div class="row">
+      <hr>
+      	{% load bootstrap3 %}
+      	{% bootstrap_messages %}
+        <div class="col-lg-12">
+          <div class="page-header">
+            <h3> Project Lists </h3>
+          </div>
+          {% load endless %}
+        {% if entries %}
+		{% paginate entries %}
+		{% for entry in entries %}
+		    <div class="row">
+		    	<div class="col-lg-8 col-lg-offset-2">
+		    		<h3> {{ entry.name }}</h3>
+		    		<h4> Club : {{entry.club.name }}</h4>
+		    		{{ entry.html_code | safe }}
+		    	</div>
+		    </div>
+		    <hr>
+		{% endfor %}
+		{% show_pages %}
+		{% endif %}
+		</div>
+	</div>
+
+</div>
+	{% include "footer.html" %}
+
+</body>
+</html>
