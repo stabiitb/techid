@@ -23,5 +23,6 @@ from django.contrib.auth.hashers import *
 from signup.mail import *
 from season.models import *
 
-def view_all(request):
-	entries = 
+def viewall(request):
+	entries = Video.objects.all()
+	return render(request,"seasons/viewall.html",{"entries":entries})

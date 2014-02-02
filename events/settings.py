@@ -88,6 +88,7 @@ INSTALLED_APPS = (
     'image_cropping',
     'like_button',
     'resources',
+    'season',
   #  'sorl.thumbnail',
     'calendar_sms',
 #    'imperavi',

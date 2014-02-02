@@ -10,7 +10,7 @@ class Video(models.Model):
 	html_code = models.TextField()
 	link = models.URLField(null=True,blank=True)
 	club = models.ForeignKey(Club)
-	videoFile = models.FileField(upload_to='videos/%Y/%m/%d',null=True,blank=True).
+	videoFile = models.FileField(upload_to='videos/%Y/%m/%d',null=True,blank=True)
 
 	def __unicode__(self):
 		return self.name
