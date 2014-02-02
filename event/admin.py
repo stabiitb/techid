@@ -10,7 +10,7 @@ from django_select2 import *
 from django.forms import TextInput, ModelForm, Textarea, Select
 from misc.models import *
 from django import forms
-
+from season.models import *
 class EventForm(ModelForm):
 	class Meta:
 		widgets={
@@ -47,6 +47,7 @@ from registration.models import *
 from projects.models import *
 from resources.models import *
 
+admin.site.register(Video)
 admin.site.register(Entered)
 admin.site.register(Component)
 admin.site.register(Resource)
