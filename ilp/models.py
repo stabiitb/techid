@@ -10,6 +10,7 @@ class Program(models.Model):
 
 class Ilpteam(models.Model):
 	team_name = models.CharField(max_length=255)
+	program = models.ForeignKey(Program)
 	members = models.ManyToManyField(User)
 	added = models.DateTimeField(auto_now_add=True)
 	updated = models.DateTimeField(auto_now=True)

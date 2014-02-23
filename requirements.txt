@@ -7,6 +7,5 @@ easy-thumbnails
 django-bootstrap3
 south
 django_like_button
-django_calendar_sms
-django_bootstrap3_datetime
+django_bootstrap3_datetimepicker
 django_select2

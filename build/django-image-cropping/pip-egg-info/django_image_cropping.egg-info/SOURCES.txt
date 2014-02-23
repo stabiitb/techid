@@ -1,0 +1,16 @@
+CONTRIBUTORS
+LICENSE.txt
+MANIFEST.in
+README.rst
+setup.cfg
+image_cropping/__init__.py
+image_cropping/admin.py
+image_cropping/fields.py
+image_cropping/thumbnail_processors.py
+image_cropping/widgets.py
+image_cropping/templatetags/__init__.py
+image_cropping/templatetags/cropping.py
+pip-egg-info/django_image_cropping.egg-info/PKG-INFO
+pip-egg-info/django_image_cropping.egg-info/SOURCES.txt
+pip-egg-info/django_image_cropping.egg-info/dependency_links.txt
+pip-egg-info/django_image_cropping.egg-info/top_level.txt
