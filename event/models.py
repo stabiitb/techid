@@ -3,7 +3,6 @@ from django.db import models
 # Create your models here.
 from misc.models import *
 from image_cropping import ImageRatioField
-
 class Event(models.Model):
 	name = models.CharField(max_length=255)
 	description =models.TextField()

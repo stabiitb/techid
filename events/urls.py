@@ -41,6 +41,7 @@ urlpatterns = patterns('',
     url(r'^accounts/login/$','signup.views.index'),
     url(r'^resend/$','signup.views.resend_activation'),
     url(r'^tinkerer/', include('tinkerer.urls')),
+    url(r'^ilp/', include('ilp.urls')),
     url(r'', include('like_button.urls')),
     url(r'^resources/$','resources.views.resources'),
 

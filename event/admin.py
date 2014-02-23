@@ -11,6 +11,8 @@ from django.forms import TextInput, ModelForm, Textarea, Select
 from misc.models import *
 from django import forms
 from season.models import *
+from ilp.models import *
+
 class EventForm(ModelForm):
 	class Meta:
 		widgets={
@@ -40,13 +42,18 @@ class RegistrationAdmin(admin.ModelAdmin):
 	list_filter = ('event',)
 	actions = [send_an_email]
 
-
+class ProgramForm(ModelForm):
+	class Meta:
+		widgets = {
+		'details':RedactorWidget(editor_options={'lang': 'en'}),
+		}
 
 from tinkerer.models import *
 from registration.models import *
 from projects.models import *
 from resources.models import *
 
+admin.site.register(Program,ProgramForm)
 admin.site.register(Video)
 admin.site.register(Entered)
 admin.site.register(Component)
