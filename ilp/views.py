@@ -15,6 +15,7 @@ from django.core.validators import validate_email
 from django.contrib.auth.decorators import *
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth.hashers import *
+from ilp.forms import *
 
 @login_required
 def viewAllProjects(request):
@@ -28,5 +29,25 @@ def viewProject(request,id):
 	is_entry = Program.objects.filter(id=id)
 	if is_entry.exists():
 		return render(request,template_html,{"entry":is_entry[0]})
+	else:
+		raise Http404
+
+@login_required
+def register(request,id):
+	template_html="ilp/register.html"
+	form = RegistrationForm()
+	is_entry = Program.objects.filter(id=id)
+	if is_entry.exists():
+		return render(request,template_html,{"entry":is_entry[0],"form":form})
+	else:
+		raise Http404
+
+@login_required
+def registered(request,id):
+	template_html="ilp/registered.html"
+	form = RegistrationForm()
+	is_entry = Program.objects.filter(id=id)
+	if is_entry.exists():
+		return render(request,template_html,{"entry":is_entry[0],"form":form})
 	else:
 		raise Http404
