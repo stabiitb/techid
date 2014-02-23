@@ -1,5 +1,0 @@
-include AUTHORS
-include README.rst
-include LICENSE
-recursive-include like_button/templates/ *.html
-recursive-include like_button/templates/like_button *.html

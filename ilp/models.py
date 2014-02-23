@@ -6,7 +6,7 @@ class Program(models.Model):
 	attachements = models.FileField(max_length=100,upload_to='documents/ilp/%Y/%m/%d',blank=True,null=True)
 	details = models.TextField(null=True,blank=True)
 	team_size = models.IntegerField()
-	other details = models.TextField(null=True,blank=True)
+	other_details = models.TextField(null=True,blank=True)
 
 class Ilpteam(models.Model):
 	team_name = models.CharField(max_length=255)

@@ -29,8 +29,8 @@ DEBUG = False
 REAL_DEBUG = False
 
 #=======
-DEBUG = False
-REAL_DEBUG = False
+DEBUG = True
+REAL_DEBUG = True
 #>>>>>>> 37801b7d7ede8da75c24402d749145eab00ef03b
 SITE_ID = 1
 WIKI_ACCOUNT_HANDLING = False
@@ -89,10 +89,11 @@ INSTALLED_APPS = (
     'like_button',
     'resources',
     'season',
-  #  'sorl.thumbnail',
-    'calendar_sms',
-#    'imperavi',
- #   'newsletter',
+    'ilp',
+    # 'sorl.thumbnail',
+    # 'calendar_sms',
+    #'imperavi',
+    #'newsletter',
     # 'django_tables2',
     # 'south',
     # 'filebrowser',

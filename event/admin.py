@@ -47,13 +47,15 @@ class ProgramForm(ModelForm):
 		widgets = {
 		'details':RedactorWidget(editor_options={'lang': 'en'}),
 		}
-
+class ProgramAdmin(ImageCroppingMixin,admin.ModelAdmin):
+	list_display = ('title','attachements')
+	form = ProgramForm
 from tinkerer.models import *
 from registration.models import *
 from projects.models import *
 from resources.models import *
 
-admin.site.register(Program,ProgramForm)
+admin.site.register(Program,ProgramAdmin)
 admin.site.register(Video)
 admin.site.register(Entered)
 admin.site.register(Component)

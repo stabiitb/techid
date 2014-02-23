@@ -27,7 +27,6 @@ def viewProject(request,id):
 	template_html = "ilp/page.html"
 	is_entry = Program.objects.filter(id=id)
 	if is_entry.exists():
-		return render(request,template_html,{"entry":entry})
+		return render(request,template_html,{"entry":is_entry[0]})
 	else:
 		raise Http404
-
