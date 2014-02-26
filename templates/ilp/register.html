@@ -32,6 +32,7 @@
         </div>
         <div class="col-lg-8" style="margin:10px;">
             <form class="form-horizontal" method="post">
+            {% csrf_token %}
             {% bootstrap_form form %}
             <button type="submit" class="btn btn-success  btn-block">Create team</button>
             </form>

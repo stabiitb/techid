@@ -47,15 +47,26 @@ class ProgramForm(ModelForm):
 		widgets = {
 		'details':RedactorWidget(editor_options={'lang': 'en'}),
 		}
+class IlpTeamForm(ModelForm):
+	members = forms.ModelMultipleChoiceField(queryset=User.objects.all(),widget=
+			Select2MultipleWidget(attrs={"style":"width:100%"}),required=False)
+	class Meta:
+		pass
 class ProgramAdmin(ImageCroppingMixin,admin.ModelAdmin):
 	list_display = ('title','attachements')
 	form = ProgramForm
+
+class IlpTeamAdmin(ImageCroppingMixin,admin.ModelAdmin):
+	list_display = ('team_name','program')
+	form = IlpTeamForm
+
 from tinkerer.models import *
 from registration.models import *
 from projects.models import *
 from resources.models import *
 
 admin.site.register(Program,ProgramAdmin)
+admin.site.register(Ilpteam,IlpTeamAdmin)
 admin.site.register(Video)
 admin.site.register(Entered)
 admin.site.register(Component)

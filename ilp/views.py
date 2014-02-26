@@ -38,7 +38,43 @@ def register(request,id):
 	form = RegistrationForm()
 	is_entry = Program.objects.filter(id=id)
 	if is_entry.exists():
-		return render(request,template_html,{"entry":is_entry[0],"form":form})
+		program = is_entry[0];
+		if request.method == "GET":
+			try:
+				ilpteam = Ilpteam.objects.filter(program=program,members__in=[request.user])
+				form = RegistrationForm(instance=ilpteam[0])
+				return render(request,template_html,{"entry":is_entry[0],"form":form})
+			except Exception,e:
+				print e
+				return render(request,template_html,{"entry":is_entry[0],"form":form})
+		else:
+			ilpteam = Ilpteam.objects.filter(program=program,members__in=[request.user])
+			awesome = False
+			if ilpteam.exists():
+				form = RegistrationForm(request.POST,instance=ilpteam[0])
+			else:
+				if unicode(request.user.id) not in request.POST.getlist('members'):
+					print request.POST.getlist('members')
+					awesome = True
+				form = RegistrationForm(request.POST)
+
+			if form.is_valid():
+				if len(request.POST.getlist('members')) > 7:
+					messages.add_message(request,messages.ERROR,"You cannot add more than 7 members")
+					return HttpResponseRedirect("/ilp/register/"+str(program.id))
+				info=form.save(commit=False)
+				info.program = program
+				info_id=info.save()
+				form.save_m2m()
+
+				if  awesome:
+					Ilpteam.objects.filter(id=info_id)[0].members.add(request.user)
+
+				messages.add_message(request,messages.INFO,"Added your detials")
+			else:
+				messages.add_message(request,messages.ERROR,"error Adding your details")
+			return HttpResponseRedirect("/ilp/register/"+str(program.id))
+
 	else:
 		raise Http404
 
