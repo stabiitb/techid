@@ -8,3 +8,5 @@ south
 django_like_button
 django_bootstrap3_datetimepicker
 django_select2
+requests
+bleach
