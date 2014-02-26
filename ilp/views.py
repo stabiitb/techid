@@ -65,11 +65,9 @@ def register(request,id):
 				info=form.save(commit=False)
 				info.program = program
 				info_id=info.save()
-				form.save_m2m()
-
+				form_id=form.save_m2m()
 				if  awesome:
-					Ilpteam.objects.filter(id=info_id)[0].members.add(request.user)
-
+					info.members.add(request.user)
 				messages.add_message(request,messages.INFO,"Added your detials")
 			else:
 				messages.add_message(request,messages.ERROR,"error Adding your details")
@@ -81,9 +79,9 @@ def register(request,id):
 @login_required
 def registered(request,id):
 	template_html="ilp/registered.html"
-	form = RegistrationForm()
 	is_entry = Program.objects.filter(id=id)
 	if is_entry.exists():
-		return render(request,template_html,{"entry":is_entry[0],"form":form})
+		teams = Ilpteam.objects.filter(program=is_entry[0])
+		return render(request,template_html,{"entry":is_entry[0],"teams":teams,"registered":True})
 	else:
 		raise Http404

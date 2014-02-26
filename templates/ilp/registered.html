@@ -31,12 +31,61 @@
         </div>
         </div>
         <div class="col-lg-8" style="margin:10px;">
-        
+        {% if registered %}
+          <table class="table table-hover table-bordered datatable" >
+              <thead>
+                  <tr>
+                      <th>Team Name</th>
+                      <th>number of Team members</th>
+                      <th>Team members</th>
+                      <th>created at</th>
+                      <th>Updated on </th>
+                  </tr>
+              </thead>
+              <tbody>
+                {% for entry in teams %}
+                <tr>
+                  <td>{{ entry.team_name | title}}</td>
+                  <td>{{ entry.members.all| length }}</td>
+                  <td>{% for e in entry.members.all %}
+                  {{e}} | {% endfor %} </td>
+                  <td>{{ entry.added }}</td>
+                  <td>{{ entry.update }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+          </table>
+        {% else %}
+      <div class="alert alert-info fade in">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+      <strong>Huhh!</strong> No one is registered yet!!, You are the first one to register.
+      </div>  
+        {% endif %}
         </div>     
       </div>
      </div>
     </div>
   {% include "footer.html" %}
+    <script src="//cdnjs.cloudflare.com/ajax/libs/datatables/1.9.4/jquery.dataTables.min.js"></script>
+    <script src="/static/datatables.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $('.datatable').dataTable({
+        "sPaginationType": "bs_full"
+      });
+      $('.datatable').each(function(){
+        var datatable = $(this);
+        // SEARCH - Add the placeholder for Search and Turn this into in-line form control
+        var search_input = datatable.closest('.dataTables_wrapper').find('div[id$=_filter] input');
+        search_input.attr('placeholder', 'Search');
+        search_input.addClass('form-control input-sm');
+        // LENGTH - Inline-Form control
+        var length_sel = datatable.closest('.dataTables_wrapper').find('div[id$=_length] select');
+        length_sel.addClass('form-control input-sm');
+      });
+    });
+    </script>
+
 
 </body>
 </html>
