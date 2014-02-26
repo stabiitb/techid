@@ -1,0 +1,11 @@
+Hello {{username}},
+
+	You have registered for this event.
+	{{ url }}
+
+	Thank you,
+	Stab IITB Team.
+	ILP Team.
+
+you can contact us at
+http://gymkhana.iitb.ac.in/~ilp

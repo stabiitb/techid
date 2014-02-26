@@ -35,7 +35,12 @@ def viewProject(request,id):
 @login_required
 def register(request,id):
 	template_html="ilp/register.html"
+	template = "emails/ilp.txt"
+	subject = "Mail confirmation for ILP"
 	form = RegistrationForm()
+	from_email = "stab.iitb@gmail.com"
+	to_email = request.user.email
+	url = "http://techid.stab-iitb.org/"+"ilp/"
 	is_entry = Program.objects.filter(id=id)
 	if is_entry.exists():
 		program = is_entry[0];
@@ -71,6 +76,12 @@ def register(request,id):
 				messages.add_message(request,messages.INFO,"Added your detials")
 			else:
 				messages.add_message(request,messages.ERROR,"error Adding your details")
+			try:
+				data = {"username":request.user.first_name,"url":url+str(program.id)}
+				send_email(template,subject,from_email,to_email,data)
+			except Exception,e:
+				pass
+
 			return HttpResponseRedirect("/ilp/register/"+str(program.id))
 
 	else:
