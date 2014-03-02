@@ -39,7 +39,6 @@
                       <th>number of Team members</th>
                       <th>Team members</th>
                       <th>created at</th>
-                      <th>Updated on </th>
                   </tr>
               </thead>
               <tbody>
@@ -50,7 +49,6 @@
                   <td><table class="table table-hover table-bordered">{% for e in entry.members.all %}
                   <tr><td>{{e}}</td><td>{{e.alternate_email}}</td></tr>{% endfor %} </table></td>
                   <td>{{ entry.added }}</td>
-                  <td>{{ entry.update }}</td>
                 </tr>
                 {% endfor %}
               </tbody>
