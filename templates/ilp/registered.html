@@ -69,7 +69,19 @@
     <script type="text/javascript">
     $(document).ready(function() {
       $('.datatable').dataTable({
-        "sPaginationType": "bs_full"
+        "sPaginationType": "bs_full",
+        "sDom": 'T<"clear">lfrtip',
+        "oTableTools": {
+            "aButtons": [
+                "copy",
+                "print",
+                {
+                    "sExtends":    "collection",
+                    "sButtonText": "Save",
+                    "aButtons":    [ "csv", "xls", "pdf" ]
+                }
+            ]
+        }
       });
       $('.datatable').each(function(){
         var datatable = $(this);
