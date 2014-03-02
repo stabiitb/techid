@@ -47,8 +47,8 @@
                 <tr>
                   <td>{{ entry.team_name | title}}</td>
                   <td>{{ entry.members.all| length }}</td>
-                  <td>{% for e in entry.members.all %}
-                  {{e}} | {% endfor %} </td>
+                  <td><table>{% for e in entry.members.all %}
+                  <tr><td>{{e}}</td><td>{{e.alternate_email}}</td></tr>{% endfor %} </table></td>
                   <td>{{ entry.added }}</td>
                   <td>{{ entry.update }}</td>
                 </tr>
