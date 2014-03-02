@@ -73,6 +73,9 @@
       $('.datatable').dataTable({
         "sPaginationType": "bs_full",
         "sDom": 'T<"clear">lfrtip',
+    		"oTableTools": {
+    			"sSwfPath": "/static/swf/copy_csv_xls_pdf.swf"
+    		}
       });
       $('.datatable').each(function(){
         var datatable = $(this);
