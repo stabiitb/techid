@@ -64,8 +64,8 @@ def register(request,id):
 				form = RegistrationForm(request.POST)
 
 			if form.is_valid():
-				if len(request.POST.getlist('members')) > 7:
-					messages.add_message(request,messages.ERROR,"You cannot add more than 7 members")
+				if len(request.POST.getlist('members')) > program.team_size:
+					messages.add_message(request,messages.ERROR,"You cannot add more than "+str(program.team_size)+" members")
 					return HttpResponseRedirect("/ilp/register/"+str(program.id))
 				info=form.save(commit=False)
 				info.program = program
