@@ -13,7 +13,7 @@ class Program(models.Model):
 	small_cropping = ImageRatioField('picture','200x200',size_warning=True)
 	company_name = models.CharField(max_length=255)
 	link	= models.URLField(null=True,blank=True)
-	
+	other_details = models.TextField(null=True,blank=True)
 	def __unicode__(self):
 		return self.title
 
