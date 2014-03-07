@@ -29,6 +29,13 @@
                   </div>
                   <div class="panel-body">
                   <p>
+                  {% if entry.picture.name %}
+                    {% load cropping %}
+                    <img src="{% cropped_thumbnail o "small_cropping"  %}">
+                    {% else %}
+                    <img class="img-responsive" src="/static/images/cover.jpg"  style="width:200px;height:200px" width="100" height="100">
+                  {% endif %}
+                   <p> {{entry.company_name }}</p>
                     <a href="/uploads/{{entry.attachements}}" class="btn btn-default"> Download PS </a></p>
                    <p><a href="/ilp/{{entry.id}}" class="btn btn-primary"> View more details </a></p>
                    <p><a href="/ilp/register/{{entry.id}}" class="btn btn-success"> Register </a></p>
