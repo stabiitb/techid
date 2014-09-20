@@ -83,7 +83,6 @@ INSTALLED_APPS = (
     'projects',
     'endless_pagination',
     'bootstrap3_datetime',
-    'tinkerer',
     'easy_thumbnails',
     'image_cropping',
     'like_button',
