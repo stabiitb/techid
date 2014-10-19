@@ -10,3 +10,4 @@ django_bootstrap3_datetimepicker
 django_select2
 requests
 bleach
+django-suit-redactor
