@@ -1,0 +1,4 @@
+apt-get install python-setuptools
+apt-get install python-pip
+sudo apt-get build-dep python-imaging
+apt-get install python-mysqldb
